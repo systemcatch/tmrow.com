@@ -89,6 +89,14 @@ section#hero h2 {
 	padding-bottom: 10%;
 }
 
+h2.mission .quote.start {
+	margin-bottom: 10px;
+}
+
+h2.mission .quote.end {
+	margin-bottom: -10px;
+}
+
 img.svg {
 	shape-rendering: geometricPrecision;
 }
