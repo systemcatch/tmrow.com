@@ -31,32 +31,41 @@ header #header-content, footer #footer-content, .content-container {
 	width: 100%;
 	max-width: 1024px;
 	margin: 0 auto;
-	padding: 50px 0px;
+	padding: 50px 25px;
+	box-sizing: border-box;
+
 }
 
-header  img {
+header h1 {
+	float: left;
+}
+
+header  img.logo {
 	width: 460px;
+	/* Shadow */
+	-webkit-filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.20));
+	filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.20));
 }
 
-footer ul {
+header ul {
 	float: right;
 }
 
-footer li {
+header li {
 	list-style-type: none;
 	display: inline;
 	margin-left: 20px;
 }
 
-footer li a {
-	opacity: 0.9;
+header li a {
+	opacity: 0.95;
 }
 
-footer li a:hover {
+header li a:hover {
 	opacity: 1;
 }
 
-footer li.email img {
+header li.email img {
 	margin-bottom: 2px;
 }
 
@@ -70,6 +79,7 @@ section#hero {
 	-moz-background-size: cover;
 	-o-background-size: cover;	
 	color: white;
+	text-shadow: 0px 2px 4px rgba(0,0,0,0.20);
 }
 
 section#hero #hero-content {
@@ -91,10 +101,12 @@ section#hero h2 {
 
 h2.mission .quote.start {
 	margin-bottom: 10px;
+	opacity: 0.85;
 }
 
 h2.mission .quote.end {
 	margin-bottom: -10px;
+	opacity: 0.85;
 }
 
 img.svg {
