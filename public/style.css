@@ -17,11 +17,11 @@ header > h1 {
 	z-index: 99;
 	top: 0;
 	left: 0;
+}
+
+header > img {
 	width: 378px;
 	height: 32px;
-	background-size: 100%;
-	background-repeat: no-repeat;
-	background-image: url('img/logo_with_tagline.svg');
 }
 
 section#hero {
@@ -46,3 +46,6 @@ section#hero h2 {
 	right: 10%;
 }
 
+img.svg {
+	shape-rendering: geometricPrecision;
+}
