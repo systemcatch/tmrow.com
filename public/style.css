@@ -5,13 +5,21 @@ html, body {
 	height:100%;
 	font-family: 'Lato', 'sans-serif';
 	background-color: black;
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
 }
 
 h1, h2, h3, h4, h5, h6 {
 	margin-top: 0;
 }
 
-header > h1 {
+a {
+	transition: all 0.5s ease;
+}
+
+header, footer {
+	width: 100%;
 	position: absolute;
 	margin-top: 0;
 	z-index: 99;
@@ -19,9 +27,37 @@ header > h1 {
 	left: 0;
 }
 
-header > img {
-	width: 378px;
-	height: 32px;
+header #header-content, footer #footer-content, .content-container {
+	width: 100%;
+	max-width: 1024px;
+	margin: 0 auto;
+	padding: 50px 0px;
+}
+
+header  img {
+	width: 460px;
+}
+
+footer ul {
+	float: right;
+}
+
+footer li {
+	list-style-type: none;
+	display: inline;
+	margin-left: 20px;
+}
+
+footer li a {
+	opacity: 0.9;
+}
+
+footer li a:hover {
+	opacity: 1;
+}
+
+footer li.email img {
+	margin-bottom: 2px;
 }
 
 section#hero {
@@ -36,14 +72,21 @@ section#hero {
 	color: white;
 }
 
+section#hero #hero-content {
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
+	right: 0px;
+}
+
 section#hero h2 {
+	letter-spacing: 0px;
+	float: right;
 	font-weight: 300;
 	font-style: italic;
-	width: 400px;
-	font-size: 18px;
-	position: absolute;
-	bottom: 10%;
-	right: 10%;
+	width: 450px;
+	font-size: 24px;
+	padding-bottom: 10%;
 }
 
 img.svg {
