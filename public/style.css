@@ -123,3 +123,39 @@ h2.mission .quote.end {
 img.svg {
 	shape-rendering: geometricPrecision;
 }
+
+.logo.mobile {
+	display: none;
+}
+
+/* Mobile styles */
+@media only screen and (max-width : 680px) {
+	.logo {
+		display: none;
+	}
+	.logo.mobile {
+		display: inline-block;
+		width: 300px;
+	}
+
+	#header-content h1 {
+		margin-top: 10%;
+		width: 100%;
+    	text-align: center;
+    	float: none;
+	}
+	header ul {
+		float: none;
+		padding: 0;
+		display: block;
+		text-align: center;
+	}
+	header ul li {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	section#hero h2 {	
+		width: 100%;
+		margin-bottom: 20%;
+	}
+}
