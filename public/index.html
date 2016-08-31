@@ -46,7 +46,7 @@
             </ul>
           </div>
         </header>
-        <section id="hero">
+        <section id="hero" data-original="img/bg1.jpg">
           <div id="hero-content">
             <div class="content-container">
               <article>
@@ -60,8 +60,12 @@
             </div>
           </div>
         </section>
-      <script src="/main.js"></script>
+      <script type="text/javascript" src="bower_components/vanilla-lazyload/dist/lazyload.min.js"></script>
       <script type="text/javascript">
+      var myLazyLoad = new LazyLoad({
+        elements_selector: "section#hero",
+        show_while_loading: false
+      });
         if (window.location.href.indexOf('tmrow.co') !== -1){
           mixpanel.track("Pageview");
         }
