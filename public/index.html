@@ -50,7 +50,7 @@
             </ul>
           </div>
         </header>
-        <section id="hero" data-original="img/bg1.jpg">
+        <section id="hero">
           <div id="hero-content">
             <div class="content-container">
               <article>
@@ -66,11 +66,14 @@
         </section>
       <script type="text/javascript" src="bower_components/vanilla-lazyload/dist/lazyload.min.js"></script>
       <script type="text/javascript">
+      var random = Math.floor(Math.random() * 4) + 1;
+      document.getElementById("hero").setAttribute("data-original", "img/bg"+random+".jpg");
+
       var myLazyLoad = new LazyLoad({
         elements_selector: "section#hero",
         show_while_loading: false
       });
-        if (window.location.href.indexOf('tmrow.co') !== -1){
+        if (window.location.href.indexOf("tmrow.co") !== -1){
           mixpanel.track("Pageview");
         }
       </script>
