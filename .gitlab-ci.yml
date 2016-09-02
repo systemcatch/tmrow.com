@@ -1,6 +1,7 @@
 pages:
   script:
-  - echo 'Nothing to do...'
+  - npm install -g bower
+  - cd public && bower install
   artifacts:
     paths:
     - public
