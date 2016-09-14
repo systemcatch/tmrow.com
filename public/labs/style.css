@@ -1,0 +1,88 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	width:100%;
+	height:100%;
+	font-family: 'Lato', 'sans-serif';
+	background-color: black;
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+* {
+	margin: 0;
+}
+
+a {
+	transition: all 0.5s ease;
+}
+
+nav.desktop {
+	position: fixed;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100px;
+	background-color: white;
+}
+
+nav.desktop .logo-container {
+	position: absolute;
+	bottom: 25px;
+	width: 100%;
+	text-align: center;
+}
+
+section.project {
+	box-sizing: border-box;
+	display: block;
+	height: 100%;
+	width: 100%;
+	padding-left: 100px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;	
+	color: white;
+	transition: all 0.5s ease;
+	display: flex;
+  	align-items: flex-end;
+  	justify-content: center;
+}
+
+section.project .container {
+	width: 100%;
+	text-align: center;
+	padding-bottom: 8%;
+}
+
+section.project h1,h3 {
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+section.project h1 {
+	font-size: 48px;
+	font-weight: bold;
+}
+
+section.project .separator {
+	max-width: 500px;
+	margin: 0 auto;
+	margin-top: 20px;
+	border-top: 2px solid white;
+
+}
+section.project h3 {
+	font-size: 20px;
+	font-weight: 300;
+}
+
+
+/* Mobile styles */
+@media only screen and (max-width : 680px) and (min-height : 400px) {
+
+}

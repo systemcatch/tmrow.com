@@ -29,7 +29,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png">
     <link rel="manifest" href="../img/favicon/manifest.json">
     <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:300i,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
     <!--[if lt IE 9]>
       <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
     <![endif]-->
@@ -51,33 +51,26 @@
   <!-- end GA -->
   </head>
     <body>
-      <header id="main-header">
-        <div id="header-content">
-          <h1>
-            <a href="#" title="Tomorrow">
-              <img class="svg logo" src="img/logo_with_tagline.svg"/>
-              <img class="svg logo mobile" src="img/logo_with_tagline_stacked.svg"/>
-            </a>
-          </h1>
-          <ul class="contacts">
-            <li class="email"><a href="mailto:hello@tmrow.co"><img class="svg" src="img/envelope.svg"/></a></li>
-            <li class="twitter"><a href="https://twitter.com/tmrowco"><img class="svg" src="img/twitter-logo.svg"/></a></li>
-          </ul>
-        </div>
-      </header>
-      <section id="hero">
-        <div id="hero-content">
-          <div class="content-container">
-            <article>
-              <h2 class="mission">
-                <img class="quote start" src="img/double_quote_start.svg"/>
-                We want to propel humanity to a sustainable state of existence by quantifying the impact of every choice we make
-                <img class="quote end" src="img/double_quote_end.svg"/>
-              </h2>
-            </article>
-          </div>
-        </div>
-      </section>
+        <nav class="desktop">
+            <div class="logo-container">
+                <img src="img/tomorrow_labs.svg"/>
+            </div>
+        </nav>
+        <nav class="mobile">
+        </nav>        
+        <section class="project" style="background-image: url('img/electricitymap.jpg');">
+            <div class="container">
+                <h1>Real-time climate impact of the European electricity production</h1>
+                <div class="separator">&nbsp;</div>
+                <h3>A visualization of where your electricity comes from and how much greenhouse gas (GHG) was emitted to produce it.</h3>
+            </div>
+        </section>
+        <section class="project" style="background-image: url('img/electricitymap.jpg');">
+            <div class="container">
+                <h1></h1>
+                <h3></h3>
+            </div>
+        </section>        
       <script type="text/javascript" src="bower_components/vanilla-lazyload/dist/lazyload.min.js"></script>
       <script type="text/javascript">
         var random = Math.floor(Math.random() * 3) + 1;
