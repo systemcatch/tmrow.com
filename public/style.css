@@ -58,16 +58,30 @@ header li {
 }
 
 header li a {
-	opacity: 0.95;
+	opacity: 0.80;
 }
 
 header li a:hover {
 	opacity: 1;
 }
 
-header li.email img {
-	margin-bottom: 2px;
+header li.twitter img {
+	margin-bottom: -2px;
 }
+
+header li.labs {
+	margin-left: 16px;
+}
+
+header li.labs a {
+	color: white;
+	text-decoration: none;
+}
+
+header li.labs a i {
+	font-size: 20px;
+}
+
 
 section#hero {
 	position: relative;
