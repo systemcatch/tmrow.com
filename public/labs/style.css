@@ -19,6 +19,17 @@ a {
 	text-decoration: none;
 }
 
+nav.mobile {
+	display: none;
+	width: 100%;
+	background-color: white;
+	text-align: center;
+	padding: 20px 0px;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
 nav.desktop {
 	position: fixed;
 	left: 0;
@@ -105,5 +116,27 @@ a.silent {
 
 /* Mobile styles */
 @media only screen and (max-width : 680px) and (min-height : 400px) {
+	nav.desktop {
+		display: none;
+	}
+	nav.mobile {
+		display: block;
+	}
+	section.project {
+		padding: 0 20px;
+	}
+	section.project h1 {
+		font-size: 2.0em;
+	}
+	section.project a.project-link {
+		position: inherit;
+		display: block;
+		margin-top: 25px;
+	}
+	section.project a.project-link:hover {
+		border: 1px solid transparent;
+		background-color: transparent;
+	}	
+
 
 }
