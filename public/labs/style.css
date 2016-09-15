@@ -16,6 +16,7 @@ html, body {
 
 a {
 	transition: all 0.5s ease;
+	text-decoration: none;
 }
 
 nav.desktop {
@@ -81,6 +82,26 @@ section.project h3 {
 	font-weight: 300;
 }
 
+section.project a.project-link {
+	position: absolute;
+	top: 35px;
+	right: 45px;
+	color: white;
+	font-weight: 300;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	padding: 5px 10px;
+}
+
+section.project a.project-link:hover {
+	border: 1px solid white;
+	background-color: rgba(255,255,255, 0.1);
+}
+
+a.silent {
+	color: inherit !important;
+	text-decoration: inherit !important;
+}
 
 /* Mobile styles */
 @media only screen and (max-width : 680px) and (min-height : 400px) {
