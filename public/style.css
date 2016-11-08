@@ -82,16 +82,16 @@ header li.twitter img {
 	margin-bottom: -2px;
 }
 
-header li.labs {
+header li.projects {
 	margin-left: 16px;
 }
 
-header li.labs a {
+header li.projects a {
 	color: white;
 	text-decoration: none;
 }
 
-header li.labs a i {
+header li.projects a i {
 	font-size: 20px;
 }
 
