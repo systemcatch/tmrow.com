@@ -55,6 +55,7 @@ header li {
 	list-style-type: none;
 	display: inline;
 	margin-left: 20px;
+	white-space: nowrap;
 }
 
 header li a {
@@ -66,7 +67,7 @@ header li a:hover {
 }
 
 header li.blog {
-	margin-left: 16px;
+	
 }
 
 header li.blog a {
@@ -83,7 +84,7 @@ header li.twitter img {
 }
 
 header li.projects {
-	margin-left: 16px;
+	margin-left: 10px;
 }
 
 header li.projects a {
@@ -101,7 +102,7 @@ section#hero {
 	height: 100%;
 	width: 100%;
 	background-repeat: no-repeat;
-	background-position: center;
+	background-position: right bottom;
 	background-attachment: fixed;
 	background-size: cover;
 	-webkit-background-size: cover;
@@ -134,7 +135,7 @@ section#hero h2 {
 	font-style: italic;
 	width: 500px;
 	font-size: 24px;
-	padding-bottom: 10%;
+	padding-bottom: 1%;
 }
 
 h2.mission .quote.start {
@@ -185,4 +186,9 @@ img.svg {
 		width: 100%;
 		margin-bottom: 30%;
 	}
+}
+
+div.fb-share-button, div.fb-like, div.fb-follow, iframe.twitter-share-button, iframe.twitter-follow-button, iframe.__slackin {
+    vertical-align: middle;
+    display: inline-flex;
 }
