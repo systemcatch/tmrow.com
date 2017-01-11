@@ -52,50 +52,21 @@ header ul {
 }
 
 header li {
-	list-style-type: none;
 	display: inline;
-	margin-left: 20px;
+	list-style-type: none;
+	padding: 5px;
 	white-space: nowrap;
 }
 
 header li a {
+	color: white;
+	text-decoration: none;
 	opacity: 0.80;
 }
 
 header li a:hover {
 	opacity: 1;
 }
-
-header li.blog {
-	
-}
-
-header li.blog a {
-	color: white;
-	text-decoration: none;
-}
-
-header li.blog a i {
-	font-size: 20px;
-}
-
-header li.twitter img {
-	margin-bottom: -2px;
-}
-
-header li.projects {
-	margin-left: 10px;
-}
-
-header li.projects a {
-	color: white;
-	text-decoration: none;
-}
-
-header li.projects a i {
-	font-size: 20px;
-}
-
 
 section#hero {
 	position: relative;
