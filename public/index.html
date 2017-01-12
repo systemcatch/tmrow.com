@@ -51,98 +51,81 @@
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
     ga('create', 'UA-79729918-2', 'auto');
-    ga('send', 'pageview');
   </script>
   <!-- end GA -->
   </head>
-    <body>
-      <!-- start Twitter -->
-      <script>
-          window.twttr = (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0],
-          t = window.twttr || {};
-          if (d.getElementById(id)) return t;
-          js = d.createElement(s);
-          js.id = id;
-          js.src = "https://platform.twitter.com/widgets.js";
-          fjs.parentNode.insertBefore(js, fjs);
-
-          t._e = [];
-          t.ready = function(f) {
-              t._e.push(f);
-          };
-
-          return t;
-          }(document, "script", "twitter-wjs"));
-      </script>
-      <!-- end Twitter -->
-      <!-- Load Facebook SDK for JavaScript -->
-      <div id="fb-root"></div>
-      <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+  <body>
+    <!-- start Twitter -->
+    <script>
+        window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
         fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));</script>
-      <header id="main-header">
-        <div id="header-content">
-          <h1>
-            <a href="index.html" title="Tomorrow">
-              <img class="svg logo" src="img/logo_with_tagline.svg"/>
-              <img class="svg logo mobile" src="img/logo_with_tagline_stacked.svg"/>
-            </a>
-          </h1>
-          <ul class="contacts">
-            <li class="email"><a href="mailto:hello@tmrow.co"><i class="fa fa-envelope" aria-hidden="true"></i> Contact</a></li>
-            <li class="blog"><a href="https://medium.com/tmrow" target="_blank"><i class="fa fa-medium" aria-hidden="true"></i> Blog</a></li>
-            <li class="projects"><a href="projects"><i class="fa fa-flask" aria-hidden="true"></i> Projects</a></li>
-            <!--<li class="team"><a href="team.html"><i class="fa fa-users" aria-hidden="true"></i> Team</a></li>-->
-          </ul>
-        </div>
-      </header>
-      <section id="hero">
-        <div id="hero-content">
-          <div class="content-container">
-            <article>
-              <h2 class="mission">
-                <img class="quote start" src="img/double_quote_start.svg"/>
-                We want to propel humanity to a sustainable state of existence by quantifying, and making widely accessible, the impact of every choice we make
-                <img class="quote end" src="img/double_quote_end.svg"/>
-                <p>
-                  <!-- Facebook follow -->
-                  <div class="fb-like" 
-                    data-href="https://www.facebook.com/tmrowco" 
-                    data-layout="button" 
-                    data-action="like"
-                    data-size="small" 
-                    data-show-faces="false">
-                  </div>
-                  <!-- Twitter follow -->
-                  <a class="twitter-follow-button"
-                    href="https://twitter.com/tmrowco"
-                    data-show-screen-name="false"
-                    data-show-count="false">
-                  Follow @tmrowco</a>
-                </p>
-              </h2>
-            </article>
-          </div>
-        </div>
-      </section>
-      <script type="text/javascript" src="bower_components/vanilla-lazyload/dist/lazyload.min.js"></script>
-      <script type="text/javascript">
-        var numPictures = 1;
-        var random = Math.round(Math.random() * (numPictures - 1)) + 1;
-        document.getElementById("hero").setAttribute("data-original", "img/bg" + random + ".jpg");
 
-        var myLazyLoad = new LazyLoad({
-          elements_selector: "section#hero",
-          show_while_loading: false
-        });
-        if (window.location.href.indexOf("www.tmrow.co") !== -1) {
-          mixpanel.track("Pageview");
-        }
-      </script>
+        t._e = [];
+        t.ready = function(f) {
+            t._e.push(f);
+        };
+
+        return t;
+        }(document, "script", "twitter-wjs"));
+    </script>
+    <!-- end Twitter -->
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <header id="main-header">
+      <div id="header-content">
+        <a href="index.html" title="Tomorrow">
+          <img class="svg logo" src="img/logo_with_tagline.svg"/>
+          <img class="svg logo mobile" src="img/logo_with_tagline_stacked.svg"/>
+        </a>
+        <ul class="menu">
+          <li class="email"><a href="mailto:hello@tmrow.co"><i class="fa fa-envelope" aria-hidden="true"></i> Contact</a></li>
+          <li class="blog"><a href="https://medium.com/tmrow" target="_blank"><i class="fa fa-medium" aria-hidden="true"></i> Blog</a></li>
+          <li class="projects"><a href="projects"><i class="fa fa-flask" aria-hidden="true"></i> Projects</a></li>
+          <li class="team"><a href="team.html"><i class="fa fa-users" aria-hidden="true"></i> Team</a></li>
+        </ul>
+      </div>
+    </header>
+    <content>
+      <div id="mission">
+        <img class="quote start" src="img/double_quote_start.svg"/>
+        We want to propel humanity to a sustainable state of existence by quantifying, and making widely accessible, the impact of every choice we make
+        <img class="quote end" src="img/double_quote_end.svg"/>
+        <p>
+          <!-- Facebook follow -->
+          <div class="fb-like" 
+            data-href="https://www.facebook.com/tmrowco" 
+            data-layout="button" 
+            data-action="like"
+            data-size="small" 
+            data-show-faces="false">
+          </div>
+          <!-- Twitter follow -->
+          <a class="twitter-follow-button"
+            href="https://twitter.com/tmrowco"
+            data-show-screen-name="false"
+            data-show-count="false">
+          Follow @tmrowco</a>
+        </p>
+      </div>
+    </content>
+    <script type="text/javascript">
+      if (window.location.href.indexOf('www.tmrow.co') !== -1) {
+        mixpanel.track('Pageview');
+        ga('send', 'pageview');
+      }
+    </script>
   </body>
 </html>
