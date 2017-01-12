@@ -18,7 +18,7 @@ body {
 }
 body:after {
 	content: "";
-	position: absolute;
+	position: fixed;
 	background-repeat: no-repeat;
 	background-position: right bottom;
 	background-attachment: fixed;
@@ -29,7 +29,7 @@ body:after {
 	right: 0;
 	bottom: 0;
 	z-index: -1;
-	opacity: 0.7;
+	opacity: 0.4;
 }
 
 /* General */
@@ -53,22 +53,22 @@ ul {
 	padding: 0px;
 }
 
-/* Header */
+/* Blocks */
 header, footer, div#main {
 	padding-left: 5%;
 	padding-right: 5%;
 }
-
-header {
-	padding-top: 50px;
-	padding-bottom: 50px;
-}
-
-header #header-content, footer #footer-content {
+header #header-content, footer #footer-content, div#main #main-content {
 	width: 100%;
 	max-width: 1024px;
 	margin: 0 auto;
 	box-sizing: border-box;
+}
+
+/* Header */
+header {
+	padding-top: 50px;
+	padding-bottom: 50px;
 }
 
 header img.logo {
@@ -123,6 +123,8 @@ header li {
 	background-color: rgba(0, 0, 0, 0.3);
 	margin-left: 15%;
 	margin-right: 15%;
+	margin: 0 auto;
+	max-width: 600px;
 	padding: 4%;
 }
 #main h2:first-child {
@@ -130,10 +132,6 @@ header li {
 }
 #main p:last-child {
 	margin-bottom: 0px;
-}
-
-#main-content {
-	max-width: 500px;
 }
 
 .loading {
@@ -169,15 +167,21 @@ img.svg {
     	float: none;
 	}
 	header ul {
-		margin-top: 5%;
+		line-height: 2em;
+		margin-top: 2%;
 		float: none;
 		padding: 0;
 		display: block;
 		text-align: center;
 	}
 	header ul li {
-		margin-left: 10px;
-		margin-right: 10px;
+		margin-left: 5%;
+		margin-right: 5%;
+		margin-top: 5%;
+	}
+
+	#main {
+		background-color: unset;
 	}
 
 	#mission-container {
@@ -206,7 +210,8 @@ div.profile {
 	display: inline-flex;
 }
 div.profile .description {
-	margin-left: 20px;
+	margin-left: 5%;
+	max-width: 400px;
 }
 
 /* Slack */
