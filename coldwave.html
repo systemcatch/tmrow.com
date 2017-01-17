@@ -109,12 +109,12 @@
           Aujourd'hui, à <span id="current-time" style="font-weight: bold"></span>:
             <small><ul>
                 <li> La France produit <strong><span id="total-production"></span> GW d'électricité</strong>, correspondant à une intensité carbone de <strong><span id="total-production-emissions"></span> tonnes de CO2 par minute.</strong></li>
-                <li id="import-line"> La France importe <strong><span id="total-net-import"></span> GW d'électricité</strong>, correspondant à une intensité carbonne de <strong><span id="total-net-import-emissions"></span> tonnes de CO2 par minute.</strong></li>
-                <li id="export-line"> La France exporte <strong><span id="total-net-export"></span> GW d'électricité</strong>, correspondant à une intensité carbonne de <strong><span id="total-net-export-emissions"></span> tonnes de CO2 par minute.</strong></li>
+                <li id="import-line"> La France importe <strong><span id="total-net-import"></span> GW d'électricité</strong>, correspondant à une intensité carbone de <strong><span id="total-net-import-emissions"></span> tonnes de CO2 par minute.</strong></li>
+                <li id="export-line"> La France exporte <strong><span id="total-net-export"></span> GW d'électricité</strong>, correspondant à une intensité carbone de <strong><span id="total-net-export-emissions"></span> tonnes de CO2 par minute.</strong></li>
                 <li id="explanation-line"> Ainsi, la France importe <strong><span id="import-percentage"></span>% de son électricité</strong> qui compte pour <strong><span id="import-emissions-percentage"></span>% de ses émissions de CO2</strong> liées à la consommation électrique.</li>
             </ul></small>
           </p>
-          <p> Toutes les données utilisées sur cette page proviennent de l'<a href="http://electricitymap.tmrow.co" target="_blank" style="color: lightblue"><strong>Electricity Map</strong> </a>.
+          <p> Toutes les données utilisées sur cette page proviennent de l'<a href="http://electricitymap.tmrow.co" target="_blank" style="color: lightblue"><strong>Electricity Map</strong></a>.
           </p> 
 
           <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -122,6 +122,9 @@
           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
           <script>
 
+            var handleClick;
+            var chart;
+            var redraw;
             function getLast(arr) {
               return arr && arr.length && arr[arr.length - 1] || undefined;
             }
@@ -186,40 +189,55 @@
                 return {x: d.x, y: Math.min(d.y, 0)}
               });
 
-              var lastImportPercentage = getLast(positiveExchanges).y /
-                getLast(production).y * 100.0;
-              var lastImportCO2MassPercentage = getLast(positiveExchangesCO2Mass).y /
-                getLast(productionCO2Mass).y * 100.0;
-              var isImporting = getLast(positiveExchanges).y > 0;
+              handleClick = function(evt) {
+                var activeElement = chart.getElementAtEvent(evt);
+                var i = activeElement[0] && activeElement[0]._index || undefined;
+                redraw(i);
+              }
 
-              document.getElementById('current-time').innerHTML = 
-                moment(getLast(production).x).format('LT');
-              document.getElementById('total-production').innerHTML = 
-                d3.format('.1f')(getLast(production).y);
-              document.getElementById('total-production-emissions').innerHTML = 
-                d3.format('.0f')(getLast(productionCO2Mass).y / 60.0 / 1e6);
+              redraw = function(i) {
 
-              document.getElementById('import-line').style.display = isImporting ? 'list-item' : 'none';
-              document.getElementById('total-net-import').innerHTML = 
-                d3.format('.1f')(getLast(positiveExchanges).y);
-              document.getElementById('total-net-import-emissions').innerHTML = 
-                d3.format('.0f')(getLast(positiveExchangesCO2Mass).y / 60.0 / 1e6);
+                function get(arr) {
+                  return (i === undefined) ? getLast(arr) : arr[i]
+                }
 
-              document.getElementById('export-line').style.display = !isImporting ? 'list-item' : 'none';
-              document.getElementById('total-net-export').innerHTML = 
-                d3.format('.2f')(getLast(negativeExchanges).y);
-              document.getElementById('total-net-export-emissions').innerHTML = 
-                d3.format('.0f')(getLast(negativeExchangesCO2Mass).y / 60.0 / 1e6);
+                var lastImportPercentage = get(positiveExchanges).y /
+                  get(production).y * 100.0;
+                var lastImportCO2MassPercentage = get(positiveExchangesCO2Mass).y /
+                  get(productionCO2Mass).y * 100.0;
+                var isImporting = get(positiveExchanges).y > 0;
 
-              document.getElementById('explanation-line').style.display = isImporting ? 'list-item' : 'none';
+                document.getElementById('current-time').innerHTML = 
+                  moment(get(production).x).format('LT');
+                document.getElementById('total-production').innerHTML = 
+                  d3.format('.1f')(get(production).y);
+                document.getElementById('total-production-emissions').innerHTML = 
+                  d3.format('.0f')(get(productionCO2Mass).y / 60.0 / 1e6);
 
-              document.getElementById('import-percentage').innerHTML = 
-                d3.format('.1f')(lastImportPercentage);
-              document.getElementById('import-emissions-percentage').innerHTML = 
-                d3.format('.1f')(lastImportCO2MassPercentage);
+                document.getElementById('import-line').style.display = isImporting ? 'list-item' : 'none';
+                document.getElementById('total-net-import').innerHTML = 
+                  d3.format('.1f')(get(positiveExchanges).y);
+                document.getElementById('total-net-import-emissions').innerHTML = 
+                  d3.format('.0f')(get(positiveExchangesCO2Mass).y / 60.0 / 1e6);
 
-              var ctx = document.getElementById("chart");
-              var myChart = new Chart(ctx, {
+                document.getElementById('export-line').style.display = !isImporting ? 'list-item' : 'none';
+                document.getElementById('total-net-export').innerHTML = 
+                  d3.format('.2f')(get(negativeExchanges).y);
+                document.getElementById('total-net-export-emissions').innerHTML = 
+                  d3.format('.0f')(get(negativeExchangesCO2Mass).y / 60.0 / 1e6);
+
+                document.getElementById('explanation-line').style.display = isImporting ? 'list-item' : 'none';
+
+                document.getElementById('import-percentage').innerHTML = 
+                  d3.format('.1f')(lastImportPercentage);
+                document.getElementById('import-emissions-percentage').innerHTML = 
+                  d3.format('.1f')(lastImportCO2MassPercentage);
+              }
+
+              redraw();
+
+              var ctx = document.getElementById('chart');
+              chart = new Chart(ctx, {
                 type: 'line',
                 data: {
                   datasets: [
@@ -254,7 +272,8 @@
                     yAxes: [{
                       stacked: true
                     }]
-                  }
+                  },
+                  onClick: handleClick
                 }
               })
             })
