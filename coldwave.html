@@ -114,7 +114,7 @@
                 <li id="explanation-line"> Ainsi, la France importe <strong><span id="import-percentage"></span>% de son électricité</strong> qui compte pour <strong><span id="import-emissions-percentage"></span>% de ses émissions de CO2</strong> liées à la consommation électrique.</li>
             </ul></small>
           </p>
-          <p> Pour voir en détail la production d'électricité en Europe et les échanges entre pays, n'hésitez pas à visiter l'<a href="http://electricitymap.tmrow.co" target="_blank">Electricity Map</a>.
+          <p> Toutes les données utilisées sur cette page proviennent de l'<a href="http://electricitymap.tmrow.co" target="_blank" style="color: lightblue"><strong>Electricity Map</strong> </a>.
           </p> 
 
           <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -225,15 +225,18 @@
                   datasets: [
                     {
                       label: 'Exportation (GW)',
-                      data: negativeExchanges
+                      data: negativeExchanges,
+                      backgroundColor: '#5ab4ac'
                     },
                     {
                       label: 'Production (GW)',
-                      data: production
+                      data: production,
+                      backgroundColor: '#ffffbf'
                     },
                     {
                       label: 'Importation (GW)',
-                      data: positiveExchanges
+                      data: positiveExchanges,
+                      backgroundColor: '#d8b365'
                     }
                   ]
                 },
@@ -243,8 +246,9 @@
                       type: 'time',
                       time: {
                           displayFormats: {
-                              hour: 'MMM D, hA'
-                          }
+                            hour: 'LT'
+                          },
+                          tooltipFormat: 'LLLL'
                       }
                     }],
                     yAxes: [{
