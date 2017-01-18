@@ -101,6 +101,9 @@
     <div id="main">
       <div id="main-content">
         <h2>Impact des imports sur l'intensité carbone de l'électricité en France</h2>
+        <p style="text-align: center">
+          <a id="show-power" href="javascript:showPower();">Show Power</a> | <a id="show-co2" href="javascript:showCO2();">Show CO2</a>
+        </p>
         <div id="graph" style="background-color: white; padding: 2%">
           <canvas id="chart"></canvas>
         </div>
@@ -143,6 +146,19 @@
             var handleHover;
             var chart;
             var redraw;
+            var drawChart;
+            var isShowingCO2 = false;
+
+            function showCO2() {
+              isShowingCO2 = true;
+              drawChart();
+            }
+
+            function showPower() {
+              isShowingCO2 = false;
+              drawChart();
+            }
+
             function getLast(arr) {
               return arr && arr.length && arr[arr.length - 1] || undefined;
             }
@@ -297,7 +313,7 @@
               chart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                  datasets: co2Dataset
+                  datasets: isShowingCO2 ? co2Dataset : powerDataset
                 },
                 options: {
                   animation: false,
@@ -322,7 +338,8 @@
                   tooltips: {
                     callbacks: {
                       label: function(d, obj) {
-                        return d3.format('.1f')(obj.datasets[d.datasetIndex].data[d.index].y) + ' tCO2eq/min';
+                        return d3.format('.1f')(obj.datasets[d.datasetIndex].data[d.index].y) + 
+                          (isShowingCO2 ? ' tCO2eq/min' : ' GW');
                       }
                     },
                     intersect: false,
@@ -333,6 +350,26 @@
                   },
                 }
               })
+
+              drawChart = function() {
+
+                document.getElementById('show-co2').style.color = isShowingCO2 ? 'gray' : 'lightblue';
+                document.getElementById('show-co2').style['font-weight'] = isShowingCO2 ? 'bold' : undefined;
+                document.getElementById('show-power').style.cursor = !isShowingCO2 ? 'text' : undefined;
+                
+                document.getElementById('show-power').style.color = !isShowingCO2 ? 'gray' : 'lightblue';
+                document.getElementById('show-power').style['font-weight'] = !isShowingCO2 ? 'bold' : 
+                document.getElementById('show-power').style.cursor = isShowingCO2 ? 'text' : undefined;
+
+                chart.data.datasets = isShowingCO2 ? co2Dataset : powerDataset;
+                chart
+                  .update();
+                
+              };
+
+              drawChart(powerDataset);
+              isShowingCO2 = false;
+
             })
 
           </script>
