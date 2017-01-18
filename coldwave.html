@@ -102,7 +102,7 @@
       <div id="main-content">
         <h2>Impact CO2 des imports d'électricité en France</h2>
         <p style="text-align: center">
-          <a id="show-power" href="javascript:showPower();">Show Power</a> | <a id="show-co2" href="javascript:showCO2();">Show CO2</a>
+          <span id="show-power" onclick="javascript:showPower();">Show Power</span> | <span id="show-co2" onclick="javascript:showCO2();">Show CO2</span>
         </p>
         <div id="graph" style="background-color: white; padding: 2%">
           <canvas id="chart"></canvas>
@@ -162,6 +162,10 @@
             function getLast(arr) {
               return arr && arr.length && arr[arr.length - 1] || undefined;
             }
+
+            // Load proper locale
+            var locale = window.navigator.userLanguage || window.navigator.language;
+            moment.locale(locale);
 
             d3.json('http://electricitymap.tmrow.co/v2/co2LastDay?countryCode=FR', function(err, obj) {
               console.log(obj);
@@ -354,12 +358,12 @@
               drawChart = function() {
 
                 document.getElementById('show-co2').style.color = isShowingCO2 ? 'gray' : 'lightblue';
-                document.getElementById('show-co2').style['font-weight'] = isShowingCO2 ? 'bold' : undefined;
-                document.getElementById('show-power').style.cursor = !isShowingCO2 ? 'text' : undefined;
+                document.getElementById('show-co2').style['font-weight'] = isShowingCO2 ? 'bold' : 'normal';
+                document.getElementById('show-co2').style.cursor = isShowingCO2 ? 'text' : 'pointer';
 
                 document.getElementById('show-power').style.color = !isShowingCO2 ? 'gray' : 'lightblue';
-                document.getElementById('show-power').style['font-weight'] = !isShowingCO2 ? 'bold' : 
-                document.getElementById('show-power').style.cursor = isShowingCO2 ? 'text' : undefined;
+                document.getElementById('show-power').style['font-weight'] = !isShowingCO2 ? 'bold' : 'normal';
+                document.getElementById('show-power').style.cursor = !isShowingCO2 ? 'text' : 'pointer';
 
                 chart.data.datasets = isShowingCO2 ? co2Dataset : powerDataset;
                 chart
