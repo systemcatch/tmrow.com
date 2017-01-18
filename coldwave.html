@@ -109,8 +109,7 @@
           Aujourd'hui, à <span id="current-time" style="font-weight: bold"></span>:
             <small><ul>
                 <li> La France produit <strong><span id="total-production"></span> GW d'électricité</strong>, correspondant à une intensité carbone de <strong><span id="total-production-emissions"></span> tonnes de CO2 par minute.</strong></li>
-                <li id="import-line"> La France importe <strong><span id="total-net-import"></span> GW d'électricité</strong>, correspondant à une intensité carbone de <strong><span id="total-net-import-emissions"></span> tonnes de CO2 par minute.</strong></li>
-                <li id="export-line"> La France exporte <strong><span id="total-net-export"></span> GW d'électricité</strong>, correspondant à une intensité carbone de <strong><span id="total-net-export-emissions"></span> tonnes de CO2 par minute.</strong></li>
+                <li> La France <span id="power-flow-direction-verb"></span> <strong><span id="power-flow-value"></span> GW d'électricité</strong>, <span id="co2-power-flow-contradition"></span> <span id="co2-flow-increase-verb"></span> son intensité carbone de <strong><span id="co2-flow-value"></span> tonnes de CO2 par minute.</strong></li>
                 <li id="explanation-line"> Ainsi, la France importe <strong><span id="import-percentage"></span>% de son électricité</strong> comptant pour <strong><span id="import-emissions-percentage"></span>% de ses émissions de CO2</strong> liées à la consommation électrique.</li>
             </ul></small>
           </p>
@@ -208,6 +207,7 @@
                 var importCO2MassPercentage = get(positiveExchangesCO2Mass).y /
                   (get(productionCO2Mass).y + get(positiveExchangesCO2Mass).y) * 100.0;
                 var isImporting = !(get(negativeExchanges).y < 0);
+                var isImportingCO2 = !(get(negativeExchangesCO2Mass).y < 0);
 
                 document.getElementById('current-time').innerHTML = 
                   moment(get(production).x).format('LT');
@@ -216,19 +216,19 @@
                 document.getElementById('total-production-emissions').innerHTML = 
                   d3.format('.0f')(get(productionCO2Mass).y);
 
-                document.getElementById('import-line').style.display = isImporting ? 'list-item' : 'none';
-                document.getElementById('total-net-import').innerHTML = 
-                  d3.format('.1f')(get(positiveExchanges).y);
-                document.getElementById('total-net-import-emissions').innerHTML = 
-                  d3.format('.0f')(get(exchangesCO2Mass).y);
+                document.getElementById('power-flow-direction-verb').innerHTML = 
+                  isImporting ? 'importe' : 'exporte';
+                document.getElementById('power-flow-value').innerHTML = 
+                  d3.format('.1f')(get(positiveExchanges).y - get(negativeExchanges).y);
+                document.getElementById('co2-flow-value').innerHTML = 
+                  d3.format('.0f')(Math.abs(get(exchangesCO2Mass).y));
+                document.getElementById('co2-flow-increase-verb').innerHTML = 
+                  isImportingCO2 ? 'augmente' : 'dimine';
+                document.getElementById('co2-power-flow-contradition').innerHTML =
+                  (isImporting != isImportingCO2) ? 'mais' : 'et';
 
-                document.getElementById('export-line').style.display = !isImporting ? 'list-item' : 'none';
-                document.getElementById('total-net-export').innerHTML = 
-                  d3.format('.1f')(-1 * get(negativeExchanges).y);
-                document.getElementById('total-net-export-emissions').innerHTML = 
-                  d3.format('.0f')(-1 * get(exchangesCO2Mass).y);
-
-                document.getElementById('explanation-line').style.display = isImporting ? 'list-item' : 'none';
+                document.getElementById('explanation-line').style.display = 
+                  (isImporting && isImportingCO2) ? 'list-item' : 'none';
 
                 document.getElementById('import-percentage').innerHTML = 
                   d3.format('.1f')(importPercentage);
