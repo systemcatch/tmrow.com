@@ -279,17 +279,17 @@
 
               var powerDataset = [
                 {
-                  label: 'Exportation nette (GW)',
+                  label: 'Exportation nette',
                   data: negativeExchanges,
                   backgroundColor: '#5ab4ac'
                 },
                 {
-                  label: 'Production (GW)',
+                  label: 'Production',
                   data: production,
                   backgroundColor: '#ffffbf'
                 },
                 {
-                  label: 'Importation nette (GW)',
+                  label: 'Importation nette',
                   data: positiveExchanges,
                   backgroundColor: '#d8b365'
                 }
@@ -297,17 +297,17 @@
 
               var co2Dataset = [
                 {
-                  label: 'Impact de l\'exportation nette',
+                  label: 'Exportation nette',
                   data: negativeExchangesCO2Mass,
                   backgroundColor: '#5ab4ac'
                 },
                 {
-                  label: 'Impact de la production nette',
+                  label: 'Production',
                   data: productionCO2Mass,
                   backgroundColor: '#ffffbf'
                 },
                 {
-                  label: 'Impact de l\'importation nette',
+                  label: 'Importation nette',
                   data: positiveExchangesCO2Mass,
                   backgroundColor: '#d8b365'
                 }
@@ -332,6 +332,10 @@
                       }
                     }],
                     yAxes: [{
+                      scaleLabel: {
+                        display: true,
+                        labelString: ''
+                      },
                       stacked: true
                     }]
                   },
@@ -366,6 +370,7 @@
                 document.getElementById('show-power').style.cursor = !isShowingCO2 ? 'text' : 'pointer';
 
                 chart.data.datasets = isShowingCO2 ? co2Dataset : powerDataset;
+                chart.options.scales.yAxes[0].scaleLabel.labelString = isShowingCO2 ? 'Impact carbone (tCO2/min)' : 'Puissance (GW)';
                 chart
                   .update();
                 
