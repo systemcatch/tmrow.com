@@ -100,10 +100,13 @@
     </header>
     <div id="main">
       <div id="main-content">
-        <h2 class='lang-fr'>Impact CO2 des imports d'électricité en France</h2>
-        <h2 class='lang-other'>CO2 impact of electricity imports in France</h2>
-        <p style="text-align: center">
-          <span id="show-power" onclick="javascript:showPower();">Puissance électrique</span> | <span id="show-co2" onclick="javascript:showCO2();">Empreinte carbone</span>
+        <h2 class="lang-fr">Impact CO2 des imports d'électricité en France</h2>
+        <h2 class="lang-other">CO2 impact of electricity imports in France</h2>
+        <p class="lang-fr" style="text-align: center">
+          <span class="show-power" onclick="javascript:showPower();">Puissance électrique</span> | <span class="show-co2" onclick="javascript:showCO2();">Empreinte carbone</span>
+        </p>
+        <p class="lang-other" style="text-align: center">
+          <span class="show-power" onclick="javascript:showPower();">Electricity power</span> | <span class="show-co2" onclick="javascript:showCO2();">Carbon footprint</span>
         </p>
         <div id="graph" style="background-color: white">
           <canvas id="chart"></canvas>
@@ -112,25 +115,25 @@
           <p>
             <span id="current-time" style="font-weight: bold"></span>:
             <small>
-              <ul class='lang-fr'>
-                <li> La France produit <strong><span id="total-production"></span> GW d'électricité</strong>, correspondant à une empreinte carbone de <strong><span id="total-production-emissions"></span> tonnes de CO2 par minute.</strong></li>
-                <li> La France <span id="power-flow-direction-verb"></span> <strong><span id="power-flow-value"></span> GW d'électricité</strong>, <span id="co2-power-flow-contradition"></span> <span id="co2-flow-increase-verb"></span> son empreinte carbone de <strong><span id="co2-flow-value"></span> tonnes de CO2 par minute.</strong></li>
-                <li id="explanation-line"> Ainsi, la France importe <strong><span id="import-percentage"></span>% de son électricité</strong> comptant pour <strong><span id="import-emissions-percentage"></span>% de ses émissions de CO2</strong> liées à la consommation électrique.</li>
+              <ul class="lang-fr">
+                <li> La France produit <strong><span class="total-production"></span> GW d'électricité</strong>, correspondant à une empreinte carbone de <strong><span class="total-production-emissions"></span> tonnes de CO2 par minute.</strong></li>
+                <li> La France <span class="power-flow-direction-verb"></span> <strong><span class="power-flow-value"></span> GW d'électricité</strong>, <span class="co2-power-flow-contradition"></span> <span class="co2-flow-increase-verb"></span> son empreinte carbone de <strong><span class="co2-flow-value"></span> tonnes de CO2 par minute.</strong></li>
+                <li class="explanation-line"> Ainsi, la France importe <strong><span class="import-percentage"></span>% de son électricité</strong> comptant pour <strong><span class="import-emissions-percentage"></span>% de ses émissions de CO2</strong> liées à la consommation électrique.</li>
               </ul>
-              <ul class='lang-other'>
-                <li> La France produit <strong><span id="total-production"></span> GW d'électricité</strong>, correspondant à une empreinte carbone de <strong><span id="total-production-emissions"></span> tonnes de CO2 par minute.</strong></li>
-                <li> La France <span id="power-flow-direction-verb"></span> <strong><span id="power-flow-value"></span> GW d'électricité</strong>, <span id="co2-power-flow-contradition"></span> <span id="co2-flow-increase-verb"></span> son empreinte carbone de <strong><span id="co2-flow-value"></span> tonnes de CO2 par minute.</strong></li>
-                <li id="explanation-line"> Ainsi, la France importe <strong><span id="import-percentage"></span>% de son électricité</strong> comptant pour <strong><span id="import-emissions-percentage"></span>% de ses émissions de CO2</strong> liées à la consommation électrique.</li>
+              <ul class="lang-other">
+                <li> France produces <strong><span class="total-production"></span> GW of electricity</strong>, corresponding to a carbon footprint of <strong><span class="total-production-emissions"></span> tons of CO2 per minute.</strong></li>
+                <li> France <span class="power-flow-direction-verb"></span> <strong><span class="power-flow-value"></span> GW of electricity</strong>, <span class="co2-power-flow-contradition"></span> <span class="co2-flow-increase-verb"></span> its carbon footprint by <strong><span class="co2-flow-value"></span> tons of CO2 per minute.</strong></li>
+                <li class="explanation-line"> Thus, France imports <strong><span class="import-percentage"></span>% of its electricity</strong> accounting for <strong><span class="import-emissions-percentage"></span>% of its CO2 emissions</strong> related to electricity consumption.</li>
               </ul>
             </small>
           </p>
-          <p class='lang-fr'> Toutes les données utilisées sur cette page proviennent de l'<a href="http://electricitymap.tmrow.co" target="_blank" style="color: lightblue"><strong>Electricity Map</strong></a>.
-          <p class='lang-other'> All the datas used on this page originate from the <a href="http://electricitymap.tmrow.co" target="_blank" style="color: lightblue"><strong>Electricity Map</strong></a>.
+          <p class="lang-fr"> Toutes les données utilisées sur cette page proviennent de l'<a href="http://electricitymap.tmrow.co" target="_blank" style="color: lightblue"><strong>Electricity Map</strong></a>.
+          <p class="lang-other"> All the data used on this page originate from the <a href="http://electricitymap.tmrow.co" target="_blank" style="color: lightblue"><strong>Electricity Map</strong></a>.
           <br />
           <br />
           <hr>
           <h3>FAQ</h3>
-          <small class='lang-fr'>
+          <small class="lang-fr">
             <p style="font-weight: bold">
               Q: Pourquoi est-ce que le pourcentage d'augmentation des émissions de CO2 est plus important que celui des imports en électricité?
             </p>
@@ -146,7 +149,7 @@
               Exemple chiffré: Si pendant une heure la France importe 1000 MW à 200 gCO2/kWh et exporte 1100 MW à 100gCO2/kWh, alors elle aura exporté au final 100 MWh mais aura augmenté ses émissions de 90 tonnes de CO2 pendant la meme période.
             </p>
           </small>
-          <small class='lang-other'>
+          <small class="lang-other">
             <p style="font-weight: bold">
               Q: Pourquoi est-ce que le pourcentage d'augmentation des émissions de CO2 est plus important que celui des imports en électricité?
             </p>
@@ -191,8 +194,8 @@
             // Load proper locale
             var locale = window.navigator.userLanguage || window.navigator.language;
             moment.locale(locale);
-            d3.selectAll('.lang-fr').style('display', locale == 'fr' ? 'unset' : 'none');
-            d3.selectAll('.lang-other').style('display', locale != 'fr' ? 'unset' : 'none');
+            d3.selectAll('.lang-fr').style('display', locale == 'fr' ? undefined : 'none');
+            d3.selectAll('.lang-other').style('display', locale != 'fr' ? undefined : 'none');
 
             d3.json('http://electricitymap.tmrow.co/v2/co2LastDay?countryCode=FR', function(err, obj) {
               console.log(obj);
@@ -275,48 +278,55 @@
                 var isImporting = !(get(negativeExchanges).y < 0);
                 var isImportingCO2 = !(get(negativeExchangesCO2Mass).y < 0);
 
-                document.getElementById('current-time').innerHTML = 
-                  moment(get(production).x).calendar();
-                document.getElementById('total-production').innerHTML = 
-                  d3.format('.1f')(get(production).y);
-                document.getElementById('total-production-emissions').innerHTML = 
-                  d3.format('.0f')(get(productionCO2Mass).y);
+                d3.selectAll('#current-time').text( 
+                  moment(get(production).x).calendar());
 
-                document.getElementById('power-flow-direction-verb').innerHTML = 
-                  isImporting ? 'importe' : 'exporte';
-                document.getElementById('power-flow-value').innerHTML = 
-                  d3.format('.1f')(get(positiveExchanges).y - get(negativeExchanges).y);
-                document.getElementById('co2-flow-value').innerHTML = 
-                  d3.format('.0f')(Math.abs(get(exchangesCO2Mass).y));
-                document.getElementById('co2-flow-increase-verb').innerHTML = 
-                  isImportingCO2 ? 'augmente' : 'dimine';
-                document.getElementById('co2-power-flow-contradition').innerHTML =
-                  (isImporting != isImportingCO2) ? 'mais' : 'et';
+                d3.selectAll('.total-production').text( 
+                  d3.format('.1f')(get(production).y));
+                d3.selectAll('.total-production-emissions').text( 
+                  d3.format('.0f')(get(productionCO2Mass).y));
 
-                document.getElementById('explanation-line').style.display = 
+                d3.selectAll('.power-flow-direction-verb').text( 
+                  isImporting ? 
+                    (locale == 'fr' ? 'importe' : 'imports') :
+                    (locale == 'fr' ? 'exporte' : 'exports'));
+                d3.selectAll('.power-flow-value').text( 
+                  d3.format('.1f')(get(positiveExchanges).y - get(negativeExchanges).y));
+                d3.selectAll('.co2-flow-value').text( 
+                  d3.format('.0f')(Math.abs(get(exchangesCO2Mass).y)));
+                d3.selectAll('.co2-flow-increase-verb').text( 
+                  isImportingCO2 ? 
+                    (locale == 'fr' ? 'augmente' : 'increases') :
+                    (locale == 'fr' ? 'diminue' : 'reduces'));
+                d3.selectAll('.co2-power-flow-contradition').text(
+                  (isImporting != isImportingCO2) ? 
+                    (locale == 'fr' ? 'mais' : 'but') : 
+                    (locale == 'fr' ? 'et' : 'and'));
+
+                d3.selectAll('.explanation-line').style.display = 
                   (isImporting && isImportingCO2) ? 'list-item' : 'none';
 
-                document.getElementById('import-percentage').innerHTML = 
-                  d3.format('.1f')(importPercentage);
-                document.getElementById('import-emissions-percentage').innerHTML = 
-                  d3.format('.1f')(importCO2MassPercentage);
+                d3.selectAll('.import-percentage').text( 
+                  d3.format('.1f')(importPercentage));
+                d3.selectAll('.import-emissions-percentage').text( 
+                  d3.format('.1f')(importCO2MassPercentage));
               }
 
               redraw();
 
               var powerDataset = [
                 {
-                  label: 'Exportation',
+                  label: locale == 'fr' ? 'Exportation' : 'Export',
                   data: negativeExchanges,
                   backgroundColor: '#5ab4ac'
                 },
                 {
-                  label: 'Production',
+                  label: locale == 'fr' ? 'Production' : 'Production',
                   data: production,
                   backgroundColor: '#ffffbf'
                 },
                 {
-                  label: 'Importation',
+                  label: locale == 'fr' ? 'Importation' : 'Import',
                   data: positiveExchanges,
                   backgroundColor: '#d8b365'
                 }
@@ -324,17 +334,17 @@
 
               var co2Dataset = [
                 {
-                  label: 'Exportation',
+                  label: locale == 'fr' ? 'Exportation' : 'Export',
                   data: negativeExchangesCO2Mass,
                   backgroundColor: '#5ab4ac'
                 },
                 {
-                  label: 'Production',
+                  label: locale == 'fr' ? 'Production' : 'Production',
                   data: productionCO2Mass,
                   backgroundColor: '#ffffbf'
                 },
                 {
-                  label: 'Importation',
+                  label: locale == 'fr' ? 'Importation' : 'Import',
                   data: positiveExchangesCO2Mass,
                   backgroundColor: '#d8b365'
                 }
@@ -391,16 +401,19 @@
 
               drawChart = function() {
 
-                document.getElementById('show-co2').style.color = isShowingCO2 ? 'gray' : 'lightblue';
-                document.getElementById('show-co2').style['font-weight'] = isShowingCO2 ? 'bold' : 'normal';
-                document.getElementById('show-co2').style.cursor = isShowingCO2 ? 'text' : 'pointer';
+                d3.selectAll('.show-co2').style('color' , isShowingCO2 ? 'gray' : 'lightblue');
+                d3.selectAll('.show-co2').style('font-weight', isShowingCO2 ? 'bold' : 'normal');
+                d3.selectAll('.show-co2').style('cursor', isShowingCO2 ? 'text' : 'pointer');
 
-                document.getElementById('show-power').style.color = !isShowingCO2 ? 'gray' : 'lightblue';
-                document.getElementById('show-power').style['font-weight'] = !isShowingCO2 ? 'bold' : 'normal';
-                document.getElementById('show-power').style.cursor = !isShowingCO2 ? 'text' : 'pointer';
+                d3.selectAll('.show-power').style('color', !isShowingCO2 ? 'gray' : 'lightblue');
+                d3.selectAll('.show-power').style('font-weight', !isShowingCO2 ? 'bold' : 'normal');
+                d3.selectAll('.show-power').style('cursor', !isShowingCO2 ? 'text' : 'pointer');
 
                 chart.data.datasets = isShowingCO2 ? co2Dataset : powerDataset;
-                chart.options.scales.yAxes[0].scaleLabel.labelString = isShowingCO2 ? 'Empreinte carbone (tCO2/min)' : 'Puissance (GW)';
+                chart.options.scales.yAxes[0].scaleLabel.labelString = 
+                  isShowingCO2 ? 
+                    (locale == 'fr' ? 'Empreinte carbone (tCO2/min)' : 'Carbon footprint (tCO2/min)') : 
+                    (locale == 'fr' ? 'Puissance (GW)' : 'Power (GW)');
                 chart
                   .update();
                 
