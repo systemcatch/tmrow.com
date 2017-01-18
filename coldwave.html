@@ -373,7 +373,7 @@
                 document.getElementById('show-power').style.cursor = !isShowingCO2 ? 'text' : 'pointer';
 
                 chart.data.datasets = isShowingCO2 ? co2Dataset : powerDataset;
-                chart.options.scales.yAxes[0].scaleLabel.labelString = isShowingCO2 ? 'Impact carbone (tCO2/min)' : 'Puissance (GW)';
+                chart.options.scales.yAxes[0].scaleLabel.labelString = isShowingCO2 ? 'Empreinte carbone (tCO2/min)' : 'Puissance (GW)';
                 chart
                   .update();
                 
