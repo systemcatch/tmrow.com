@@ -111,7 +111,7 @@
                 <li> La France produit <strong><span id="total-production"></span> GW d'électricité</strong>, correspondant à une intensité carbone de <strong><span id="total-production-emissions"></span> tonnes de CO2 par minute.</strong></li>
                 <li id="import-line"> La France importe <strong><span id="total-net-import"></span> GW d'électricité</strong>, correspondant à une intensité carbone de <strong><span id="total-net-import-emissions"></span> tonnes de CO2 par minute.</strong></li>
                 <li id="export-line"> La France exporte <strong><span id="total-net-export"></span> GW d'électricité</strong>, correspondant à une intensité carbone de <strong><span id="total-net-export-emissions"></span> tonnes de CO2 par minute.</strong></li>
-                <li id="explanation-line"> Ainsi, la France importe <strong><span id="import-percentage"></span>% de son électricité</strong> qui compte pour <strong><span id="import-emissions-percentage"></span>% de ses émissions de CO2</strong> liées à la consommation électrique.</li>
+                <li id="explanation-line"> Ainsi, la France importe <strong><span id="import-percentage"></span>% de son électricité</strong> comptant pour <strong><span id="import-emissions-percentage"></span>% de ses émissions de CO2</strong> liées à la consommation électrique.</li>
             </ul></small>
           </p>
           <p> Toutes les données utilisées sur cette page proviennent de l'<a href="http://electricitymap.tmrow.co" target="_blank" style="color: lightblue"><strong>Electricity Map</strong></a>.
@@ -122,7 +122,7 @@
           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
           <script>
 
-            var handleClick;
+            var handleHover;
             var chart;
             var redraw;
             function getLast(arr) {
@@ -154,7 +154,7 @@
               var productionCO2Mass = obj.data.map(function(_, i) {
                 return {
                   x: production[i].x,
-                  y: production[i].y * productionCO2Intensity[i].y
+                  y: (production[i].y * productionCO2Intensity[i].y) / 60.0 / 1e6 // t / min
                 }
               });
 
@@ -179,19 +179,21 @@
                 }).reduce(function(a,b) { return a + b });
                 return {
                   x: moment(zone.datetime),
-                  y: value
+                  y: value / 60.0 / 1e6 // t / min
                 }
               });
-              var positiveExchangesCO2Mass = exchangesCO2Mass.map(function(d) {
-                return {x: d.x, y: Math.max(d.y, 0)}
+              var positiveExchangesCO2Mass = exchangesCO2Mass.map(function(d, i) {
+                var isImporting = !(negativeExchanges[i].y < 0);
+                return {x: d.x, y: isImporting ? d.y : 0}
               });
-              var negativeExchangesCO2Mass = exchangesCO2Mass.map(function(d) {
-                return {x: d.x, y: Math.min(d.y, 0)}
+              var negativeExchangesCO2Mass = exchangesCO2Mass.map(function(d, i) {
+                var isImporting = !(negativeExchanges[i].y < 0);
+                return {x: d.x, y: (!isImporting) ? d.y : 0}
               });
 
-              handleClick = function(evt) {
-                var activeElement = chart.getElementAtEvent(evt);
-                var i = activeElement[0] && activeElement[0]._index || undefined;
+              handleHover = function(evt) {
+                if (!evt.length) return redraw();
+                var i = evt[0]._index;
                 redraw(i);
               }
 
@@ -201,64 +203,85 @@
                   return (i === undefined) ? getLast(arr) : arr[i]
                 }
 
-                var lastImportPercentage = get(positiveExchanges).y /
-                  get(production).y * 100.0;
-                var lastImportCO2MassPercentage = get(positiveExchangesCO2Mass).y /
-                  get(productionCO2Mass).y * 100.0;
-                var isImporting = get(positiveExchanges).y > 0;
+                var importPercentage = get(positiveExchanges).y /
+                  (get(production).y + get(positiveExchanges).y) * 100.0;
+                var importCO2MassPercentage = get(positiveExchangesCO2Mass).y /
+                  (get(productionCO2Mass).y + get(positiveExchangesCO2Mass).y) * 100.0;
+                var isImporting = !(get(negativeExchanges).y < 0);
 
                 document.getElementById('current-time').innerHTML = 
                   moment(get(production).x).format('LT');
                 document.getElementById('total-production').innerHTML = 
                   d3.format('.1f')(get(production).y);
                 document.getElementById('total-production-emissions').innerHTML = 
-                  d3.format('.0f')(get(productionCO2Mass).y / 60.0 / 1e6);
+                  d3.format('.0f')(get(productionCO2Mass).y);
 
                 document.getElementById('import-line').style.display = isImporting ? 'list-item' : 'none';
                 document.getElementById('total-net-import').innerHTML = 
                   d3.format('.1f')(get(positiveExchanges).y);
                 document.getElementById('total-net-import-emissions').innerHTML = 
-                  d3.format('.0f')(get(positiveExchangesCO2Mass).y / 60.0 / 1e6);
+                  d3.format('.0f')(get(positiveExchangesCO2Mass).y);
 
                 document.getElementById('export-line').style.display = !isImporting ? 'list-item' : 'none';
                 document.getElementById('total-net-export').innerHTML = 
-                  d3.format('.2f')(get(negativeExchanges).y);
+                  d3.format('.1f')(-1 * get(negativeExchanges).y);
                 document.getElementById('total-net-export-emissions').innerHTML = 
-                  d3.format('.0f')(get(negativeExchangesCO2Mass).y / 60.0 / 1e6);
+                  d3.format('.0f')(-1 * get(negativeExchangesCO2Mass).y);
 
                 document.getElementById('explanation-line').style.display = isImporting ? 'list-item' : 'none';
 
                 document.getElementById('import-percentage').innerHTML = 
-                  d3.format('.1f')(lastImportPercentage);
+                  d3.format('.1f')(importPercentage);
                 document.getElementById('import-emissions-percentage').innerHTML = 
-                  d3.format('.1f')(lastImportCO2MassPercentage);
+                  d3.format('.1f')(importCO2MassPercentage);
               }
 
               redraw();
+
+              var powerDataset = [
+                {
+                  label: 'Exportation nette (GW)',
+                  data: negativeExchanges,
+                  backgroundColor: '#5ab4ac'
+                },
+                {
+                  label: 'Production (GW)',
+                  data: production,
+                  backgroundColor: '#ffffbf'
+                },
+                {
+                  label: 'Importation nette (GW)',
+                  data: positiveExchanges,
+                  backgroundColor: '#d8b365'
+                }
+              ];
+
+              var co2Dataset = [
+                {
+                  label: 'Impact de l\'exportation nette (tCO2eq/min)',
+                  data: negativeExchangesCO2Mass,
+                  backgroundColor: '#5ab4ac'
+                },
+                {
+                  label: 'Impact de la production nette (tCO2eq/min)',
+                  data: productionCO2Mass,
+                  backgroundColor: '#ffffbf'
+                },
+                {
+                  label: 'Impact de l\'importation  nette (tCO2eq/min)',
+                  data: positiveExchangesCO2Mass,
+                  backgroundColor: '#d8b365'
+                }
+              ];
 
               var ctx = document.getElementById('chart');
               chart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                  datasets: [
-                    {
-                      label: 'Exportation (GW)',
-                      data: negativeExchanges,
-                      backgroundColor: '#5ab4ac'
-                    },
-                    {
-                      label: 'Production (GW)',
-                      data: production,
-                      backgroundColor: '#ffffbf'
-                    },
-                    {
-                      label: 'Importation (GW)',
-                      data: positiveExchanges,
-                      backgroundColor: '#d8b365'
-                    }
-                  ]
+                  datasets: powerDataset
                 },
                 options: {
+                  animation: false,
                   scales: {
                     xAxes: [{
                       type: 'time',
@@ -273,7 +296,13 @@
                       stacked: true
                     }]
                   },
-                  onClick: handleClick
+                  hover: {
+                    intersect: false,
+                    onHover: handleHover
+                  },
+                  tooltips: {
+                    intersect: false
+                  },
                 }
               })
             })
