@@ -183,12 +183,12 @@
                 }
               });
               var positiveExchangesCO2Mass = exchangesCO2Mass.map(function(d, i) {
-                var isImporting = !(negativeExchanges[i].y < 0);
-                return {x: d.x, y: isImporting ? d.y : 0}
+                var isImportingCO2 = d.y >= 0;//!(negativeExchanges[i].y < 0);
+                return {x: d.x, y: isImportingCO2 ? d.y : 0}
               });
               var negativeExchangesCO2Mass = exchangesCO2Mass.map(function(d, i) {
-                var isImporting = !(negativeExchanges[i].y < 0);
-                return {x: d.x, y: (!isImporting) ? d.y : 0}
+                var isImportingCO2 = d.y >= 0;//!(negativeExchanges[i].y < 0);
+                return {x: d.x, y: (!isImportingCO2) ? d.y : 0}
               });
 
               handleHover = function(evt) {
@@ -220,13 +220,13 @@
                 document.getElementById('total-net-import').innerHTML = 
                   d3.format('.1f')(get(positiveExchanges).y);
                 document.getElementById('total-net-import-emissions').innerHTML = 
-                  d3.format('.0f')(get(positiveExchangesCO2Mass).y);
+                  d3.format('.0f')(get(exchangesCO2Mass).y);
 
                 document.getElementById('export-line').style.display = !isImporting ? 'list-item' : 'none';
                 document.getElementById('total-net-export').innerHTML = 
                   d3.format('.1f')(-1 * get(negativeExchanges).y);
                 document.getElementById('total-net-export-emissions').innerHTML = 
-                  d3.format('.0f')(-1 * get(negativeExchangesCO2Mass).y);
+                  d3.format('.0f')(-1 * get(exchangesCO2Mass).y);
 
                 document.getElementById('explanation-line').style.display = isImporting ? 'list-item' : 'none';
 
