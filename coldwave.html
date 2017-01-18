@@ -104,7 +104,7 @@
         <p style="text-align: center">
           <span id="show-power" onclick="javascript:showPower();">Puissance électrique</span> | <span id="show-co2" onclick="javascript:showCO2();">Impact CO2</span>
         </p>
-        <div id="graph" style="background-color: white; padding: 2%">
+        <div id="graph" style="background-color: white">
           <canvas id="chart"></canvas>
         </div>
         <div>
@@ -321,6 +321,9 @@
                 },
                 options: {
                   animation: false,
+                  layout: {
+                    padding: 20
+                  },
                   scales: {
                     xAxes: [{
                       type: 'time',
