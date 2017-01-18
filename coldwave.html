@@ -307,8 +307,8 @@
                     (locale == 'fr' ? 'mais' : 'but') : 
                     (locale == 'fr' ? 'et' : 'and'));
 
-                d3.selectAll('.explanation-line').style.display = 
-                  (isImporting && isImportingCO2) ? 'list-item' : 'none';
+                d3.selectAll('.explanation-line').style('display', 
+                  (isImporting && isImportingCO2) ? 'list-item' : 'none');
 
                 d3.selectAll('.import-percentage').text( 
                   d3.format('.1f')(importPercentage));
