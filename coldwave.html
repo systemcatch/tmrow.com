@@ -100,7 +100,7 @@
     </header>
     <div id="main">
       <div id="main-content">
-        <h2>Impact des imports sur l'intensité carbone de l'électricité en France</h2>
+        <h2>Impact CO2 des imports d'électricité en France</h2>
         <p style="text-align: center">
           <a id="show-power" href="javascript:showPower();">Show Power</a> | <a id="show-co2" href="javascript:showCO2();">Show CO2</a>
         </p>
@@ -109,7 +109,7 @@
         </div>
         <div>
           <p>
-          Aujourd'hui, à <span id="current-time" style="font-weight: bold"></span>:
+          <span id="current-time" style="font-weight: bold"></span>:
             <small><ul>
                 <li> La France produit <strong><span id="total-production"></span> GW d'électricité</strong>, correspondant à une intensité carbone de <strong><span id="total-production-emissions"></span> tonnes de CO2 par minute.</strong></li>
                 <li> La France <span id="power-flow-direction-verb"></span> <strong><span id="power-flow-value"></span> GW d'électricité</strong>, <span id="co2-power-flow-contradition"></span> <span id="co2-flow-increase-verb"></span> son intensité carbone de <strong><span id="co2-flow-value"></span> tonnes de CO2 par minute.</strong></li>
@@ -245,7 +245,7 @@
                 var isImportingCO2 = !(get(negativeExchangesCO2Mass).y < 0);
 
                 document.getElementById('current-time').innerHTML = 
-                  moment(get(production).x).format('LT');
+                  moment(get(production).x).calendar();
                 document.getElementById('total-production').innerHTML = 
                   d3.format('.1f')(get(production).y);
                 document.getElementById('total-production-emissions').innerHTML = 
@@ -356,7 +356,7 @@
                 document.getElementById('show-co2').style.color = isShowingCO2 ? 'gray' : 'lightblue';
                 document.getElementById('show-co2').style['font-weight'] = isShowingCO2 ? 'bold' : undefined;
                 document.getElementById('show-power').style.cursor = !isShowingCO2 ? 'text' : undefined;
-                
+
                 document.getElementById('show-power').style.color = !isShowingCO2 ? 'gray' : 'lightblue';
                 document.getElementById('show-power').style['font-weight'] = !isShowingCO2 ? 'bold' : 
                 document.getElementById('show-power').style.cursor = isShowingCO2 ? 'text' : undefined;
