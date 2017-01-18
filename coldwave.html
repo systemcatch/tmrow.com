@@ -12,13 +12,13 @@
     <meta property="og:description" content="We want to propel humanity to a sustainable state of existence by quantifying, and making widely accessible, the impact of every choice we make" />
     <meta property="og:url" content="http://www.tmrow.co" />
     <meta property="og:image" content="http://www.tmrow.co/img/tmrow-social.jpg" />
-    <meta property="og:title" content="Tomorrow - Quantifying the impact of every choice we make" />
+    <meta property="og:title" content="Tomorrow - Live carbon impact of French electricity imports" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="We want to propel humanity to a sustainable state of existence by quantifying, and making widely accessible, the impact of every choice we make" />
     <meta name="twitter:image" content="http://www.tmrow.co/img/tmrow-social.jpg">
     <meta name="twitter:site" content="@tmrowco">
-    <meta name="twitter:title" content="Tomorrow - Quantifying the impact of every choice we make" />
+    <meta name="twitter:title" content="Tomorrow -- Live carbon impact of French electricity imports" />
     <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
@@ -128,7 +128,11 @@
             </small>
           </p>
           <p class="lang-fr"> Toutes les données utilisées sur cette page proviennent de l'<a href="http://electricitymap.tmrow.co" target="_blank" style="color: lightblue"><strong>Electricity Map</strong></a>.
-          <p class="lang-other"> All the data used on this page originate from the <a href="http://electricitymap.tmrow.co" target="_blank" style="color: lightblue"><strong>Electricity Map</strong></a>.
+          <p class="lang-other"> All the data used on this page originates from the <a href="http://electricitymap.tmrow.co" target="_blank" style="color: lightblue"><strong>Electricity Map</strong></a>.
+          <br />
+          <div class="fb-share-button" data-href="http://www.tmrow.co/coldwave.html" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.tmrow.co%2Fcoldwave.html&amp;src=sdkpreparse&amp;p[summary]=YOUR_SUMMARY">Share</a></div>
+          <span id="twitter-container"></span>
+          <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
           <br />
           <br />
           <hr>
@@ -138,7 +142,7 @@
               Q: Pourquoi est-ce que le pourcentage d'augmentation des émissions de CO2 est plus important que celui des imports en électricité?
             </p>
             <p>
-              L'intensité carbone de l'électricité produite en France (environ 100gCO2/kWh) est souvent plus basse que ses pays voisins. En important depuis ses voisins, plus intensifs en carbone, la France augmente donc son intensité carbone moyenne: ses emissions augmentent encore plus vite que n'augmente sa consommation.
+              L'intensité carbone de l'électricité produite en France (environ 100 gCO2/kWh) est souvent plus basse que ses pays voisins. En important depuis ses voisins, plus intensifs en carbone, la France augmente donc son intensité carbone moyenne: ses emissions augmentent encore plus vite que n'augmente sa consommation.
             </p>
             <p style="font-weight: bold">
               Q: Peut-on exporter de l'électricité tout en ayant une empreinte carbone qui augmente?
@@ -260,7 +264,7 @@
               });
 
               handleHover = function(evt) {
-                if (!evt.length) return redraw();
+                if (!evt.length) return;
                 var i = evt[0]._index;
                 redraw(i);
               }
@@ -310,6 +314,35 @@
                   d3.format('.1f')(importPercentage));
                 d3.selectAll('.import-emissions-percentage').text( 
                   d3.format('.1f')(importCO2MassPercentage));
+
+                // Only update twitter if i === undefined, i.e. a redraw not
+                // coming from a hover
+                if (i === undefined) {
+                  var defaultTwitterText = locale == 'fr' ?
+                    'Suivez en direct l’impact CO2 des imports d’électricité lié à la vague de froid (via @tmrowco)' :
+                    'Follow live the CO2 impact of French electricity imports due to the cold wave (via @tmrowco)';
+
+                  d3.select('#twitter-container iframe').remove();
+                  d3.select('#twitter-container').append('a')
+                    .attr('href', 'https://twitter.com/share')
+                    .attr('class', 'twitter-share-button')
+                    .attr('data-show-count', 'true')
+                    .attr('data-size', 'small')
+                    .text('Tweet')
+                    .attr('data-text', 
+                      (!isImporting || !isImportingCO2) ? defaultTwitterText :
+                        locale == 'fr' ? 
+                          (moment(get(production).x).calendar() + ', la France importe ' + 
+                            d3.format('.1f')(importPercentage) + '% de son electricité = ' +
+                            d3.format('.1f')(importCO2MassPercentage) + '% de son emprunte carbone (via @tmrowco)'
+                          ) :
+                          (moment(get(production).x).calendar() + ', France imports ' + 
+                            d3.format('.1f')(importPercentage) + '% of its electricity = ' +
+                            d3.format('.1f')(importCO2MassPercentage) + '% of its CO2 footprint (via @tmrowco)' 
+                          )
+                    );
+                  twttr.widgets && twttr.widgets.load();
+                }
               }
 
               redraw();
