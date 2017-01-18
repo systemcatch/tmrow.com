@@ -258,17 +258,17 @@
 
               var co2Dataset = [
                 {
-                  label: 'Impact de l\'exportation nette (tCO2eq/min)',
+                  label: 'Impact de l\'exportation nette',
                   data: negativeExchangesCO2Mass,
                   backgroundColor: '#5ab4ac'
                 },
                 {
-                  label: 'Impact de la production nette (tCO2eq/min)',
+                  label: 'Impact de la production nette',
                   data: productionCO2Mass,
                   backgroundColor: '#ffffbf'
                 },
                 {
-                  label: 'Impact de l\'importation  nette (tCO2eq/min)',
+                  label: 'Impact de l\'importation nette',
                   data: positiveExchangesCO2Mass,
                   backgroundColor: '#d8b365'
                 }
@@ -301,7 +301,16 @@
                     onHover: handleHover
                   },
                   tooltips: {
-                    intersect: false
+                    callbacks: {
+                      label: function(d, obj) {
+                        return d3.format('.0f')(obj.datasets[d.datasetIndex].data[d.index].y) + ' tCO2eq/min';
+                      }
+                    },
+                    intersect: false,
+                    itemSort: function(a, b, obj) {
+                      return d3.descending(a.datasetIndex, b.datasetIndex);
+                    },
+                    mode: 'index'
                   },
                 }
               })
