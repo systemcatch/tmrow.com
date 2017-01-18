@@ -303,7 +303,7 @@
                   tooltips: {
                     callbacks: {
                       label: function(d, obj) {
-                        return d3.format('.0f')(obj.datasets[d.datasetIndex].data[d.index].y) + ' tCO2eq/min';
+                        return d3.format('.1f')(obj.datasets[d.datasetIndex].data[d.index].y) + ' tCO2eq/min';
                       }
                     },
                     intersect: false,
