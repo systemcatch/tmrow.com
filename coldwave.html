@@ -111,7 +111,7 @@
           <p>
           <span id="current-time" style="font-weight: bold"></span>:
             <small><ul>
-                <li> La France produit <strong><span id="total-production"></span> GW d'électricité</strong>, correspondant à une impact carbone de <strong><span id="total-production-emissions"></span> tonnes de CO2 par minute.</strong></li>
+                <li> La France produit <strong><span id="total-production"></span> GW d'électricité</strong>, correspondant à un impact carbone de <strong><span id="total-production-emissions"></span> tonnes de CO2 par minute.</strong></li>
                 <li> La France <span id="power-flow-direction-verb"></span> <strong><span id="power-flow-value"></span> GW d'électricité</strong>, <span id="co2-power-flow-contradition"></span> <span id="co2-flow-increase-verb"></span> son impact carbone de <strong><span id="co2-flow-value"></span> tonnes de CO2 par minute.</strong></li>
                 <li id="explanation-line"> Ainsi, la France importe <strong><span id="import-percentage"></span>% de son électricité</strong> comptant pour <strong><span id="import-emissions-percentage"></span>% de ses émissions de CO2</strong> liées à la consommation électrique.</li>
             </ul></small>
@@ -221,11 +221,11 @@
                 }
               });
               var positiveExchangesCO2Mass = exchangesCO2Mass.map(function(d, i) {
-                var isImportingCO2 = d.y >= 0;//!(negativeExchanges[i].y < 0);
+                var isImportingCO2 = d.y >= 0;
                 return {x: d.x, y: isImportingCO2 ? d.y : 0}
               });
               var negativeExchangesCO2Mass = exchangesCO2Mass.map(function(d, i) {
-                var isImportingCO2 = d.y >= 0;//!(negativeExchanges[i].y < 0);
+                var isImportingCO2 = d.y >= 0;
                 return {x: d.x, y: (!isImportingCO2) ? d.y : 0}
               });
 
@@ -346,7 +346,7 @@
                   tooltips: {
                     callbacks: {
                       label: function(d, obj) {
-                        return d3.format('.1f')(obj.datasets[d.datasetIndex].data[d.index].y) + 
+                        return obj.datasets[d.datasetIndex].label + ': ' + d3.format('.1f')(obj.datasets[d.datasetIndex].data[d.index].y) + 
                           (isShowingCO2 ? ' tCO2eq/min' : ' GW');
                       }
                     },
