@@ -202,7 +202,7 @@
             d3.selectAll('.lang-fr').style('display', locale == 'fr' ? undefined : 'none');
             d3.selectAll('.lang-other').style('display', locale != 'fr' ? undefined : 'none');
 
-            d3.json('http://electricitymap.tmrow.co/v2/co2LastDay?countryCode=FR', function(err, obj) {
+            d3.json('https://www.electricitymap.org/v2/co2LastDay?countryCode=FR', function(err, obj) {
               console.log(obj);
 
               // We only work in GW here
