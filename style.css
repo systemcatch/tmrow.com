@@ -20,14 +20,18 @@ a:hover {
 	opacity: 1.0;
 }
 
-/* Fix word wrap */
-.fa { 
+.fa {
+	/* Fix word wrap */
 	display:inline !important;
 }
 
 ul {
 	margin: 0px;
 	padding: 0px;
+}
+
+img.svg {
+	shape-rendering: geometricPrecision;
 }
 
 /* Blocks */
@@ -79,6 +83,11 @@ header a {
 	white-space: nowrap;
 }
 
+/* Footer */
+#footer-content {
+	padding: 1.2rem;
+}
+
 /* Hero */
 #hero-container {
 	content: "";
@@ -112,38 +121,6 @@ header a {
 	opacity: 0.85;
 }
 
-/* Main content */
-#main {
-	background-color: rgba(0, 0, 0, 0.3);
-	margin-left: 15%;
-	margin-right: 15%;
-	margin: 0 auto;
-	max-width: 700px;
-	padding: 4%;
-}
-#main h2:first-child {
-	margin-top: 0px;
-}
-#main p:last-child {
-	margin-bottom: 0px;
-}
-
-.loading {
-	opacity: 0;
-}
-
-.loaded {
-	opacity: 1;
-}
-
-img.svg {
-	shape-rendering: geometricPrecision;
-}
-
-.logo.mobile {
-	display: none;
-}
-
 /* Mobile styles */
 @media only screen and (max-width : 680px) and (min-height : 400px) {
 	
@@ -168,8 +145,8 @@ div.fb-share-button, div.fb-like, div.fb-follow, iframe.twitter-share-button, if
 
 /* Profile */
 img.profile {
-	width: 70px;
-	height: 70px;
+	width: 90px;
+	height: 90px;
 }
 
 div.profile {
