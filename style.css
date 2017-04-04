@@ -13,7 +13,6 @@ html, body {
 /* General */
 a {
 	transition: all 0.5s ease;
-	color: white;
 	text-decoration: none;
 	opacity: 0.80;
 }
@@ -43,15 +42,19 @@ header #header-content, footer #footer-content, section, div#main #main-content 
 
 /* Header */
 header {
-	webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
-	box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
-	background-color: black;
+	webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+	box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+	background-color: white;
 	padding: 1.2rem;
 	position: fixed;
 	top: 0;
 	transition: all .35s;
 	width: 100%;
 	z-index: 888; /* to be above facebook button */
+}
+
+header a {
+	color: black;
 }
 
 #header-content {
@@ -89,7 +92,6 @@ header {
 /* Mission */
 #mission {
 	font-weight: 300;
-	font-style: italic;
 	font-size: 24px;
 	margin: auto; /* center horizontally */
 	text-align: center;
@@ -99,6 +101,10 @@ header {
 #mission .quote.start {
 	margin-bottom: 10px;
 	opacity: 0.85;
+}
+
+#mission .quote{
+	font-style: italic;
 }
 
 #mission .quote.end {
