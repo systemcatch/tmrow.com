@@ -125,19 +125,20 @@
           <li class="email"><a href="mailto:hello@tmrow.co"><i class="fa fa-envelope" aria-hidden="true"></i> Contact</a></li>
           <li class="blog"><a href="https://medium.com/tmrow" target="_blank"><i class="fa fa-medium" aria-hidden="true"></i> Blog</a></li>
           <li class="projects"><a href="projects"><i class="fa fa-flask" aria-hidden="true"></i> Projects</a></li>
-          <li class="team"><a href="team.html"><i class="fa fa-users" aria-hidden="true"></i> Team</a></li>
+          <li class="team"><a href="#team"><i class="fa fa-users" aria-hidden="true"></i> Team</a></li>
         </ul>
       </div>
     </header>
     <div id="hero-container">
     </div>
-    <section id="mission-container">
+    <div id="mission-container">
       <div id="mission">
         <h3 style="text-align: left">Our mission:</h3>
         <img class="quote start" src="img/double_quote_start.svg"/>
         <span class="quote">
           We want to propel humanity to a sustainable state of existence by quantifying, and making widely accessible, the impact of every choice we make
         </span>
+        <br/><br/><br/><br/><br/><br/><br/><br/>
         <img class="quote end" src="img/double_quote_end.svg"/>
         <p>
           <!-- Facebook follow -->
@@ -157,11 +158,14 @@
         </p>
       </div>
       Here we need to explain our vision
-    </section>
-    <section>
+    </div>
+
+    <section id="products">
+      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
       Here we need to show our products
     </section>
-    <section id="team-container">
+
+    <section id="team">
       <div class="profile">
         <div>
           <img class="profile" src="img/team/oli.png"></img>
@@ -192,10 +196,15 @@
         </p>
       </div>
     </section>
-    <section>
+
+    <section id="jobs">
       Here we need to show our jobs / funding opportunities
       <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     </section>
+
     <footer>
       <div id="footer-content">
         <p>
@@ -205,5 +214,31 @@
         </p>
       </div>
     </footer>
+
+    <script src="vendor/jquery.min.js"></script>
+    <script src="vendor/jquery-scrollspy.min.js"></script>
+
+    <script>
+      $(function domReady($) {
+
+        $('section').each(function eachElement() {
+          var $this = $(this);
+          var position = $this.position();
+          $this.scrollspy({
+            min: position.top,
+            max: position.top + $this.height(),
+            //offset: 100,
+            onEnter: function onEnter(element) {
+              $('#header-content li.' + element.id).addClass('active');
+            },
+            onLeave: function onEnter(element) {
+              $('#header-content li.' + element.id).removeClass('active');
+            }
+          })
+        });
+
+      });
+    </script>
+
   </body>
 </html>

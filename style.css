@@ -8,6 +8,7 @@ html, body {
 	font-smoothing: antialiased;
 	-webkit-font-smoothing: antialiased;
 	box-sizing: border-box;
+	position: relative;
 }
 
 /* General */
@@ -81,6 +82,10 @@ header a {
 	padding: 0 0 0 1.0rem; /* pad on the right side */
 	text-transform: uppercase;
 	white-space: nowrap;
+}
+
+#header-content li.active a {
+	color: orange;
 }
 
 /* Footer */
