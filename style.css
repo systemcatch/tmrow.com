@@ -13,11 +13,12 @@ html, body {
 
 /* General */
 a {
-	transition: all 0.5s ease;
+	color: #3064b9;
+	transition: all 0.2s ease;
 	text-decoration: none;
-	opacity: 0.80;
 }
 a:hover {
+	color: #4285F4;
 	opacity: 1.0;
 }
 
