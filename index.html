@@ -124,7 +124,7 @@
         <ul class="menu">
           <li class="email"><a href="mailto:hello@tmrow.co"><i class="fa fa-envelope" aria-hidden="true"></i> Contact</a></li>
           <li class="blog"><a href="https://medium.com/tmrow" target="_blank"><i class="fa fa-medium" aria-hidden="true"></i> Blog</a></li>
-          <li class="products"><a href="products"><i class="fa fa-flask" aria-hidden="true"></i> Products</a></li>
+          <li class="products"><a href="#products"><i class="fa fa-flask" aria-hidden="true"></i> Products</a></li>
           <li class="team"><a href="#team"><i class="fa fa-users" aria-hidden="true"></i> Team</a></li>
         </ul>
       </div>
@@ -180,25 +180,25 @@
     <section id="products">
       <div class="section-content">
         <h1>Our products</h1>
-        <div style="width: 100%; display: flex; text-align: center; line-height: 1.7rem;">
-          <div style="width: 33.33333%;">
+        <div style="width: 100%; display: flex; flex-wrap: wrap; text-align: center; line-height: 1.7rem;">
+          <div class="col-3" style="padding-top: 1em">
             <a href="https://www.electricitymap.org" target="_blank">
-              <img src="img/electricitymap.png" style="margin: 0 auto; width: 50%; border-radius: 5%"/>
+              <img src="img/electricitymap.png" style="margin: 0 auto; width: 10rem; border-radius: 5%"/>
               <h3>electricitymap.org</h3>
             </a>
             An interactive map that shows in real-time where your electricity comes from and how much CO2 was emitted to produce it.
             <!--The project is open sourced on <a href="https://github.com/tmrowco/electricitymap" target="_blank"><i class="fa fa-github" aria-hidden="true"></i> github</a>.-->
             <!-- Add play store / apple store buttons. -->
           </div>
-          <div style="width: 33.33333%;">
+          <div class="col-3" style="padding-top: 1em">
             <a href="https://www.co2signal.com" target="_blank">
-              <img src="img/electricitymap.png" style="margin: 0 auto; width: 50%; border-radius: 5%"/>
+              <img src="img/electricitymap.png" style="margin: 0 auto; width: 10rem; border-radius: 5%"/>
               <h3>CO2 Signal</h3>
             </a>
             An API that enables smart devices to use electricity when its carbon footprint is lowest.
           </div>
-          <div style="width: 33.33333%;">
-            <img src="img/electricitymap.png" style="margin: 0 auto; width: 50%; border-radius: 5%"/>
+          <div class="col-3" style="padding-top: 1em">
+            <img src="img/electricitymap.png" style="margin: 0 auto; width: 10rem; border-radius: 5%"/>
             <h3>?</h3>
             Where your power comes from.
             One number to track mitigation efforts on emissions from electricity.
@@ -210,35 +210,41 @@
     <section id="team">
       <div class="section-content">
         <h1>Team</h1>
-        <div class="profile">
+        <div style="max-width: 45rem;">
+          <div class="profile">
+            <div>
+              <img class="profile" src="img/team/oli.png"></img>
+            </div>
+            <div class="description">
+              <b>Olivier Corradi</b>, Founder
+              <span style="white-space: nowrap; margin-bottom: 1px">
+                <a href="https://twitter.com/corradio" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                <a href="https://www.linkedin.com/in/oliviercorradi" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a> 
+              </span>
+              <p>Olivier is a French/Danish data scientist, full stack programmer and engineer.</p>
+              <p>He spent time researching how complex systems self-organise, figuring out how to use that knowledge to better shape a sustainable world.</p>
+              <p><b>Previous companies:</b> <a href="http://snips.ai" target="_blank">Snips</a>, Google, IBM&nbsp;Research
+              <p><b>Words he likes:</b> Non-linear. Chaotic. Evolution. Entropy.</p>
+            </div>
+          </div>
+          <!--<h2>Contributors</h2>
+          <span class="slack-button">
+              <a href="https://slack.tmrow.co" target="_blank" class="slack-btn">
+                  <span class="slack-ico"></span>
+                  <span class="slack-text">Slack</span>
+              </a>
+          </span>
+          <img width="24" src="https://ca.slack-edge.com/T24QCQBC4-U2E4GKV7E-75e0b3b32b58-48"></img>@apant-->
           <div>
-            <img class="profile" src="img/team/oli.png"></img>
+            <p>&nbsp;</p>
+            <p>
+              If you're looking to have a meaningful impact, consider joining us.
+              We're looking for skilled full stack developers, designers and data scientists.
+              <p>
+                Come say hi on our <a href="http://slack.tmrow.co" target="_blank"><i class="fa fa-slack" aria-hidden="true"></i>&nbsp;slack</a> channel, or send us an <a href="mailto:hello@tmrow.co"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;email</a>.
+              </p>
+            </p>
           </div>
-          <div class="description">
-            <b>Olivier Corradi</b>, Founder
-            <span style="white-space: nowrap; margin-bottom: 1px">
-              <a href="https://twitter.com/corradio" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-              <a href="https://www.linkedin.com/in/oliviercorradi" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a> 
-            </span>
-            <p>Olivier is a French/Danish data scientist, full stack programmer and engineer.</p>
-            <p>He spent time researching how complex systems self-organise, figuring out how to use that knowledge to better shape a sustainable world.</p>
-            <p><b>Previous companies:</b> <a href="http://snips.ai" target="_blank">Snips</a>, Google, IBM Research
-            <p><b>Words you like:</b> Non-linear. Chaotic. Evolution. Entropy.</p>
-          </div>
-        </div>
-        <!--<h2>Contributors</h2>
-        <span class="slack-button">
-            <a href="https://slack.tmrow.co" target="_blank" class="slack-btn">
-                <span class="slack-ico"></span>
-                <span class="slack-text">Slack</span>
-            </a>
-        </span>
-        <img width="24" src="https://ca.slack-edge.com/T24QCQBC4-U2E4GKV7E-75e0b3b32b58-48"></img>@apant-->
-        <div>
-          <p>&nbsp;</p>
-          <p>
-          If you're looking to have a meaningful impact, consider joining us. We're looking for skilled full stack developers, designers and data scientists. Come say hi on our <a href="http://slack.tmrow.co" target="_blank"><i class="fa fa-slack" aria-hidden="true"></i>&nbsp;slack</a> channel, or send us an <a href="mailto:hello@tmrow.co"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;email</a>.
-          </p>
         </div>
       </div>
     </section>

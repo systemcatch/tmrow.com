@@ -6,11 +6,14 @@ html, body {
 	text-rendering: optimizeLegibility;
 	font-smoothing: antialiased;
 	-webkit-font-smoothing: antialiased;
-	box-sizing: border-box;
 	position: relative;
 }
 
 /* General */
+* {
+	box-sizing: border-box;
+}
+
 a {
 	color: #3064b9;
 	transition: all 0.2s ease;
@@ -48,9 +51,6 @@ h1, h2, h3 {
 }
 
 /* Blocks */
-header, footer, div#main, section {
-	box-sizing: border-box;
-}
 header #header-content, footer #footer-content, #mission-container, section .section-content, body hr {
 	width: 100%;
 	margin-left: auto;
@@ -60,6 +60,22 @@ header #header-content, footer #footer-content, #mission-container, section .sec
 section {
 	padding-top: 4.0rem; /* Should correspond to header height. Used to position anchor when menu clicked */
 	padding-bottom: 4.0rem;
+	/* Left/right padding is here for mobile support */
+	padding-left: 1.2rem;
+	padding-right: 1.2rem;
+}
+section h1:first-child {
+	margin-top: 0;
+}
+
+/* cols */
+.col-3 {
+	width: 100%;
+}
+@media (min-width: 52em) {
+	.col-3 {
+		width: 33.33333%;
+	}
 }
 
 /* Header */
@@ -168,10 +184,6 @@ section#products {
 		float: none;
 		line-height: 200%;
 	}
-	section {
-		padding-left: 1.2rem;
-		padding-right: 1.2rem;
-	}
 }
 
 /* Social */
@@ -180,7 +192,7 @@ div.fb-share-button, div.fb-like, div.fb-follow, iframe.twitter-share-button, if
     display: inline-flex;
 }
 
-/* Profile */
+/* Team */
 img.profile {
 	border-radius: 3%;
 	width: 15rem;
@@ -188,10 +200,10 @@ img.profile {
 
 div.profile {
 	display: inline-flex;
+	padding-top: 1rem;
 }
 div.profile .description {
 	margin-left: 5%;
-	max-width: 400px;
 }
 
 /* Slack */
