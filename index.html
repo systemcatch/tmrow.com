@@ -34,8 +34,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
     <link rel="manifest" href="img/favicon/manifest.json">
   	<link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:300i,400" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Radley:300i,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400|Open+Sans:300,400|Radley:300,300i,300,400" rel="stylesheet">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">    
     <script type="application/ld+json">
       {
@@ -115,6 +114,7 @@
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
     </script>
+
     <header>
       <div id="header-content">
         <a href="#" title="Tomorrow" class="logo">
@@ -124,104 +124,140 @@
         <ul class="menu">
           <li class="email"><a href="mailto:hello@tmrow.co"><i class="fa fa-envelope" aria-hidden="true"></i> Contact</a></li>
           <li class="blog"><a href="https://medium.com/tmrow" target="_blank"><i class="fa fa-medium" aria-hidden="true"></i> Blog</a></li>
-          <li class="projects"><a href="projects"><i class="fa fa-flask" aria-hidden="true"></i> Projects</a></li>
+          <li class="products"><a href="products"><i class="fa fa-flask" aria-hidden="true"></i> Products</a></li>
           <li class="team"><a href="#team"><i class="fa fa-users" aria-hidden="true"></i> Team</a></li>
         </ul>
       </div>
     </header>
-    <div id="hero-container">
-    </div>
-    <div id="mission-container">
+
+    <div id="hero-container"></div>
+
+    <section id="mission-container">
       <div id="mission">
-        <h3 style="text-align: left">Our mission:</h3>
+        <h1 style="text-align: left">Our mission:</h1>
         <img class="quote start" src="img/double_quote_start.svg"/>
         <span class="quote">
           We want to propel humanity to a sustainable state of existence by quantifying, and making widely accessible, the impact of every choice we make
         </span>
         <img class="quote end" src="img/double_quote_end.svg"/>
+        <div style="padding: 0.8rem">
+          <p>
+            <!-- Facebook follow -->
+            <div class="fb-like" 
+              data-href="https://www.facebook.com/tmrowco" 
+              data-layout="button" 
+              data-action="like"
+              data-size="small" 
+              data-show-faces="false">
+            </div>
+            <!-- Twitter follow -->
+            <a class="twitter-follow-button"
+              href="https://twitter.com/tmrowco"
+              data-show-screen-name="false"
+              data-show-count="false">
+            Follow @tmrowco</a>
+          </p>
+        </div>
+      </div>
+      <div id="mission-description">
         <p>
-          <!-- Facebook follow -->
-          <div class="fb-like" 
-            data-href="https://www.facebook.com/tmrowco" 
-            data-layout="button" 
-            data-action="like"
-            data-size="small" 
-            data-show-faces="false">
-          </div>
-          <!-- Twitter follow -->
-          <a class="twitter-follow-button"
-            href="https://twitter.com/tmrowco"
-            data-show-screen-name="false"
-            data-show-count="false">
-          Follow @tmrowco</a>
+          Natural resources are limited, and we are depleting them faster than they replenish.
+          Our current mode of operation is therefore unsustainable.
+        </p>
+        <p>
+          Change is required.
+        </p>
+        <p>
+         We believe information preceedes action. In the jungle of complex trade-offs, doing what is right has become difficult.
+        </p>
+        <p>
+          We use science, data and machine learning to automatically quantify the impact of our daily decisions.
+          We try to present this information in a simple and elegant way, empowering everyone to take informed decisions and have a tangible and positive impact.
         </p>
       </div>
-      <div>
-      Natural resources are limited, and we are depleting them faster than they replenish, making our current [...] unsustainable.
-
-      We focus on Climate Change [...] goal of radically changing our human societies to remove 80% of our emissions by 2040.
-      We use science, data, and machine learning when required, to quantify those limits.
-      We try to present this information in a simple and beautiful way, focussing on what matters.
-      Putting data/information before ideology.
-      </div>
-    </div>
+    </section>
 
     <section id="products">
-      <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-      Here we need to show our products<br/>
-      <img src="https://external-arn2-1.xx.fbcdn.net/safe_image.php?d=AQCflTp_yRyZp-lJ&w=526&h=275&url=https%3A%2F%2Fcloud.githubusercontent.com%2Fassets%2F1655848%2F20340757%2F5ada5cf6-abe3-11e6-97c4-e68929b8a135.png&cfs=1&upscale=1&_nc_hash=AQAO5UdfVZb54rwF"/>
-      ElectricityMap
-      Where your power comes from.
-      One number to track mitigation efforts on emissions from electricity.
-      Add <a href="https://github.com/tmrowco/electricitymap" target="_blank"><i class="fa fa-github" aria-hidden="true"></i> github</a> logo.
-      Add play store / apple store buttons.
+      <div class="section-content">
+        <h1>Our products</h1>
+        <div style="width: 100%; display: flex; text-align: center; line-height: 1.7rem;">
+          <div style="width: 33.33333%;">
+            <a href="https://www.electricitymap.org" target="_blank">
+              <img src="img/electricitymap.png" style="margin: 0 auto; width: 50%; border-radius: 5%"/>
+              <h3>electricitymap.org</h3>
+            </a>
+            An interactive map that shows in real-time where your electricity comes from and how much CO2 was emitted to produce it.
+            <!--The project is open sourced on <a href="https://github.com/tmrowco/electricitymap" target="_blank"><i class="fa fa-github" aria-hidden="true"></i> github</a>.-->
+            <!-- Add play store / apple store buttons. -->
+          </div>
+          <div style="width: 33.33333%;">
+            <a href="https://www.co2signal.com" target="_blank">
+              <img src="img/electricitymap.png" style="margin: 0 auto; width: 50%; border-radius: 5%"/>
+              <h3>CO2 Signal</h3>
+            </a>
+            An API that enables smart devices to use electricity when its carbon footprint is lowest.
+          </div>
+          <div style="width: 33.33333%;">
+            <img src="img/electricitymap.png" style="margin: 0 auto; width: 50%; border-radius: 5%"/>
+            <h3>?</h3>
+            Where your power comes from.
+            One number to track mitigation efforts on emissions from electricity.
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="team">
-      <div class="profile">
+      <div class="section-content">
+        <div class="profile">
+          <div>
+            <img class="profile" src="img/team/oli.png"></img>
+          </div>
+          <div class="description">
+            <b>Olivier Corradi</b>, Founder
+            <span style="white-space: nowrap; margin-bottom: 1px">
+              <a href="https://twitter.com/corradio" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+              <a href="https://www.linkedin.com/in/oliviercorradi" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a> 
+            </span>
+            <p>French/Danish data scientist, full stack programmer and engineer.</p>
+            <p>I believe in flat organisations with strong autonomous teams working for a common purpose.</p>
+            <p>I also spend time researching how complex systems self-organise, figuring out how to use that knowledge to better shape a sustainable world.</p>
+            <p>Previous companies: <a href="http://snips.ai" target="_blank">Snips</a>, Google, IBM Research
+            <p>Words you like: Non-linear. Chaotic. Evolution. Entropy.</p>
+            Remove 'I'. 
+          </div>
+        </div>
+        <!--<h2>Contributors</h2>
+        <span class="slack-button">
+            <a href="https://slack.tmrow.co" target="_blank" class="slack-btn">
+                <span class="slack-ico"></span>
+                <span class="slack-text">Slack</span>
+            </a>
+        </span>
+        <img width="24" src="https://ca.slack-edge.com/T24QCQBC4-U2E4GKV7E-75e0b3b32b58-48"></img>@apant-->
         <div>
-          <img class="profile" src="img/team/oli.png"></img>
+          <p>&nbsp;</p>
+          <p>We're looking for skilled full stack developers, designers and data scientists to join us.
+          If you're up for the task, come say hi on our <a href="http://slack.tmrow.co" target="_blank"><i class="fa fa-slack" aria-hidden="true"></i>&nbsp;slack</a> channel, or send us an <a href="mailto:hello@tmrow.co"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;email</a>.
+          </p>
         </div>
-        <div class="description">
-          <b>Olivier Corradi</b>, Founder
-          <span style="white-space: nowrap; margin-bottom: 1px">
-            <a href="https://twitter.com/corradio" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a href="https://www.linkedin.com/in/oliviercorradi" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a> 
-          </span>
-          <p>French/Danish data scientist, full stack programmer and engineer.</p>
-          <p>I believe in flat organisations with strong autonomous teams working for a common purpose.</p>
-          <p>I also spend time researching how complex systems self-organise, figuring out how to use that knowledge to better shape a sustainable world.</p>
-          <p>Previous companies: <a href="http://snips.ai" target="_blank">Snips</a>, Google, IBM Research
-          <p>Words you like: Non-linear. Chaotic. Evolution. Entropy.</p>
-          Remove 'I'. 
-        </div>
-      </div>
-      <!--<h2>Contributors</h2>
-      <span class="slack-button">
-          <a href="https://slack.tmrow.co" target="_blank" class="slack-btn">
-              <span class="slack-ico"></span>
-              <span class="slack-text">Slack</span>
-          </a>
-      </span>
-      <img width="24" src="https://ca.slack-edge.com/T24QCQBC4-U2E4GKV7E-75e0b3b32b58-48"></img>@apant-->
-      <div>
-        <p>&nbsp;</p>
-        <p>We're looking for skilled full stack developers, designers and data scientists to join us.
-        If you're up for the task, come say hi on our <a href="http://slack.tmrow.co" target="_blank"><i class="fa fa-slack" aria-hidden="true"></i>&nbsp;slack</a> channel, or send us an <a href="mailto:hello@tmrow.co"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;email</a>.
-        </p>
       </div>
     </section>
 
     <section id="values">
-      Here we need to show our values
+      <div class="section-content">
+        Here we need to show our values
+      </div>
     </section>
 
     <section id="jobs">
-      Here we need to show our jobs / funding opportunities
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      <div class="section-content">
+        Here we need to show our jobs / funding opportunities
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      </div>
     </section>
 
     <footer>
@@ -243,10 +279,10 @@
         $('section').each(function eachElement() {
           var $this = $(this);
           var position = $this.position();
+          var offset = 200;
           $this.scrollspy({
-            min: position.top,
-            max: position.top + $this.height(),
-            //offset: 100,
+            min: position.top - offset,
+            max: position.top - offset + $this.height(),
             onEnter: function onEnter(element) {
               $('#header-content li.' + element.id).addClass('active');
             },
