@@ -40,7 +40,7 @@ img.svg {
 header, footer, div#main, section {
 	box-sizing: border-box;
 }
-header #header-content, footer #footer-content, section, div#main #main-content {
+header #header-content, footer #footer-content, #mission-container, section {
 	width: 100%;
 	margin: 0 auto;
 	max-width: 990px;
@@ -151,8 +151,8 @@ div.fb-share-button, div.fb-like, div.fb-follow, iframe.twitter-share-button, if
 
 /* Profile */
 img.profile {
-	width: 90px;
-	height: 90px;
+	border-radius: 3%;
+	width: 15rem;
 }
 
 div.profile {
