@@ -201,6 +201,7 @@ img.profile {
 div.profile {
 	display: inline-flex;
 	padding-top: 1rem;
+	padding-bottom: 3rem;
 }
 div.profile .description {
 	margin-left: 5%;
