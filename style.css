@@ -196,6 +196,7 @@ div.fb-share-button, div.fb-like, div.fb-follow, iframe.twitter-share-button, if
 /* Team */
 img.profile {
 	border-radius: 3%;
+	filter: grayscale(100%);
 	width: 15rem;
 }
 
