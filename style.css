@@ -60,9 +60,12 @@ header #header-content, footer #footer-content, #mission-container, section .sec
 section {
 	padding-top: 4.0rem; /* Should correspond to header height. Used to position anchor when menu clicked */
 	padding-bottom: 4.0rem;
+}
+section, footer {
+
 	/* Left/right padding is here for mobile support */
-	padding-left: 1.2rem;
-	padding-right: 1.2rem;
+	padding-left: 2.0rem;
+	padding-right: 2.0rem;
 }
 section h1:first-child {
 	margin-top: 0;
@@ -121,6 +124,16 @@ header a {
 	color: orange;
 }
 
+@media (max-width : 52em) {
+	#header-content {
+		text-align: center;
+	}
+	#header-content ul {
+		float: none;
+		line-height: 200%;
+	}
+}
+
 /* Footer */
 footer {
 	background-color: #f3f3f3;
@@ -134,10 +147,15 @@ footer {
 #hero-container {
 	content: "";
 	background-repeat: no-repeat;
-	background-position: right bottom;
+	background-position: left bottom;
 	background-image: url(img/bg1.jpg);
 	background-size: cover;
 	height: 30rem;
+}
+@media (max-width : 52em) {
+	#hero-container {
+		height: 60%;
+	}
 }
 
 /* Mission */
@@ -175,18 +193,6 @@ section#products {
 	background-color: #f3f3f3;
 }
 
-/* Mobile styles */
-@media only screen and (max-width : 680px) and (min-height : 400px) {
-	
-	#header-content {
-		text-align: center;
-	}
-	#header-content ul {
-		float: none;
-		line-height: 200%;
-	}
-}
-
 /* Social */
 div.fb-share-button, div.fb-like, div.fb-follow, iframe.twitter-share-button, iframe.twitter-follow-button, iframe.__slackin {
     vertical-align: middle;
@@ -200,13 +206,29 @@ img.profile {
 	width: 15rem;
 }
 
-div.profile {
+.profile {
 	display: inline-flex;
 	padding-top: 1rem;
 	padding-bottom: 3rem;
 }
-div.profile .description {
+.profile .picture {
+	/*width: 33%;*/
+}
+.profile .description {
 	margin-left: 5%;
+}
+@media (max-width : 52em) {
+	.profile {
+		flex-wrap: wrap;
+	}
+	.profile .picture {
+		text-align: center;
+		width: 100%;
+	}
+	.profile .description {
+		margin-left: 0;
+		width: 100%;
+	}
 }
 
 /* Slack */
