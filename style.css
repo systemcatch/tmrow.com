@@ -202,7 +202,12 @@ div.fb-share-button, div.fb-like, div.fb-follow, iframe.twitter-share-button, if
 /* Team */
 img.profile {
 	border-radius: 3%;
+	-webkit-filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	-o-filter: grayscale(100%);
 	filter: grayscale(100%);
+ 	filter: gray; /* IE 6-9 */
 	width: 15rem;
 }
 
