@@ -62,19 +62,20 @@ header #header-content, footer #footer-content, #mission-container, section .sec
 	max-width: 990px;
 }
 section {
-	padding-top: 3.0rem;
-	padding-bottom: 3.0rem;
+	padding: 3.0rem;
+}
+section, footer {
+	padding-left: 3.0rem;
+	padding-right: 3.0rem;
 }
 @media (max-width: 52em) {
 	section {
 		padding: 2.0rem;
 	}
-}
-section, footer {
-
-	/* Left/right padding is here for mobile support */
-	padding-left: 2.0rem;
-	padding-right: 2.0rem;
+	footer {
+		padding-left: 2.0rem;
+		padding-right: 2.0rem;
+	}
 }
 section h1 {
 	margin-bottom: 3.0rem;
@@ -244,6 +245,22 @@ img.profile {
 /* Jobs */
 section#jobs {
 	background-color: #f3f3f3;
+}
+.jobs {
+	padding: 1em;
+}
+.job:first-child {
+	padding-top: 0;
+}
+.job {
+	padding-top: 1.5em;
+}
+.job .title {
+	font-weight: bold;
+}
+.job .description {
+	padding-top: 0.3em;
+	text-indent: 2em;
 }
 
 .member {
