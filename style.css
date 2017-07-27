@@ -24,6 +24,10 @@ a:hover {
 	opacity: 1.0;
 }
 
+i {
+	font-style: unset;
+}
+
 .fa {
 	/* Fix word wrap */
 	display:inline !important;
@@ -58,26 +62,52 @@ header #header-content, footer #footer-content, #mission-container, section .sec
 	max-width: 990px;
 }
 section {
-	padding-top: 4.0rem; /* Should correspond to header height. Used to position anchor when menu clicked */
-	padding-bottom: 4.0rem;
+	padding: 3.0rem;
 }
 section, footer {
-
-	/* Left/right padding is here for mobile support */
-	padding-left: 2.0rem;
-	padding-right: 2.0rem;
+	padding-left: 3.0rem;
+	padding-right: 3.0rem;
+}
+@media (max-width: 52em) {
+	section {
+		padding: 2.0rem;
+	}
+	footer {
+		padding-left: 2.0rem;
+		padding-right: 2.0rem;
+	}
+}
+section h1 {
+	margin-bottom: 3.0rem;
+}
+@media (max-width: 52em) {
+	section h1 {
+		margin-bottom: 2.0rem;
+	}
 }
 section h1:first-child {
 	margin-top: 0;
 }
+section p:last-child {
+	margin-bottom: 0;
+}
 
 /* cols */
 .col-3 {
-	width: 100%;
+	width: 33.33333%;
+	padding-left: 1.0em;
+	padding-right: 1.0em;
 }
-@media (min-width: 52em) {
+@media (max-width: 52em) {
+	/* mobile style */
 	.col-3 {
-		width: 33.33333%;
+		width: 100%;
+		padding-top: 4rem;
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.col-3:first-child {
+		padding-top: 0;
 	}
 }
 
@@ -127,16 +157,17 @@ header a {
 @media (max-width : 52em) {
 	#header-content {
 		text-align: center;
+		line-height: unset;
 	}
 	#header-content ul {
 		float: none;
-		line-height: 200%;
+		padding-top: 0.8rem;
 	}
 }
 
 /* Footer */
 footer {
-	background-color: #f3f3f3;
+	/*background-color: #f3f3f3;*/
 }
 #footer-content {
 	padding-top: 1.2rem;
@@ -211,26 +242,51 @@ img.profile {
 	width: 15rem;
 }
 
-.profile {
-	display: inline-flex;
-	padding-top: 1rem;
-	padding-bottom: 3rem;
+/* Jobs */
+section#jobs {
+	background-color: #f3f3f3;
 }
-.profile .picture {
+.jobs {
+	padding: 1em;
+}
+.job:first-child {
+	padding-top: 0;
+}
+.job {
+	padding-top: 1.5em;
+}
+.job .title {
+	font-weight: bold;
+}
+.job .description {
+	padding-top: 0.3em;
+	text-indent: 2em;
+}
+
+.member {
+	display: inline-flex;
+	padding-top: 3rem;
+	padding-bottom: 1rem;
+}
+.member:first-child {
+	padding-top: 0;
+}
+.member .picture {
 	/*width: 33%;*/
 }
-.profile .description {
+.member .description {
 	margin-left: 5%;
 }
 @media (max-width : 52em) {
-	.profile {
+	.member {
 		flex-wrap: wrap;
 	}
-	.profile .picture {
+	.member .picture {
 		text-align: center;
 		width: 100%;
+		padding-bottom: 2rem; /* because they are now stacked together */
 	}
-	.profile .description {
+	.member .description {
 		margin-left: 0;
 		width: 100%;
 	}
@@ -245,4 +301,16 @@ img.profile {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     float: left;
+}
+
+.badge {
+	background-color: #ec1e2f;
+	/* all sizes are relative to parent */
+	font-size: 0.5em;
+	width: 1.2em;
+	border-radius: 1.2em;
+	display: inline-block;
+	text-align: center;
+	color: white;
+	vertical-align: super;
 }
