@@ -147,6 +147,13 @@
         margin-top: 2rem;
       }
 
+      /* Prevent subscript from affecting line-height */
+      sub {
+        vertical-align: baseline;
+        position: relative;
+        top: 0.4em;
+      }
+
       /* Graphs */
       .graph {
         width: 70%;
@@ -183,7 +190,7 @@
 
     <section style="margin-top: 3em;">
       <div class="section-content">
-        <h1>Climate Change in a nutshell</h1>
+        <h1>A pragmatic guide to Climate Change</h1>
         <p>
           A very short introduction
         </p>
@@ -298,7 +305,7 @@
 
                 var option = initialOption();
 
-                option.title.text = 'Reconstruction of global temperatures in the last 11,300 years';
+                option.title.text = 'Reconstruction of global temperatures in the last 11 300 years';
                 option.title.subtext = '°C compared to 1961-1990 average';
 
                 option.color = ['#61a0a8']
@@ -353,16 +360,208 @@
 
         <h2>Climate change is caused by greenhouse gases</h2>
         <p>
-          show screenshot of oldest study on GHG.
+          Some gases are transparent to the sun's rays heating the Earth, but are opaque (acting as mirrors) with respect to rays emitted back from the Earth.
+          Those gases act as a blanket, trapping heat that is unable to escape, and are called greenhouse gases due to warming behaviour.
+          The most abundant greenhouse gas is water wapor and is part of the natural stability of our climate.
+          By trapping heat inside the atmosphere, it enables our nights to be relatively warm compared to the cold of outer space.
+        </p>
+        <p>
+          One of the most interesting greehouse gas is carbon dioxide (CO<sub>2</sub>), as it has been relatively stable until the industrial revolution.
+          We know this because we have been able to drill <a href="https://earthobservatory.nasa.gov/Features/Paleoclimatology_IceCores/" target="_blank">Ice Cores</a> that are columns of ice containing small bubbles of old trapped air. By analysing this air, we can infer the CO<sub>2</sub> concentration in previous times.
+          This major increase during the industrial revolution has been found to be the <a href="https://www.bloomberg.com/graphics/2015-whats-warming-the-world/" target="_blank">main driver</a> behind temperature increases.
+          We <a href="https://climate.nasa.gov/evidence/" target="_blank">know this</a> because climate models fail to reconstruct temperature increases without taking into account the recent increase in greenhouse gas concentration.
+        </p>
+
+        <div class="graph">
+          <div class="chart" id="ghg_time_series"></div>
+          <div class="source">
+            Source: National Oceanic and Atmospheric Administration (NOAA) <a href="https://www.ncdc.noaa.gov/paleo-search/study/17975" target="_blank">Ice Core records</a> (<a href="https://www1.ncdc.noaa.gov/pub/data/paleo/icecore/antarctica/antarctica2015co2composite.txt" target="_blank">data</a>) and <a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html" target="_blank">Mauna Loa records</a> (<a href="ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_annmean_mlo.txt" target="_blank">data</a>)
+          </div>
+        </div>
+
+        <script>
+          (function() {
+            var icecore_url = 'data/antarctica2015co2composite.txt';
+            var mlo_url = 'data/co2_annmean_mlo.txt';
+
+            d3.queue()
+              .defer(d3.text, icecore_url)
+              .defer(d3.text, mlo_url)
+              .await(function(err, icecore_obj, mlo_obj) {
+              if (err) throw err;
+
+              var icecore_data = icecore_obj.split('\n')
+                .filter(function(d, i) { return i >= 138; })
+                .map(function(d) {
+                  var r = d.split('\t')
+                  return [1950 - +r[0], +r[1]];
+                })
+
+              var mlo_data = mlo_obj.split('\n')
+                .filter(function(d) { return d[0] != '#'; })
+                .map(function(d) {
+                  var r = d.split('   ')
+                  return [+r[0], +r[1]];
+                })
+
+              var option = initialOption();
+
+              option.title.text = 'Atmospheric CO2 concentration up to 10 000 years ago';
+              option.title.subtext = 'in ppm (particles per million)';
+
+              // option.color = ['#61a0a8']
+
+              option.xAxis.type = 'value';
+              option.xAxis.axisLabel = {
+                formatter: function(e) { return e.toString() }
+              }
+              option.xAxis.min = -10000;
+              option.yAxis.min = 150;
+              option.yAxis.max = 450;
+
+              option.dataZoom = [
+                {
+                  type: 'slider',
+                  startValue: 0,
+                  showDataShadow: false,
+                }
+              ]
+
+              option.legend = {
+                data: ['Ice Core', 'Mauna Loa'], // same as series name
+                orient: 'horizontal',
+                y: 30,
+              }
+
+              option.grid.bottom = 60;
+
+              option.tooltip.formatter = function(e) {
+                var yValue = e[0].data[1];
+                var xValue = e[0].data[0];
+                var year = xValue < 0 ?
+                  Math.round(xValue) + ' BC' :
+                  Math.round(xValue) + ' AD';
+                return yValue + ' ppm in ' + year;
+              }
+
+              option.series = [
+                {
+                  name: 'Ice Core',
+                  type: 'line',
+                  showSymbol: false,
+                  data: icecore_data
+                },
+                {
+                  name: 'Mauna Loa',
+                  type: 'line',
+                  showSymbol: false,
+                  data: mlo_data
+                }
+              ];
+
+              console.log(option)
+
+              var chart = echarts.init(document.getElementById('ghg_time_series'))
+              chart.setOption(option);
+              window.addEventListener('resize', chart.resize);
+
+            });
+          })();
+        </script>
+
+
+        <h1>Greenhouse gases are the result of human industrialisation</h1>
+
+        <p>
+          The <a href="https://en.wikipedia.org/wiki/Greenhouse_effect" target="_blank">greenhouse effect</a> has been identified since the beginning of the century.
+          <a href="https://paperspast.natlib.govt.nz/newspapers/rodney-and-otamatea-times-waitemata-and-kaipara-gazette/1912/8/14/7" target="_blank">This article</a> from 1912 is one of the earliest accounts, which further identifies the risk of releasing additional greenhouse gases, like carbon dioxide (CO<sub>2</sub>) into the atmosphere, which could cause an increase in temperatures.
+
+
+          The invention of an efficient steam engine by James Watt in 1784 meant humans were able to effectively convert fossil fuels into energy, a process that releases carbon dioxide (CO2) into the atmosphere.
+
+          Fossil fuels have a tremendous amount of energy stored. In terms of X, 1L of oil represents Y, Z.
+          The discovery of the use of fossil fuels propelled humanity into an industrialised age, and enabled us to have the living standard we have now.
+          Currently, each human on earth has the equivalent of X energetic slaves working to them to produce what we consume, ultimately sustaining our living standard. 
         </p>
 
 
-        <h2>Greenhouse gases are the result of human industrialisation</h2>
-        <div>
-          The invention of an efficient steam engine by James Watt in 1784 meant humans were able to effectively convert fossil fuels into energy, a process that releases carbon dioxide (CO2) into the atmosphere.
+        <p>
+          Several <a href="https://en.wikipedia.org/wiki/Greenhouse_gas" target="_blank">greenhouse gases</a> exist, differing by how much radiation they trap per unit area and unit time, and by how long they stay in the atmosphere.
+          To be able to compare them, the so-called <a href="https://en.wikipedia.org/wiki/Global_warming_potential" target="_blank">global warming potential</a> of each gas is calculated, being the amount of heat trapped by a certain mass of gas compared to a similar mass of CO<sub>2</sub> over 100 years.
+        </p>
+        <div class="graph">
+          <div class="chart" id="global_warming_potential"></div>
+          <div class="source">
+            Source: <a href="https://en.wikipedia.org/wiki/Global_warming_potential" target="_blank">Global warming potential (Wikipedia)</a> from 2013 IPCC AR5 p714
+          </div>
         </div>
 
+        <script>
+          (function() {
+            var option = initialOption();
+
+            var data = [
+              { name: 'CO2', gwp: 1 },
+              { name: 'CH4', gwp: 34 },
+              // { name: 'HFC-134a', gwp: 1550 }, 
+              // { name: 'CFC-11', gwp: 5350 },
+              { name: 'N2O', gwp: 298 },
+              // { name: 'CF4', gwp: 7350},
+            ];
+
+            var sortedData = data.sort(function(a, b) {
+              return d3.descending(a.gwp, b.gwp);
+            })
+
+            option.xAxis.data = sortedData.map(function(d) { return d.name })
+
+            option.title.text = 'Global warming potential over 100 years'
+            option.title.subtext = 'Relative to CO2';
+
+            option.series = [
+              {
+                name: '',
+                type: 'bar',
+                data: sortedData.map(function(d) { return d.gwp }),
+                itemStyle: {
+                  normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(255, 64, 30)'
+                    }, {
+                        offset: 1,
+                        color: 'orange'
+                    }])
+                  }
+                },
+              }
+            ];
+
+            var chart = echarts.init(document.getElementById('global_warming_potential'))
+            chart.setOption(option);
+            window.addEventListener('resize', chart.resize);
+          })()
+        </script>
+
+        </p>
+        <p>
+          ... define co2eq ...
+
+
+
+
+          Even though nitrous oxide (N<sub>2</sub>O) is worth 300 times its weight of CO<sub>2</sub>, the staggering amount of CO<sub>2</sub> in the atmosphere makes it by far the main contributor to the greenhouse effect.
+
+          
+          
+        </p>
+
       </div>
+
+      We must redouble our R&D effort, but not rely on them. Given the time constraints we are under, it is unlikely a new clean energy source will surface.
+
+      A note on emissions -> concentrations -> temperature
+
     </section>
 
     <footer class="alternate">
