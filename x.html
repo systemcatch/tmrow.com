@@ -116,6 +116,55 @@
       }(document, 'script', 'facebook-jssdk'));
     </script>
 
+    <script src="vendor/d3.min.js"></script>
+    <script src="vendor/echarts.common.min.js"></script>
+    <script>
+      function initialOption() {
+        return {
+          title: { textStyle: { fontSize: 14 }, itemGap: 5 },
+          xAxis: {},
+          yAxis: {},
+          grid: { bottom: 45 },
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'line'
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+      /* Override */
+      .section-content {
+        max-width: 800px !important;
+      }
+      h1 {
+        margin-bottom: unset !important;
+      }
+      h2 {
+        margin-top: 2rem;
+      }
+
+      /* Graphs */
+      .graph {
+        width: 70%;
+        /* center horizontally */
+        margin-right: auto;
+        margin-left: auto;
+        padding-top: 1.5em;
+        padding-bottom: 1.5em;
+      }
+      .chart {
+        width: 100%;
+        height: 350px;
+      }
+      .source {
+        font-size: small;
+      }
+    </style>
+
     <header>
       <div id="header-content">
         <a href="#" title="Tomorrow" class="logo">
@@ -124,216 +173,199 @@
         <ul class="menu">
           <li class="email"><a href="mailto:hello@tmrow.com"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Contact</a></li>
           <li class="blog"><a href="https://medium.com/tmrow" target="_blank"><i class="fa fa-medium" aria-hidden="true"></i>&nbsp;Blog</a></li>
-          <li class="products"><a href="#products"><i class="fa fa-flask" aria-hidden="true"></i>&nbsp;Products</a></li>
-          <li class="team"><a href="#team"><i class="fa fa-users" aria-hidden="true"></i>&nbsp;Team</a></li>
-          <li class="jobs"><a href="#jobs"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;Jobs</a></li>
+          <li class="products"><a href="/#products"><i class="fa fa-flask" aria-hidden="true"></i>&nbsp;Products</a></li>
+          <li class="team"><a href="/#team"><i class="fa fa-users" aria-hidden="true"></i>&nbsp;Team</a></li>
+          <li class="jobs"><a href="/#jobs"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;Jobs</a></li>
+          <li class="climate active"><a href="x.html"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Climate</a></li>
         </ul>
       </div>
     </header>
 
-    <div id="hero-container"></div>
+    <section style="margin-top: 3em;">
+      <div class="section-content">
+        <h1>Climate Change in a nutshell</h1>
+        <p>
+          A very short introduction
+        </p>
 
-    <section id="mission-container">
-      <div id="mission">
-        <h1 style="text-align: left">Our mission:</h1>
-        <img class="quote start" src="img/double_quote_start.svg"/>
-        <span class="quote">
-          We want to help humanity reach a sustainable state of existence by quantifying, and making widely accessible, the impact of every choice we make
-        </span>
-        <img class="quote end" src="img/double_quote_end.svg"/>
-        <div style="padding: 0.8rem">
+        <h2>Global temperatures are rapidly increasing</h2>
+        <div>
           <p>
-            <!-- Facebook follow -->
-            <div class="fb-like" 
-              data-href="https://www.facebook.com/tmrowco" 
-              data-layout="button" 
-              data-action="like"
-              data-size="small" 
-              data-show-faces="false">
-            </div>
-            <!-- Twitter follow -->
-            <a class="twitter-follow-button"
-              href="https://twitter.com/tmrowco"
-              data-show-screen-name="false"
-              data-show-count="false">
-            Follow @tmrowco</a>
+            "Warming of the climate system is unequivocal, and since the 1950s, many of the observed changes are unprecedented over decades to millennia", writes the Intergovernmental Panel on Climate Change (IPCC) in its <a href="http://www.ipcc.ch/pdf/assessment-report/ar5/syr/AR5_SYR_FINAL_SPM.pdf" target="_blank">fifth assessment</a>.
           </p>
+
+          <div class="graph">
+            <div class="chart" id="temperature_time_series_recent"></div>
+            <div class="source">
+              Source: <a href="https://climate.nasa.gov/vital-signs/global-temperature/" target="_blank">NASA's Goddard Institute for Space Studies (GISS)</a> (<a href="http://climate.nasa.gov/system/internal_resources/details/original/647_Global_Temperature_Data_File.txt" target="_blank">data</a>)
+            </div>
+          </div>
+
+          <script>
+            (function() {
+              var url = 'data/647_Global_Temperature_Data_File.txt';
+              d3.text(url, function(err, giss_obj) {
+                if (err) throw err;
+
+                var giss_data = giss_obj
+                  .split('\n')
+                  .map(function(row, i) { return row.split('     ') })
+                  .filter(function(row, i) { return +row[0]; })
+
+                var option = initialOption();
+                var xData = giss_data.map(function(d) { return +d[0] });
+                var yData = giss_data.map(function(d) { return +d[1] });
+                var xyData = giss_data.map(function(_, i) { return [xData[i], yData[i]] })
+
+                option.xAxis.type = 'value';
+                option.xAxis.min = d3.min(xData);
+                // option.xAxis.min = 1950;
+                option.xAxis.axisLabel = {
+                  formatter: function(e) { return e.toString() }
+                }
+
+                option.xAxis.max = d3.max(xData);
+                option.yAxis.min = -0.5;
+                option.yAxis.max = d3.max(yData) + 0.2;
+
+                option.title.text = 'Temperature anomaly'
+                option.title.subtext = '°C compared to 1951-1980 average';
+
+                option.tooltip.formatter = function(e) {
+                  var value = e[0].data[1];
+                  var sign = value >= 0 ? '+' : '';
+                  return sign + value + ' °C in ' + e[0].data[0];
+                }
+
+                option.series = [
+                  {
+                    name: 'nasa_giss_1y',
+                    type: 'line',
+                    showSymbol: false,
+                    data: xyData,
+                    areaStyle: {
+                      normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: -1 * option.yAxis.min / option.yAxis.max - 0.2,
+                            color: 'rgb(255, 64, 30)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(180, 200, 255)'
+                        }])
+                      }
+                    },
+                  }
+                ];
+
+                var chart = echarts.init(document.getElementById('temperature_time_series_recent'))
+                chart.setOption(option);
+                window.addEventListener('resize', chart.resize);
+              })
+            })()
+          </script>
+
+          <p>
+            It is very clear that the global average temperature is increasing as sixteen of the 17 warmest years have all occurred since 2001 (with the exception of 1998).
+            Furthermore, NOAA reported in August 2016 that each of the last 16 months <a href="https://www.ncdc.noaa.gov/sotc/global/201607#temp" target="_blank">were the warmest they've ever measured</a>.
+            The measured warming has been found to be consistent across <a href="https://data.giss.nasa.gov/gistemp/graphs/" target="_blank">seasons</a> and <a href="https://twitter.com/anttilip/status/891730388497965056" target="_blank">regions</a>.
+          </p>
+
+          <p>
+            We have now reached a warming of 1&deg;C since the end of the 70s. A change of 1&deg;C in 50 years is unprecedented, as it can be seen from the follow reconstruction of temperatures in the last 10 000 years:
+          </p>
+
+          <div class="graph">
+            <div class="chart" id="temperature_time_series_OLD"></div>
+            <div class="source">
+              Source: <a href="http://science.sciencemag.org/content/339/6124/1198" target="_blank">A Reconstruction of Regional and Global Temperature for the Past 11,300 Years</a> (<a href="http://science.sciencemag.org/content/suppl/2013/03/07/339.6124.1198.DC1" target="_blank">data</a>)
+            </div>
+          </div>
+
+          <script>
+            (function() {
+              var marcott_url = 'data/marcott2013.csv'
+
+              d3.text(marcott_url, function(err, marcott_obj) {
+                if (err) throw err;
+
+                var marcott_data = d3.dsvFormat(';').parse(marcott_obj);
+                var data = marcott_data
+                  .map(function(r) {
+                    return [1950 - +r['Age (yrs BP)'], parseFloat(r['Global (°C)'].replace(',', '.'))]
+                  }).filter(function(d) {
+                    return isFinite(d[1]);
+                  })
+
+                var option = initialOption();
+
+                option.title.text = 'Reconstruction of global temperatures in the last 11,300 years';
+                option.title.subtext = '°C compared to 1961-1990 average';
+
+                option.color = ['#61a0a8']
+
+                option.xAxis.type = 'value';
+                option.xAxis.axisLabel = {
+                  formatter: function(e) { return e.toString() }
+                }
+
+                option.tooltip.formatter = function(e) {
+                  var yValue = e[0].data[1];
+                  var sign = yValue >= 0 ? '+' : '';
+                  var xValue = e[0].data[0];
+                  var year = xValue < 0 ? xValue + ' BC' : xValue + ' AD';
+                  return sign + yValue + ' °C in ' + year;
+                }
+
+                option.series = [
+                  {
+                    name: 'marcott',
+                    type: 'line',
+                    showSymbol: false,
+                    data: data
+                  }
+                ];
+
+                console.log(option)
+
+                var chart = echarts.init(document.getElementById('temperature_time_series_OLD'))
+                chart.setOption(option);
+                window.addEventListener('resize', chart.resize);
+
+              });
+            })();
+          </script>
+
+          <p>
+            What is worrying is not so much the change itself, but rather the speed at which this change is taking place.
+            Historically, a change of 1&deg;C seems to happen in thousands of years - not decades.
+            The Earth is a complex ecosystem, and disturbing it by as little as a couple of degrees in the blink of a decades (or even centuries) is a non negligible disturbance.
+          </p>
+
         </div>
-      </div>
-      <div id="mission-description">
+
+
+        <h2>A couple of degrees change has widespread consequences</h2>
+
         <p>
-          Natural resources are limited, and we are depleting them faster than they replenish.
-          Our way of life is unsustainable.
+          Introduce climate change. Map of 4 degs.
         </p>
+
+
+        <h2>Climate change is caused by greenhouse gases</h2>
         <p>
-          A radical change is required.
+          show screenshot of oldest study on GHG.
         </p>
-        <p>
-         Information has to precede action. In this jungle of complex trade-offs, doing what is right has often become difficult.
-        </p>
-        <p>
-          We use science, data and machine learning to automatically quantify the environmental impact of our daily decisions.
-          We present this information in a simple and elegant way, empowering anyone to have a tangible and positive impact.
-        </p>
-      </div>
-    </section>
 
-    <section id="products">
-      <div class="section-content">
-        <h1>Our products</h1>
-        <div style="width: 100%; display: flex; flex-wrap: wrap; text-align: center; line-height: 1.7rem;">
-          <div class="col-3">
-            <a href="https://www.electricitymap.org" target="_blank">
-              <img src="img/products/electricitymap.png" style="margin: 0 auto; height: 10rem; border-radius: 5%"/>
-              <h3>electricitymap.org</h3>
-            </a>
-            <b>Electricity Map</b> shows in real-time where your electricity comes from and how much CO2 was emitted to produce it.
-            <!--The project is open sourced on <a href="https://github.com/tmrowco/electricitymap" target="_blank"><i class="fa fa-github" aria-hidden="true"></i> github</a>.-->
-            <!-- Add play store / apple store buttons. -->
-          </div>
-          <div class="col-3">
-            <a href="https://www.co2signal.com" target="_blank">
-              <img src="img/products/co2signal.png" style="margin: 0 auto; height: 10rem; border-radius: 5%"/>
-              <h3>CO2 Signal</h3>
-            </a>
-            <b>CO2 Signal</b> is an API that enables connected devices to use electricity when its carbon footprint is lowest.
-          </div>
-          <div class="col-3">
-            <div src="img/product/next.png" style="margin: 0 auto; height: 10rem; width: 10rem; border-radius: 5%; background-color: white"></div>
-            <h3>?</h3>
-            To be announced.
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section id="team">
-      <div class="section-content">
-        <h1>Team</h1>
-        <div class="members">
-
-          <div class="member">
-            <div class="picture">
-              <img class="profile" src="img/team/oli.png"></img>
-            </div>
-            <div class="description">
-              <b>Olivier Corradi</b>, Founder
-              <span style="white-space: nowrap; margin-bottom: 1px">
-                <a href="https://twitter.com/corradio" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                <a href="https://www.linkedin.com/in/oliviercorradi" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-              </span>
-              <p>Olivier is a French/Danish mathematician, engineer and full stack programmer.</p>
-              <p>
-                He previously managed data science and engineering at French AI startup <a href="http://snips.ai" target="_blank">Snips</a>, scaling the company from 1 to 30 employees.
-              </p>
-              <p>
-                He studied mathematical statistics at the Technical University of Denmark, general engineering at Ecole Centrale Paris and doesn't remember anymore when he started coding.
-              </p>
-              <p><b>Previous companies:</b> Snips, Google, IBM&nbsp;Research</p>
-              <p><b>Stuff he likes:</b> Chaos. Non-linearity. Rick Sanchez. Producing electronic music. Scraping data. Running. Playing soccer.</p>
-            </div>
-          </div>
-
-          <div class="member">
-            <div class="picture">
-              <img class="profile" src="img/team/bru.png"></img>
-            </div>
-            <div class="description">
-              <b>Bruno Lajoie</b>, Scientific Expert
-              <span style="white-space: nowrap; margin-bottom: 1px">
-                <a href="https://twitter.com/brunolajoie" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                <a href="https://www.linkedin.com/in/brunolajoie" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-              </span>
-              <p>Bruno is a French engineer specialised in energy and climate change.</p>
-              <p>He spent 7 years working in the energy industry as strategy consultant, and managed a research think-tank on the energy transition funded by Schlumberger.</p>
-              <p>He studied general engineering at Ecole Centrale Paris.</p>
-              <p><b>Previous companies:</b> Accenture, Schlumberger Business Consulting, SBC Energy Institute
-              <p><b>Stuff he likes:</b> Mountains. Yoga. Tennis. Natural sciences. Crazy trance music.</p>
-            </div>
-          </div>
-
+        <h2>Greenhouse gases are the result of human industrialisation</h2>
+        <div>
+          The invention of an efficient steam engine by James Watt in 1784 meant humans were able to effectively convert fossil fuels into energy, a process that releases carbon dioxide (CO2) into the atmosphere.
         </div>
 
-        <!--<h2>Contributors</h2>
-        <span class="slack-button">
-            <a href="https://slack.tmrow.co" target="_blank" class="slack-btn">
-                <span class="slack-ico"></span>
-                <span class="slack-text">Slack</span>
-            </a>
-        </span>
-        <img width="24" src="https://ca.slack-edge.com/T24QCQBC4-U2E4GKV7E-75e0b3b32b58-48"></img>@apant-->
       </div>
     </section>
 
-    <section id="jobs">
-      <div class="section-content">
-        <h1>Jobs<i class="badge">4</i></h1>
-
-        We're here to find scalable solutions to climate change.
-        If you're looking to have a meaningful impact, and have a significant expertise in tech, consider joining our team&nbsp;🙂
-
-        <p>
-          Current openings:
-
-          <div class="jobs">
-
-            <div class="job">
-              <div class="title">
-                <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Software Engineer / Full-stack developer (intership or student job available)
-              </div>
-              <div class="description" style="display: none">
-                Work on shaping our new products.
-                Build them from the ground up, or take existing products to the next level.
-              </div>
-            </div>
-
-            <div class="job">
-              <div class="title">
-                <i class="fa fa-paint-brush" aria-hidden="true"></i>&nbsp;&nbsp;UI and UX Designer (intership or student job available)
-              </div>
-              <div class="description" style="display: none">
-                Work on making complex information simple to understand.
-                Help us create a feeling of empowerement.
-              </div>
-            </div>
-
-            <div class="job">
-              <div class="title">
-                <i class="fa fa-line-chart" aria-hidden="true"></i>&nbsp;&nbsp;Growth Hacker / Product Manager
-              </div>
-              <div class="description" style="display: none">
-                Work on understanding our users. What drives them?
-                Help us make our product easier to understand, easier to use, and help us trigger behaviour shifts.
-              </div>
-            </div>
-
-            <div class="job">
-              <div class="title">
-                <i class="fa fa-flask" aria-hidden="true"></i>&nbsp;&nbsp;Data Scientist (intership or student job available)
-              </div>
-              <div class="description" style="display: none">
-                Work on our data processing pipeline. Privacy. Greenbit
-              </div>
-            </div>
-
-          </div>
-
-        </p>
-        
-
-        <p>
-          Interested? Send us an <a href="mailto:jobs@tmrow.com"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;email</a> with your CV, links to what you've already built, and a description of what you'd ideally like to work on.
-        </p>
-
-        <p>
-          You can also help by contributing to our <a href="https://github.com/tmrowco/" target="_blank"><i class="fa fa-github" aria-hidden="true"></i>&nbsp;open source projects</a>.
-          Come say hi on our <a href="http://slack.tmrow.co" target="_blank"><i class="fa fa-slack" aria-hidden="true"></i>&nbsp;slack</a> channel if you have any questions 🙂
-        </p>
-
-      </div>
-    </section>
-
-    <footer>
+    <footer class="alternate">
       <div id="footer-content">
         <p>
           &copy; 2017 Tomorrow | <a href="mailto:hello@tmrow.co"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;email</a> | 
@@ -347,31 +379,6 @@
         </p>
       </div>
     </footer>
-
-    <script src="vendor/jquery.min.js"></script>
-    <script src="vendor/jquery-scrollspy.min.js"></script>
-
-    <script>
-      $(function domReady($) {
-
-        $('section').each(function eachElement() {
-          var $this = $(this);
-          var position = $this.position();
-          var offset = $('header').outerHeight() + 200;
-          $this.scrollspy({
-            min: position.top - offset,
-            max: position.top - offset + $this.outerHeight(),
-            onEnter: function onEnter(element) {
-              $('#header-content li.' + element.id).addClass('active');
-            },
-            onLeave: function onEnter(element) {
-              $('#header-content li.' + element.id).removeClass('active');
-            }
-          })
-        });
-
-      });
-    </script>
 
   </body>
 </html>
