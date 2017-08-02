@@ -204,7 +204,7 @@
         <h1>Global temperatures are rapidly increasing</h1>
         <div>
           <p>
-            "Warming of the climate system is unequivocal, and since the 1950s, many of the observed changes are unprecedented over decades to millennia", writes the Intergovernmental Panel on Climate Change (IPCC) in its <a href="http://www.ipcc.ch/pdf/assessment-report/ar5/syr/AR5_SYR_FINAL_SPM.pdf" target="_blank">fifth assessment</a>.
+            "Warming of the climate system is unequivocal, and since the 1950s, many of the observed changes are unprecedented over decades to millennia", according to the Intergovernmental Panel on Climate Change (IPCC) in its <a href="http://www.ipcc.ch/pdf/assessment-report/ar5/syr/AR5_SYR_FINAL_SPM.pdf" target="_blank">fifth assessment</a>.
           </p>
 
           <div class="graph">
@@ -284,13 +284,13 @@
           </script>
 
           <p>
-            It is very clear that the global average temperature is increasing as sixteen of the 17 warmest years have all occurred since 2001 (with the exception of 1998).
+            Sixteen of the 17 warmest years have all occurred since 2001 (with the exception of 1998).
             Furthermore, NOAA reported in August 2016 that each of the last 16 months <a href="https://www.ncdc.noaa.gov/sotc/global/201607#temp" target="_blank">were the warmest they've ever measured</a>.
             The measured warming has been found to be consistent across <a href="https://data.giss.nasa.gov/gistemp/graphs/" target="_blank">seasons</a> and <a href="https://twitter.com/anttilip/status/891730388497965056" target="_blank">regions</a>.
           </p>
 
           <p>
-            We have now reached a warming of 1&deg;C since the end of the 70s. A change of 1&deg;C in 50 years is unprecedented, as it can be seen from the following reconstruction of temperatures in the last 10 000 years:
+            We have now achieved a temperature increased of 1&deg;C since the end of the 70s. A change of 1&deg;C in 50 years is unprecedented, as it can be seen from the following reconstruction of temperatures in the last 11 000 years:
           </p>
 
           <div class="graph">
@@ -347,8 +347,6 @@
                   }
                 ];
 
-                console.log(option)
-
                 var chart = echarts.init(document.getElementById('temperature_time_series_OLD'))
                 chart.setOption(option);
                 window.addEventListener('resize', chart.resize);
@@ -360,34 +358,45 @@
           <p class="incomplete">TODO: Add the last portion of this graph</p>
 
           <p>
-            What is worrying is not so much the change itself, but rather the speed at which this change is taking place.
+            What is worrying is not so much the change itself, but rather <b>the speed at which this change is taking place</b>.
             Historically, a change of 1&deg;C seems to happen in thousands of years - not decades.
-            The Earth is a complex ecosystem, and disturbing it by as little as a couple of degrees in the blink of a decades (or even centuries) is a non negligible disturbance.
+            The Earth is a complex ecosystem, and disturbing it by as little as a couple of degrees in the blink of decades (or even centuries) is a heavy disturbance.
           </p>
+
+          <p>Temperatures are increasing, but what's the impact?</p>
 
         </div>
 
 
         <h1>A couple of degrees change has widespread consequences</h1>
 
-        <p>
+        <p class="incomplete">
           x% of earth is water. Temp over the whole surface. Dilatation of the water. Most of heat is absorbed by the sea. More extreme weather. Temperature changes on land will cause pop and animal migrations. Some species can't adapt fast enough.
           2 deg globally -> 4 deg locally potentially
           Introduce climate change. Map of 4 degs.
         </p>
+
+        <p class="incomplete">
+          So how bad is it? [should this be here?]
+          WGI Chap12 for temp fcast
+          http://www.ipcc.ch/report/ar5/wg1/???
+          http://www.ipcc.ch/report/ar5/wg1/docs/ar5_wg1_annexI_all.zip
+        </p>
+
+        <p>Climate change seems serious, but what causes it?</p>
 
 
         <h1>Climate change is caused by greenhouse gases</h1>
         <p>
           Some gases are transparent to the sun's rays heating the Earth, but are opaque (acting as mirrors) with respect to rays emitted back from the Earth.
           Those gases act as a blanket, trapping heat that is unable to escape, and are called greenhouse gases due to warming behaviour.
-          The most abundant greenhouse gas is water wapor and is part of the natural stability of our climate.
           By trapping heat inside the atmosphere, it enables our nights to be relatively warm compared to the cold of outer space.
         </p>
         <p>
-          By drilling <a href="https://earthobservatory.nasa.gov/Features/Paleoclimatology_IceCores/" target="_blank">Ice Cores</a> (columns of ice containing small bubbles of old trapped air), we have been able to infer historical CO<sub>2</sub> concentration.
+          One of those greenhouse gases is carbon dioxide (CO<sub>2</sub>).
+          By drilling <a href="https://earthobservatory.nasa.gov/Features/Paleoclimatology_IceCores/" target="_blank">ice cores</a> (columns of ice containing small bubbles of old trapped air), we have been able to infer historical CO<sub>2</sub> concentration.
           This concentration has been relatively stable until the industrial revolution.
-          Again, what is worrying is the speed at which the change of concentration is happening. Both the concentration level and the speed of change are unprecendented in the history of our measurements, going back 800 000 years BC:
+          Again, what is worrying is the speed at which the change of concentration is happening. Both the concentration level and the speed of change are unprecendented in the history of measurements, going back 800 000 years BC:
         </p>
 
         <div class="graph">
@@ -485,8 +494,6 @@
 
                 }
               ];
-
-              console.log(option)
 
               var chart = echarts.init(document.getElementById('ghg_time_series'))
               chart.setOption(option);
@@ -655,122 +662,69 @@
           })()
         </script>
 
-        <p>
+        <p class="incomplete">
           The major increase in greenhouse gas emissions during the industrial revolution has therefore been <a href="https://climate.nasa.gov/evidence/" target="_blank">found to be</a> the <a href="https://www.bloomberg.com/graphics/2015-whats-warming-the-world/" target="_blank">main driver</a> behind temperature increases.
           Note that [difference between emissions, concentrations, temperature]. It is therefore crucial that we act quickly. [short term effect of volcanoes compared to co2]
         </p>
 
-
-        <h1>By 2050 we must do X [based on 2t / pers]</h1>
         <p>
-          To keep at 2deg, carbon budget, 
-          Start with projection, aim 2050, and look at CO2. Divide by pop. -> 2t / pers.
-          IPCC graph
-        </p>
-
-        <p>
-          Several <a href="https://en.wikipedia.org/wiki/Greenhouse_gas" target="_blank">greenhouse gases</a> exist aside from CO<sub>2</sub>, differing by how much radiation they trap and by how long they stay in the atmosphere.
-          To be able to compare them, the so-called <a href="https://en.wikipedia.org/wiki/Global_warming_potential" target="_blank">global warming potential</a> of each gas is used as reference, being the amount of heat trapped by a certain mass of gas compared to a similar mass of CO<sub>2</sub> over 100 years.
-          This enables us to define the mass unit of grams of <b>CO<sub>2</sub> equivalent</b>: gCO2eq.
-          However, even though nitrous oxide (N<sub>2</sub>O) is worth 300 times its weight of CO<sub>2</sub>, the staggering amount of CO<sub>2</sub> in the atmosphere makes it by far the main contributor to the greenhouse effect.
-        </p>
-
-        <p>
-          However, several <a href="https://en.wikipedia.org/wiki/Greenhouse_gas" target="_blank">greenhouse gases</a> exist aside from CO<sub>2</sub>, differing by how much radiation they trap per unit area and unit time, and by how long they stay in the atmosphere.
-          To be able to compare them, the so-called <a href="https://en.wikipedia.org/wiki/Global_warming_potential" target="_blank">global warming potential</a> of each gas is calculated, being the amount of heat trapped by a certain mass of gas compared to a similar mass of CO<sub>2</sub> over 100 years.
+          Greenhouse gases are responsible for climate change, but where do they come from?
         </p>
 
 
         <h1>Greenhouse gases are the result of human industrialisation</h1>
 
         <p>
-          The <a href="https://en.wikipedia.org/wiki/Greenhouse_effect" target="_blank">greenhouse effect</a> has been identified since the beginning of the century.
-          <a href="https://paperspast.natlib.govt.nz/newspapers/rodney-and-otamatea-times-waitemata-and-kaipara-gazette/1912/8/14/7" target="_blank">This article</a> from 1912 is one of the earliest accounts which identifies the risk of releasing greenhouse gases, like carbon dioxide (CO<sub>2</sub>) into the atmosphere, causing an increase in temperature.
-          Specifically, it links the burning of fossil fuels to an increase in temperature.
+          The effect of greenhouse gases has been identified since the beginning of the century.
+          <a href="https://paperspast.natlib.govt.nz/newspapers/rodney-and-otamatea-times-waitemata-and-kaipara-gazette/1912/8/14/7" target="_blank">This article</a> from 1912 is one of the earliest accounts which identifies the risk of burning fossil fuel, releasing CO<sub>2</sub> into the atmosphere, thus causing an increase in temperature.
         </p>
-        <p>
+        <p class="incomplete">
           The invention of an efficient steam engine by James Watt in 1784 meant humans were able to effectively convert fossil fuels into energy, a process that releases carbon dioxide (CO<sub>2</sub>) into the atmosphere.
 
           Fossil fuels have a tremendous amount of energy stored. In terms of X, 1L of oil represents Y, Z.
           The discovery of the use of fossil fuels propelled humanity into an industrialised age, and enabled us to have the living standard we have now.
           Currently, each human on earth has the equivalent of X energetic slaves working to them to produce what we consume, ultimately sustaining our living standard. 
         </p>
-        <!-- <p>
-          However, several <a href="https://en.wikipedia.org/wiki/Greenhouse_gas" target="_blank">greenhouse gases</a> exist aside from CO<sub>2</sub>, differing by how much radiation they trap per unit area and unit time, and by how long they stay in the atmosphere.
-          To be able to compare them, the so-called <a href="https://en.wikipedia.org/wiki/Global_warming_potential" target="_blank">global warming potential</a> of each gas is calculated, being the amount of heat trapped by a certain mass of gas compared to a similar mass of CO<sub>2</sub> over 100 years.
+        
+        <p class="incomplete">
+          However, other <a href="https://en.wikipedia.org/wiki/Greenhouse_gas" target="_blank">greenhouse gases</a> exist aside from CO<sub>2</sub>, differing by how much radiation they trap per unit area and unit time, and by how long they stay in the atmosphere.
+          To be able to compare them, the so-called <a href="https://en.wikipedia.org/wiki/Global_warming_potential" target="_blank">global warming potential</a> is used to convert the mass of all greenhouse gases into the mass of CO<sub>2</sub> that would yield an equivalent amount of warming over 100 years.
+          That unit is called <b>CO<sub>2</sub> equivalent</b>, abbreviated CO<sub>2</sub>eq.
+          For example, 1g of nitrous oxide (N<sub>2</sub>O) corresponds to 300g CO<sub>2</sub>eq.
+
+          [GHG by activity]
         </p>
-        <div class="graph">
-          <div class="chart" id="global_warming_potential"></div>
-          <div class="source">
-            Source: <a href="https://en.wikipedia.org/wiki/Global_warming_potential" target="_blank">Global warming potential (Wikipedia)</a> from 2013 IPCC AR5 p714
-          </div>
-        </div>
-
-        <script>
-          (function() {
-            var option = initialOption();
-
-            var data = [
-              { name: 'CO2', gwp: 1 },
-              { name: 'CH4', gwp: 34 },
-              // { name: 'HFC-134a', gwp: 1550 }, 
-              // { name: 'CFC-11', gwp: 5350 },
-              { name: 'N2O', gwp: 298 },
-              // { name: 'CF4', gwp: 7350},
-            ];
-
-            var sortedData = data.sort(function(a, b) {
-              return d3.descending(a.gwp, b.gwp);
-            })
-
-            option.xAxis.data = sortedData.map(function(d) { return d.name })
-
-            option.title.text = 'Global warming potential over 100 years'
-            option.title.subtext = 'Relative to CO2';
-
-            option.series = [
-              {
-                name: '',
-                type: 'bar',
-                data: sortedData.map(function(d) { return d.gwp }),
-                itemStyle: {
-                  normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: 'rgb(255, 64, 30)'
-                    }, {
-                        offset: 1,
-                        color: 'orange'
-                    }])
-                  }
-                },
-              }
-            ];
-
-            var chart = echarts.init(document.getElementById('global_warming_potential'))
-            chart.setOption(option);
-            window.addEventListener('resize', chart.resize);
-          })()
-        </script> 
-
-        <-->
-        <p>
-          ... define co2eq ...
-
-
-
-
-          
-
-          
-          
+        <p class="incomplete">
+          Our increadible technological advances and increased living standards have been enabled by the discovery of fossil fuels [can we generalise to !FF?], so how do we get rid of them?
         </p>
 
-      </div>
+
+        <h1>Mission: 2 tons CO<sub>2</sub> equivalent per human per year by 2050</h1>
+
+        <p class="incomplete">
+          The Paris agreement [ref needed] has set the world the 2&deg;C objective at horizon 2100.
+          From the emission pathway projections made, this means that we <b>need to live with 2t CO<sub>2</sub>eq per person per year by 2050</b>.
+
+          [graph with intensity around the world]
+
+          [different verticals]
+
+
+          TODO: I actually like this emphasis. Maybe we should keep it for this goal.
+          <!-- Start with projection, aim 2050, and look at CO2. Divide by pop. -> 2t / pers.
+          http://tntcat.iiasa.ac.at:8787/RcpDb/dsd?Action=htmlpage&page=compare
+          http://uneplive.unep.org/media/docs/theme/13/EGR_2015_Technical_Report_final_version.pdf
+          IPCC graph -->
+        </p>
+        <p class="incomplete">
 
       We must redouble our R&D effort, but not rely on them. Given the time constraints we are under, it is unlikely a new clean energy source will surface.
 
       A note on emissions -> concentrations -> temperature
+        </p>
+
+      </div>
+
 
     </section>
 
