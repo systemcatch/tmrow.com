@@ -143,7 +143,7 @@
       h1 {
         margin-bottom: unset !important;
       }
-      h2 {
+      h1, h2 {
         margin-top: 2rem;
       }
 
@@ -170,6 +170,12 @@
       .source {
         font-size: small;
       }
+
+      /* Misc */
+      .incomplete {
+        background-color: orange;
+        padding: 1em;
+      }
     </style>
 
     <header>
@@ -195,7 +201,7 @@
           A very short introduction
         </p>
 
-        <h2>Global temperatures are rapidly increasing</h2>
+        <h1>Global temperatures are rapidly increasing</h1>
         <div>
           <p>
             "Warming of the climate system is unequivocal, and since the 1950s, many of the observed changes are unprecedented over decades to millennia", writes the Intergovernmental Panel on Climate Change (IPCC) in its <a href="http://www.ipcc.ch/pdf/assessment-report/ar5/syr/AR5_SYR_FINAL_SPM.pdf" target="_blank">fifth assessment</a>.
@@ -351,6 +357,8 @@
             })();
           </script>
 
+          <p class="incomplete">TODO: Add the last portion of this graph</p>
+
           <p>
             What is worrying is not so much the change itself, but rather the speed at which this change is taking place.
             Historically, a change of 1&deg;C seems to happen in thousands of years - not decades.
@@ -360,14 +368,16 @@
         </div>
 
 
-        <h2>A couple of degrees change has widespread consequences</h2>
+        <h1>A couple of degrees change has widespread consequences</h1>
 
         <p>
+          x% of earth is water. Temp over the whole surface. Dilatation of the water. Most of heat is absorbed by the sea. More extreme weather. Temperature changes on land will cause pop and animal migrations. Some species can't adapt fast enough.
+          2 deg globally -> 4 deg locally potentially
           Introduce climate change. Map of 4 degs.
         </p>
 
 
-        <h2>Climate change is caused by greenhouse gases</h2>
+        <h1>Climate change is caused by greenhouse gases</h1>
         <p>
           Some gases are transparent to the sun's rays heating the Earth, but are opaque (acting as mirrors) with respect to rays emitted back from the Earth.
           Those gases act as a blanket, trapping heat that is unable to escape, and are called greenhouse gases due to warming behaviour.
@@ -377,7 +387,7 @@
         <p>
           By drilling <a href="https://earthobservatory.nasa.gov/Features/Paleoclimatology_IceCores/" target="_blank">Ice Cores</a> (columns of ice containing small bubbles of old trapped air), we have been able to infer historical CO<sub>2</sub> concentration.
           This concentration has been relatively stable until the industrial revolution.
-          Again, what is worrying is the speed at which the change of concentration is happening:
+          Again, what is worrying is the speed at which the change of concentration is happening. Both the concentration level and the speed of change are unprecendented in the history of our measurements, going back 800 000 years BC:
         </p>
 
         <div class="graph">
@@ -419,14 +429,14 @@
 
               var option = initialOption();
 
-              option.title.text = 'Atmospheric CO2 concentration in the last 10 000 years';
+              option.title.text = 'Atmospheric CO2 concentration in the last 10 000 to 800 000 years';
               option.title.subtext = 'in ppm (particles per million)';
 
               option.xAxis.type = 'value';
               option.xAxis.axisLabel = {
                 formatter: function(e) { return e.toString() }
               }
-              option.xAxis.min = -50000;
+              option.xAxis.min = -90000;
               option.yAxis.min = 150;
               option.yAxis.max = 420;
 
@@ -486,9 +496,188 @@
           })();
         </script>
 
+        <p class="incomplete">
+          TODO: add time series of historical CH4 + N2O?
+          Note co2 is 400 ppm, CH4 is 1.8 ppm, N2O is 0.33
+        </p>
+
         <p>
-          This major increase during the industrial revolution has been found to be the <a href="https://www.bloomberg.com/graphics/2015-whats-warming-the-world/" target="_blank">main driver</a> behind temperature increases.
-          We <a href="https://climate.nasa.gov/evidence/" target="_blank">know this</a> because climate models fail to reconstruct temperature increases without taking into account the recent increase in greenhouse gas concentration, in which CO<sub>2</sub> is the major constituent.
+          By looking at the heating and cooling effect (called <a href="https://en.wikipedia.org/wiki/Radiative_forcing" target="_blank">radiative forcing</a>) of other processes between now and the pre-industrial period (where the greenhouse gas atmospheric levels had not yet increased), it becomes clear that greenhouse gases are the main driver behind the observed warming:
+        </p>
+
+        <div class="graph">
+          <div class="chart" id="global_warming_components"></div>
+          <div class="source">
+            Source: Intergovernmental Panel on Climate Change (IPCC) <a href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg1/WG1AR5_Chapter08_FINAL.pdf" target="_blank">WG1 AR5, Fig. 8.15 p697</a> (<a href="http://www.ipcc.ch/report/ar5/wg1/docs/WG1AR5_AIISM_Datafiles.xlsx" target="_blank">data</a>)
+          </div>
+        </div>
+
+        <script>
+          (function() {
+            d3.text('data/IPCC_WG1AR5_All_1_2.csv', function(err, obj) {
+              if (err) throw err;
+
+              var raw_data = obj.split('\n')
+                .filter(function(_, i) { return i >= 7 && i < 270 })
+                //.filter(function(_, i) { return i == 0 || i >= 100 + 1 }) // start 100y after
+                .filter(function(d, i) { return i == 0 || d.split(';')[0] == '2011'; })
+              var header = raw_data[0].split(';')
+                .filter(function(_, j) { return j <= 11 })
+              // Sum by column
+              var sums = {};
+              raw_data.forEach(function(d, i) {
+                if (i == 0) { return; } // skip header
+                var row = d.split(';')
+                header.forEach(function(h, j) {
+                  if (j == 0) { return; } // skip year
+                  if (sums[h] == undefined) { sums[h] = 0 }
+                  sums[h] += +(row[j].replace(',', '.'));
+                })
+              })
+
+              var data = [
+                { name: 'Other man-made changes', value:
+                  sums['BC Snow'] +
+                  sums['Contrails'] +
+                  sums['LUC'] },
+                { name: 'Aerosols', value: sums['Aerosol (Total)'] },
+                { name: 'Volcano erruptions', value: sums['Volcano'] },
+                { name: 'Solar changes', value: sums['Solar'] },
+                { name: 'Greenhouse gases', value: 
+                  sums['CO2'] +
+                  sums['GHG OTher*'] +
+                  sums['H2O (Strat)'] +
+                  sums['O3 (Strat)'] +
+                  sums['O3 (Trop)'] },
+              ];
+
+              var cumSum = [0];
+              data.forEach(function(_, i) {
+                if (i == 0) { return; }
+                i = data.length - i - 1; // reverse
+                cumSum.push(
+                  cumSum[cumSum.length - 1]
+                  + (data[i + 1].value > 0 ? data[i + 1].value : 0)
+                  - (data[i].value < 0 ? -data[i].value : 0));
+              })
+              cumSum.push(0); data.unshift({name: 'Net observed warming', value: '-'})
+              cumSum = cumSum.reverse();
+
+              var option = initialOption();
+
+              option.grid.left = 150;
+
+              option.xAxis.type = 'value'
+              option.yAxis.data = data.map(function(d) { return d.name })
+
+              option.title.text = 'Relative changes in radiative forcing in 2011 compared to 1750';
+              option.title.subtext = 'W/m²';
+
+              option.tooltip.formatter = function(e) {
+                var e0 = e
+                  .filter(function(d) { return d.seriesName != 'offset' })
+                  .filter(function(d) { return d.data != '-'; })[0];
+                if (!e0.data) { return; }
+                var value = e0.data;
+                var name = e0.name;
+                var isWarming = e0.seriesName == 'pos';
+                return (isWarming ? 'Heating' : 'Cooling') +
+                  ' with ' + (isWarming ? '' : '-') + value + ' W/m<sup>2</sup>';
+              }
+
+              option.series = [
+                // transparent bars the add the offsets
+                {
+                  name: 'offset',
+                  type: 'bar',
+                  stack: 'common',
+                  data: cumSum,
+                  itemStyle: {
+                    normal: {
+                      barBorderColor: 'rgba(0,0,0,0)',
+                      color: 'rgba(0,0,0,0)'
+                    },
+                    emphasis: {
+                      barBorderColor: 'rgba(0,0,0,0)',
+                      color: 'rgba(0,0,0,0)'
+                    }
+                  },
+                },
+                {
+                  name: 'pos',
+                  type: 'bar',
+                  stack: 'common',
+                  data: data
+                    .map(function(d) { return d.value < 0 ? '-' : d.value }),
+                  label: {
+                    normal: {
+                      show: true,
+                      position: 'right'
+                    }
+                  }
+                },
+                {
+                  name: 'neg',
+                  type: 'bar',
+                  stack: 'common',
+                  barGap: 0,
+                  data: data
+                    .map(function(d) { return d.value >= 0 ? '-' : -d.value }),
+                  label: {
+                    normal: {
+                      show: true,
+                      position: 'left',
+                      formatter: '-{c}'
+                    }
+                  }
+                },
+                {
+                  name: 'net',
+                  type: 'bar',
+                  stack: 'common',
+                  barGap: 0,
+                  data: data.map(function(_, i) {
+                    return i == 0 ? cumSum[1] : '-'
+                  }),
+                  label: {
+                    normal: {
+                      show: true,
+                      position: 'right'
+                    }
+                  }
+                },
+              ];
+
+              var chart = echarts.init(document.getElementById('global_warming_components'))
+              chart.setOption(option);
+              window.addEventListener('resize', chart.resize);
+            });
+          })()
+        </script>
+
+        <p>
+          The major increase in greenhouse gas emissions during the industrial revolution has therefore been <a href="https://climate.nasa.gov/evidence/" target="_blank">found to be</a> the <a href="https://www.bloomberg.com/graphics/2015-whats-warming-the-world/" target="_blank">main driver</a> behind temperature increases.
+          Note that [difference between emissions, concentrations, temperature]. It is therefore crucial that we act quickly. [short term effect of volcanoes compared to co2]
+        </p>
+
+
+        <h1>By 2050 we must do X [based on 2t / pers]</h1>
+        <p>
+          To keep at 2deg, carbon budget, 
+          Start with projection, aim 2050, and look at CO2. Divide by pop. -> 2t / pers.
+          IPCC graph
+        </p>
+
+        <p>
+          Several <a href="https://en.wikipedia.org/wiki/Greenhouse_gas" target="_blank">greenhouse gases</a> exist aside from CO<sub>2</sub>, differing by how much radiation they trap and by how long they stay in the atmosphere.
+          To be able to compare them, the so-called <a href="https://en.wikipedia.org/wiki/Global_warming_potential" target="_blank">global warming potential</a> of each gas is used as reference, being the amount of heat trapped by a certain mass of gas compared to a similar mass of CO<sub>2</sub> over 100 years.
+          This enables us to define the mass unit of grams of <b>CO<sub>2</sub> equivalent</b>: gCO2eq.
+          However, even though nitrous oxide (N<sub>2</sub>O) is worth 300 times its weight of CO<sub>2</sub>, the staggering amount of CO<sub>2</sub> in the atmosphere makes it by far the main contributor to the greenhouse effect.
+        </p>
+
+        <p>
+          However, several <a href="https://en.wikipedia.org/wiki/Greenhouse_gas" target="_blank">greenhouse gases</a> exist aside from CO<sub>2</sub>, differing by how much radiation they trap per unit area and unit time, and by how long they stay in the atmosphere.
+          To be able to compare them, the so-called <a href="https://en.wikipedia.org/wiki/Global_warming_potential" target="_blank">global warming potential</a> of each gas is calculated, being the amount of heat trapped by a certain mass of gas compared to a similar mass of CO<sub>2</sub> over 100 years.
         </p>
 
 
@@ -506,7 +695,7 @@
           The discovery of the use of fossil fuels propelled humanity into an industrialised age, and enabled us to have the living standard we have now.
           Currently, each human on earth has the equivalent of X energetic slaves working to them to produce what we consume, ultimately sustaining our living standard. 
         </p>
-        <p>
+        <!-- <p>
           However, several <a href="https://en.wikipedia.org/wiki/Greenhouse_gas" target="_blank">greenhouse gases</a> exist aside from CO<sub>2</sub>, differing by how much radiation they trap per unit area and unit time, and by how long they stay in the atmosphere.
           To be able to compare them, the so-called <a href="https://en.wikipedia.org/wiki/Global_warming_potential" target="_blank">global warming potential</a> of each gas is calculated, being the amount of heat trapped by a certain mass of gas compared to a similar mass of CO<sub>2</sub> over 100 years.
         </p>
@@ -562,16 +751,16 @@
             chart.setOption(option);
             window.addEventListener('resize', chart.resize);
           })()
-        </script>
+        </script> 
 
-        </p>
+        <-->
         <p>
           ... define co2eq ...
 
 
 
 
-          Even though nitrous oxide (N<sub>2</sub>O) is worth 300 times its weight of CO<sub>2</sub>, the staggering amount of CO<sub>2</sub> in the atmosphere makes it by far the main contributor to the greenhouse effect.
+          
 
           
           
