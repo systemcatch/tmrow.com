@@ -841,15 +841,15 @@
               option.title.text = 'World emissions by country in ' + year;
               option.title.subtext = 'in tCO₂eq per person per year';
 
-              option.xAxis.name = '% of world population';
+              option.xAxis.name = 'of world population';
               option.xAxis.nameLocation = 'middle';
               option.xAxis.position = 'bottom';
               option.xAxis.nameGap = 50;
-              option.xAxis.axisLabel = {formatter: '{value}%'};
-              option.grid.bottom = 70;
+              option.xAxis.axisLabel = {formatter: '{value}%', margin: 30};
+              option.grid.bottom = 80;
 
               option.dataZoom = initialDataZoom();
-              option.dataZoom[0].bottom = 30;
+              option.dataZoom[0].bottom = option.grid.bottom - 20;
               option.dataZoom[0].endValue = 6;
               option.dataZoom[0].labelFormatter = '';
               option.dataZoom[0].filterMode = 'weakFilter'; // to enable drawing
@@ -861,7 +861,7 @@
                 var intensity = Math.round(d.intensity);
                 var emissionPercent = 
                   Math.round(d.population * d.intensity / totalEmissions * 10000) / 100;
-                return d.name + ' (' + intensity + 't)' + ': ' + emissionPercent + '% of total emissions';
+                return d.name + ': ' + intensity + 't / person / year' + '<br />' + emissionPercent + '% of total emissions';
               }
 
               option.grid.right = 100;// for mark label
@@ -924,6 +924,168 @@
               window.addEventListener('resize', chart.resize);
             });
           })()
+        </script>
+
+        <div class="graph">
+          <div class="chart" id="ghg_intensity_electricity"></div>
+          <div class="source">
+            Source: Live cycle emissions from <a href="https://github.com/tmrowco/electricitymap#carbon-intensity-calcuation-and-data-source" target="_blank">Electricity Map</a> (<a href="https://github.com/tmrowco/electricitymap/blob/master/config/co2eq_parameters.js" target="_blank">data</a>)
+          </div>
+        </div>
+
+        <script>
+          (function() {
+
+            var modeColor = {
+              'wind': '#74cdb9',
+              'solar': '#f27406',
+              'hydro': '#2772b2',
+              'biomass': '#166a57',
+              'geothermal': 'yellow',
+              'nuclear': '#AEB800',
+              'gas': '#bb2f51',
+              'coal': '#ac8c35',
+              'oil': '#867d66',
+            };
+
+            var data = [
+              { name: 'wind', intensity: 12 },
+              { name: 'wind + storage', intensity: '-' },
+              { name: 'solar', intensity: 45 },
+              { name: 'solar + storage', intensity: '-' },
+              { name: 'hydro', intensity: 24 },
+              { name: 'biomass', intensity: 230 },
+              { name: 'geothermal', intensity: 24 },
+              { name: 'nuclear', intensity: 12 },
+              { name: 'gas', intensity: 490 },
+              { name: 'coal', intensity: 820 },
+              { name: 'oil', intensity: 650 },
+            ].reverse();
+
+            var option = initialOption();
+
+            option.xAxis.name = 'Carbon intensity in gCO₂eq/kWh';
+            option.xAxis.nameLocation = 'middle';
+            option.xAxis.nameGap = 30;
+            option.grid.bottom = 50;
+
+            option.xAxis.type = 'value'
+            option.yAxis.data = data.map(function(d) { return d.name })
+
+            option.title.text = 'Carbon intensity of electricity production modes';
+            option.title.subtext = 'in gCO₂eq/kWh';
+
+            option.grid.left = 90;
+
+            option.tooltip.trigger = 'none';
+
+            option.series = [
+              {
+                type: 'bar',
+                data: echarts.util.map(data, function (d) {
+                  return {
+                    value: d.intensity,
+                    itemStyle: {
+                      normal: {
+                        color: modeColor[d.name]
+                      }
+                    }
+                  }
+                }),
+                label: {
+                  normal: {
+                    show: true,
+                    position: 'right'
+                  }
+                }
+              },
+            ];
+
+            var chart = echarts.init(
+              document.getElementById('ghg_intensity_electricity'));
+            chart.setOption(option);
+            window.addEventListener('resize', chart.resize);
+          })();
+        </script>
+
+        <div class="graph incomplete">
+          <div class="chart" id="ghg_intensity_transportation"></div>
+          <div class="source">
+            Source: 
+          </div>
+        </div>
+
+        <script>
+          (function() {
+
+            var modeColor = {
+              // 'wind': '#74cdb9',
+              // 'solar': '#f27406',
+              // 'hydro': '#2772b2',
+              // 'biomass': '#166a57',
+              // 'geothermal': 'yellow',
+              // 'nuclear': '#AEB800',
+              // 'gas': '#bb2f51',
+              // 'coal': '#ac8c35',
+              // 'oil': '#867d66',
+            };
+
+            var data = [
+              { name: 'car', intensity: Math.random() },
+              { name: 'electric car (low carbon elec.)', intensity: Math.random() },
+              { name: 'electric car (high carbon elec.)', intensity: Math.random() },
+              { name: 'airplane', intensity: Math.random() },
+              { name: 'electric train (low carbon elec.)', intensity: Math.random() },
+              { name: 'electric train (high carbon elec.)', intensity: Math.random() },
+              { name: 'diesel train', intensity: Math.random() },
+              { name: 'cycling', intensity: Math.random() },
+              { name: 'walking', intensity: Math.random() },
+            ].reverse();
+
+            var option = initialOption();
+
+            option.grid.left = 170;
+
+            option.xAxis.name = 'Carbon intensity in gCO₂eq / person / km';
+            option.xAxis.nameLocation = 'middle';
+            option.xAxis.nameGap = 30;
+            option.grid.bottom = 50;
+
+            option.xAxis.type = 'value'
+            option.yAxis.data = data.map(function(d) { return d.name })
+
+            option.title.text = 'Carbon intensity of transportation modes';
+            option.title.subtext = 'in gCO₂eq / person / km';
+
+            option.tooltip.trigger = 'none';
+
+            option.series = [
+              {
+                type: 'bar',
+                data: echarts.util.map(data, function (d) {
+                  return {
+                    value: d.intensity,
+                    itemStyle: {
+                      normal: {
+                        color: modeColor[d.name]
+                      }
+                    }
+                  }
+                }),
+                label: {
+                  normal: {
+                    show: true,
+                    position: 'right'
+                  }
+                }
+              },
+            ];
+
+            var chart = echarts.init(
+              document.getElementById('ghg_intensity_transportation'));
+            chart.setOption(option);
+            window.addEventListener('resize', chart.resize);
+          })();
         </script>
 
         <p class="incomplete">
