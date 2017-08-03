@@ -695,7 +695,9 @@
 
           Fossil fuels have a tremendous amount of energy stored. In terms of X, 1L of oil represents Y, Z.
           The discovery of the use of fossil fuels propelled humanity into an industrialised age, and enabled us to have the living standard we have now.
-          Currently, each human on earth has the equivalent of X energetic slaves working to them to produce what we consume, ultimately sustaining our living standard. 
+          Currently, each human on earth has the equivalent of X energetic slaves working to them to produce what we consume, ultimately sustaining our living standard.
+
+          Graph (IEA) that shows primary energy % by fuel to show biomass -> coal -> oil -> gas and (!renewables). Don't forget to talk about agri?
         </p>
 
         <p>
@@ -708,8 +710,89 @@
           To be able to compare them, the so-called <a href="https://en.wikipedia.org/wiki/Global_warming_potential" target="_blank">global warming potential</a> is used to convert the mass of all greenhouse gases into the mass of CO<sub>2</sub> that would yield an equivalent amount of warming over 100 years.
           That unit is called <b>CO<sub>2</sub> equivalent</b>, abbreviated CO<sub>2</sub>eq.
           For example, 1g of nitrous oxide (N<sub>2</sub>O) corresponds to 300g CO<sub>2</sub>eq.
+        </p>
 
-          [GHG by activity - accenture + connaissance des E]
+        <div class="graph">
+          <div class="chart" id="ghg_origin"></div>
+          <div class="source">
+            Source: <a href="https://www.accenture.com/t00010101T000000__w__/br-pt/_acnmedia/PDF-11/Accenture-Strategy-Energy-Perspectives-Consequences-COP21.pdf">Accenture Energy Perspectives - Consequences of COP21 for the Oil and Gas Industry</a>, Fig. 12 p14.
+          </div>
+        </div>
+
+        <script>
+          (function() {
+
+            var data = [
+              { name: 'Extracting and\nburning fossil fuels', value: 48.9 - 12.2 - 4.4 , color: '#c23531'},
+              { name: 'Agriculture, forestry\nand other land-use', value: 12.2, color: '#749f83' },
+              { name: 'Other industrial emissions', value: 4.4, color: '#546570' },
+            ].reverse();
+
+            // Percentage
+            var total = d3.sum(data, function(d) { return d.value; })
+            data.forEach(function(d) {
+              d.value /= total / 100;
+            })
+
+            var option = initialOption();
+
+            option.grid.left = 150;
+
+            option.xAxis.type = 'value'
+            option.xAxis.axisLabel = {formatter: '{value}%'};
+            option.grid.bottom = 50;
+
+            option.yAxis.data = data.map(function(d) { return d.name })
+
+            option.title.text = 'Man-made greehouse gas emissions in 2010';
+            option.title.subtext = '% of total';
+
+            option.tooltip.trigger = 'none';
+
+            option.series = [
+              {
+                type: 'bar',
+                data: echarts.util.map(data, function (d) {
+                  return {
+                    value: d.value,
+                    itemStyle: {
+                      normal: {
+                        color: d.color
+                      }
+                    }
+                  }
+                }),
+                label: {
+                  normal: {
+                    show: true,
+                    position: 'right',
+                    formatter: function(e) {
+                      return Math.round(e.data.value) + '%';
+                    }
+                  }
+                }
+              },
+            ];
+
+            var chart = echarts.init(
+              document.getElementById('ghg_origin'));
+            chart.setOption(option);
+            window.addEventListener('resize', chart.resize);
+          })();
+        </script>
+
+        <p class="incomplete">
+          GHG by (48.9)
+          - FF (production + burning): 65% (Accenture)
+            This includes transport, heating, electricity
+          - AFOLU (12.2) 25%: 
+            Includes CH4 and N2O from agri. Delta co2 form Aforestation.
+            Excludes burning of FF for agri machines
+          - Other industrial emissions
+            Process CO2 from cement
+            Landfills
+            Chemical production
+            Steel
 
           [Conclude that if we keep doing that, we're heading for Xdeg [RPCX]]
         </p>
@@ -718,7 +801,7 @@
         </p>
 
 
-        <h1>Mission: 2 tons CO<sub>2</sub> equivalent per human per year by 2050</h1>
+        <h1>Objective: 2 tons CO<sub>2</sub> equivalent per human per year by 2050</h1>
 
         <p class="incomplete">
           The Paris agreement [ref needed] has set the world the 2&deg;C objective at horizon 2100.
@@ -861,7 +944,7 @@
                 var intensity = Math.round(d.intensity);
                 var emissionPercent = 
                   Math.round(d.population * d.intensity / totalEmissions * 10000) / 100;
-                return d.name + ': ' + intensity + 't / person / year' + '<br />' + emissionPercent + '% of total emissions';
+                return d.name + ': ' + intensity + ' tons / person / year' + '<br />' + emissionPercent + '% of total emissions';
               }
 
               option.grid.right = 100;// for mark label
@@ -925,6 +1008,10 @@
             });
           })()
         </script>
+
+        <p class="incomplete">
+          TODO: Would be nice to be able to find one's country. Maybe using a map? Datazoom should be controlled though. Maybe showing a map
+        </p>
 
         <div class="graph">
           <div class="chart" id="ghg_intensity_electricity"></div>
