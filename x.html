@@ -133,6 +133,25 @@
           }
         }
       }
+      function initialDataZoom() {
+        return [
+          {
+            type: 'slider',
+            showDataShadow: false,
+            height: 10,
+            borderColor: 'transparent',
+            backgroundColor: '#e2e2e2',
+            handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
+            handleSize: 15,
+            handleStyle: {
+              shadowBlur: 6,
+              shadowOffsetX: 1,
+              shadowOffsetY: 2,
+              shadowColor: '#aaa'
+            },
+          }
+        ]
+      }
     </script>
 
     <style>
@@ -448,13 +467,8 @@
               option.yAxis.min = 150;
               option.yAxis.max = 420;
 
-              option.dataZoom = [
-                {
-                  type: 'slider',
-                  startValue: -8000,
-                  showDataShadow: false,
-                }
-              ]
+              option.dataZoom = initialDataZoom();
+              option.dataZoom[0].startValue = -8000;
 
               option.grid.bottom = 60;
 
@@ -790,10 +804,9 @@
               //         value: item,
               //         itemStyle: {
               //             normal: {
-              //                 color: 'red'
-              //             },
-              //             emphasis: {
-              //                 color: 'blue'
+              //                 // color: 'darkred',
+              //                 borderColor: 'black',
+              //                 borderWidth: 1
               //             }
               //         }
               //     };
@@ -832,27 +845,8 @@
               option.xAxis.nameLocation = 'middle';
               option.xAxis.position = 'bottom';
               option.xAxis.nameGap = 50;
+              option.xAxis.axisLabel = {formatter: '{value}%'};
               option.grid.bottom = 70;
-
-              function initialDataZoom() {
-                return [
-                  {
-                    type: 'slider',
-                    showDataShadow: false,
-                    height: 10,
-                    borderColor: 'transparent',
-                    backgroundColor: '#e2e2e2',
-                    handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z', // jshint ignore:line
-                    handleSize: 20,
-                    handleStyle: {
-                        shadowBlur: 6,
-                        shadowOffsetX: 1,
-                        shadowOffsetY: 2,
-                        shadowColor: '#aaa'
-                    },
-                  }
-                ]
-              }
 
               option.dataZoom = initialDataZoom();
               option.dataZoom[0].bottom = 30;
@@ -867,8 +861,10 @@
                 var intensity = Math.round(d.intensity);
                 var emissionPercent = 
                   Math.round(d.population * d.intensity / totalEmissions * 10000) / 100;
-                return d.name + ' (' + intensity + ' t per cap)' + ': ' + emissionPercent + '% of total emissions';
+                return d.name + ' (' + intensity + 't)' + ': ' + emissionPercent + '% of total emissions';
               }
+
+              option.grid.right = 100;// for mark label
 
               option.series =  [
                 {
@@ -877,7 +873,10 @@
                   // label: {
                   //   normal: {
                   //     show: true,
-                  //     position: 'top'
+                  //     position: 'top',
+                  //     textStyle: {
+                  //       color: 'black'
+                  //     }
                   //   }
                   // },
                   dimensions: ['from', 'to', 'intensity'],
@@ -885,27 +884,30 @@
                     x: [0, 1],
                     y: 2,
                     tooltip: [0, 1, 2],
+                    label: 3,
                     itemName: 3
                   },
                   data: chartData,
-                  // itemStyle: {
-                  //   normal: {
-                  //     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                  //         offset: 0.5,
-                  //         color: 'rgb(255, 64, 30)'
-                  //     }, {
-                  //         offset: 1,
-                  //         color: 'orange'
-                  //     }])
-                  //   },
-                  // },
+                  itemStyle: {
+                    normal: {
+                      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                          offset: 0.5,
+                          color: 'rgb(255, 64, 30)'
+                      }, {
+                          offset: 1,
+                          color: 'orange'
+                      }]),
+                      borderColor: 'black',
+                      borderWidth: 0.5
+                    },
+                  },
                   markLine: {
                     symbol: 'none',
                     data: [{ yAxis: 2 }],
                     label: {
                       normal: {
                         formatter: 'Paris objective',
-                        position: 'middle'
+                        position: 'end'
                       },
                     },
                     lineStyle: {
