@@ -156,12 +156,18 @@
 
       /* Graphs */
       .graph {
-        width: 70%;
+        width: 100%;
+        box-sizing: border-box;
         /* center horizontally */
         margin-right: auto;
         margin-left: auto;
         padding-top: 1.5em;
         padding-bottom: 1.5em;
+      }
+      @media (min-width: 52em) {
+        .graph {
+          width: 70%;
+        }
       }
       .chart {
         width: 100%;
@@ -376,13 +382,6 @@
           Introduce climate change. Map of 4 degs.
         </p>
 
-        <p class="incomplete">
-          So how bad is it? [should this be here?]
-          WGI Chap12 for temp fcast
-          http://www.ipcc.ch/report/ar5/wg1/???
-          http://www.ipcc.ch/report/ar5/wg1/docs/ar5_wg1_annexI_all.zip
-        </p>
-
         <p>Climate change seems serious, but what causes it?</p>
 
 
@@ -578,7 +577,7 @@
               option.yAxis.data = data.map(function(d) { return d.name })
 
               option.title.text = 'Relative changes in radiative forcing in 2011 compared to 1750';
-              option.title.subtext = 'W/m²';
+              option.title.subtext = 'in W/m²';
 
               option.tooltip.formatter = function(e) {
                 var e0 = e
@@ -664,7 +663,7 @@
 
         <p class="incomplete">
           The major increase in greenhouse gas emissions during the industrial revolution has therefore been <a href="https://climate.nasa.gov/evidence/" target="_blank">found to be</a> the <a href="https://www.bloomberg.com/graphics/2015-whats-warming-the-world/" target="_blank">main driver</a> behind temperature increases.
-          Note that [difference between emissions, concentrations, temperature]. It is therefore crucial that we act quickly. [short term effect of volcanoes compared to co2]
+          Note that [difference between emissions, concentrations, temperature]. It is therefore crucial that we act quickly. CH4 10y, but 10-40% of CO2 is still in the atm after 1000y (http://www.ipcc.ch/pdf/assessment-report/ar5/wg1/WG1AR5_Chapter12_FINAL.pdf, FAQ 12.3 p1106) [short term effect of volcanoes compared to co2]
         </p>
 
         <p>
@@ -674,16 +673,20 @@
 
         <h1>Greenhouse gases are the result of human industrialisation</h1>
 
-        <p>
-          The effect of greenhouse gases has been identified since the beginning of the century.
-          <a href="https://paperspast.natlib.govt.nz/newspapers/rodney-and-otamatea-times-waitemata-and-kaipara-gazette/1912/8/14/7" target="_blank">This article</a> from 1912 is one of the earliest accounts which identifies the risk of burning fossil fuel, releasing CO<sub>2</sub> into the atmosphere, thus causing an increase in temperature.
-        </p>
         <p class="incomplete">
           The invention of an efficient steam engine by James Watt in 1784 meant humans were able to effectively convert fossil fuels into energy, a process that releases carbon dioxide (CO<sub>2</sub>) into the atmosphere.
+
+          The amount of energy available was unprecedented for the time.
+
 
           Fossil fuels have a tremendous amount of energy stored. In terms of X, 1L of oil represents Y, Z.
           The discovery of the use of fossil fuels propelled humanity into an industrialised age, and enabled us to have the living standard we have now.
           Currently, each human on earth has the equivalent of X energetic slaves working to them to produce what we consume, ultimately sustaining our living standard. 
+        </p>
+
+        <p>
+          The effect of greenhouse gases has been identified since the beginning of the century.
+          <a href="https://paperspast.natlib.govt.nz/newspapers/rodney-and-otamatea-times-waitemata-and-kaipara-gazette/1912/8/14/7" target="_blank">This article</a> from 1912 is one of the earliest accounts which identifies the risk of burning fossil fuel, releasing CO<sub>2</sub> into the atmosphere, thus causing an increase in temperature.
         </p>
         
         <p class="incomplete">
@@ -692,7 +695,9 @@
           That unit is called <b>CO<sub>2</sub> equivalent</b>, abbreviated CO<sub>2</sub>eq.
           For example, 1g of nitrous oxide (N<sub>2</sub>O) corresponds to 300g CO<sub>2</sub>eq.
 
-          [GHG by activity]
+          [GHG by activity - accenture + connaissance des E]
+
+          [Conclude that if we keep doing that, we're heading for Xdeg [RPCX]]
         </p>
         <p class="incomplete">
           Our increadible technological advances and increased living standards have been enabled by the discovery of fossil fuels [can we generalise to !FF?], so how do we get rid of them?
@@ -703,6 +708,8 @@
 
         <p class="incomplete">
           The Paris agreement [ref needed] has set the world the 2&deg;C objective at horizon 2100.
+          This gives us a carbon budget [ref], which is x% of proven reserves.
+          [dangerous to let the free market...]
           From the emission pathway projections made, this means that we <b>need to live with 2t CO<sub>2</sub>eq per person per year by 2050</b>.
 
           [graph with intensity around the world]
@@ -716,6 +723,190 @@
           http://uneplive.unep.org/media/docs/theme/13/EGR_2015_Technical_Report_final_version.pdf
           IPCC graph -->
         </p>
+
+        <div class="graph">
+          <div class="chart" id="carbon_intensity_world"></div>
+          <div class="source">
+            Source: <a href="http://www.wri.org/resources/data-sets/cait-historical-emissions-data-countries-us-states-unfccc" target="_blank">World Resource Institute</a> (<a href="http://cait.wri.org/historical/export/Country%20GHG%20Emissions/WorldResourcesInstituteCAIT.csv?&keyField=Country&unit=MtCO2e&unit=MtCO%E2%82%82e%E2%80%8D&unit=People&indicator[]=Total%20GHG%20Emissions%20Excluding%20Land-Use%20Change%20and%20Forestry&indicator[]=Total%20GHG%20Emissions%20Including%20Land-Use%20Change%20and%20Forestry&indicator[]=Population&year[]=2013&sortIdx=1&sortDir=desc&chartType=geo" target="_blank">data</a>)
+          </div>
+        </div>
+
+        <script>
+          (function() {
+            d3.text('data/WorldResourcesInstituteCAIT.csv', function(err, obj) {
+              if (err) throw err;
+
+              var year = 2013;
+
+              var data = obj.split('\n')
+                .filter(function(d, i) { return i > 0; })
+                .map(function(d) { 
+                  return d.split(',"').map(function(s) {
+                    return s.replace('"', '').replace('"', '')
+                  });
+                })
+                .filter(function(d) {
+                  return [
+                    'World',
+                    'European Union (28)',
+                    'European Union (15)'
+                  ].indexOf(d[0]) == -1
+                  && d[1] == year.toString()
+                  && d[4] != '';
+                })
+                .map(function(d) {
+                  return {
+                    name: d[0],
+                    intensity: +d[2] * 1e6 / +d[4], // excluding land use + forestry
+                    population: +d[4] / 1e9 // in billions
+                  }
+                }).sort(function(a, b) {
+                  return d3.descending(a.intensity, b.intensity);
+                });
+
+              // Convert to percentages
+              var totalPopulation = d3.sum(data, function(d) { return d.population; })
+              data.forEach(function(d) {
+                d.population /= totalPopulation / 100;
+              })
+
+              var totalEmissions = d3.sum(data, function(d) { return d.population * d.intensity; })
+
+              // [from, to, height, name]
+              var chartData = [[0, data[0].population, data[0].intensity, data[0].name]]
+              data.forEach(function(d, i) {
+                if (i == 0) { return; }
+                var from = chartData[chartData.length - 1][1];
+                chartData.push([
+                  from,
+                  from + d.population,
+                  d.intensity,
+                  d.name
+                ])
+              })
+              
+              // chartData = echarts.util.map(chartData, function (item, index) {
+              //     return {
+              //         value: item,
+              //         itemStyle: {
+              //             normal: {
+              //                 color: 'red'
+              //             },
+              //             emphasis: {
+              //                 color: 'blue'
+              //             }
+              //         }
+              //     };
+              // });
+
+              function renderItem(params, api) {
+                var yValue = api.value(2);
+                var start = api.coord([api.value(0), yValue]);
+
+                var size = api.size([api.value(1) - api.value(0), yValue]);
+                var style = api.style();
+
+                return {
+                  type: 'rect',
+                  shape: echarts.graphic.clipRectByRect({
+                    x: start[0],
+                    y: start[1],
+                    width: size[0],
+                    height: size[1]
+                }, {
+                    x: params.coordSys.x,
+                    y: params.coordSys.y,
+                    width: params.coordSys.width,
+                    height: params.coordSys.height
+                }),
+                  style: style
+                };
+              }
+
+              var option = initialOption();
+
+              option.title.text = 'World emissions by country in ' + year;
+              option.title.subtext = 'in tCO₂eq per person per year';
+
+              option.xAxis.name = '% of world population';
+              option.xAxis.nameLocation = 'middle';
+              option.xAxis.position = 'bottom';
+              option.xAxis.nameGap = 30;
+              option.grid.bottom = 50;
+
+              option.dataZoom = [
+                {
+                  type: 'slider',
+                  endValue: 6,
+                  showDataShadow: false,
+                  filterMode: 'weakFilter' // to enable drawing or rects
+                }
+              ]
+
+              option.tooltip.trigger = 'item';
+              option.tooltip.formatter = function(e) {
+                if (e.componentType != 'series') { return; }
+                var d = data[e.dataIndex];
+                var intensity = Math.round(d.intensity);
+                var emissionPercent = 
+                  Math.round(d.population * d.intensity / totalEmissions * 10000) / 100;
+                return d.name + ' (' + intensity + ' t per cap)' + ': ' + emissionPercent + '% of total emissions';
+              }
+
+              option.series =  [
+                {
+                  type: 'custom',
+                  renderItem: renderItem,
+                  // label: {
+                  //   normal: {
+                  //     show: true,
+                  //     position: 'top'
+                  //   }
+                  // },
+                  dimensions: ['from', 'to', 'intensity'],
+                  encode: {
+                    x: [0, 1],
+                    y: 2,
+                    tooltip: [0, 1, 2],
+                    itemName: 3
+                  },
+                  data: chartData,
+                  // itemStyle: {
+                  //   normal: {
+                  //     color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                  //         offset: 0.5,
+                  //         color: 'rgb(255, 64, 30)'
+                  //     }, {
+                  //         offset: 1,
+                  //         color: 'orange'
+                  //     }])
+                  //   },
+                  // },
+                  markLine: {
+                    symbol: 'none',
+                    data: [{ yAxis: 2 }],
+                    label: {
+                      normal: {
+                        formatter: 'Paris objective',
+                        position: 'middle'
+                      },
+                    },
+                    lineStyle: {
+                      normal: {
+                        color: 'black'
+                      }
+                    }
+                  }
+                }
+              ]
+
+              var chart = echarts.init(document.getElementById('carbon_intensity_world'))
+              chart.setOption(option);
+              window.addEventListener('resize', chart.resize);
+            });
+          })()
+        </script>
+
         <p class="incomplete">
 
       We must redouble our R&D effort, but not rely on them. Given the time constraints we are under, it is unlikely a new clean energy source will surface.
