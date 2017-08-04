@@ -379,11 +379,16 @@
                 option.xAxis.axisLabel = {
                   formatter: function(e) { return e.toString() }
                 }
-                option.xAxis.min = data[0][0];
+                option.xAxis.min = -9000;
                 option.xAxis.max = data[data.length - 1][0]
 
                 option.yAxis.min = -0.7;
                 option.yAxis.max = 1.2;
+
+                option.dataZoom = initialDataZoom();
+                option.dataZoom[0].startValue = -9000;
+
+                option.grid.bottom = 60;
 
                 option.tooltip.formatter = function(e) {
                   var yValue = Math.round(e[0].data[1] * 100) / 100;
