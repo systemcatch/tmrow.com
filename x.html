@@ -699,18 +699,130 @@
           Fossil fuels propelled humanity into an industrialised age where the use of machines enabled to dedicate most of the working population to the service sector instead of agriculture.
           Currently, each human on the planet consumes roughly <a href="http://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE" target="_blank">60 kWh</a> of energy per day, the equivalent of dedicating 15 professional cyclists for 10 hours a day to each person. To get an even more concrete idea, take a look at <a href="https://www.youtube.com/watch?v=S4O5voOCqAQ" target="_blank">this video</a> to see <a href="https://en.wikipedia.org/wiki/Robert_F%C3%B6rstemann">Robert Förstemann</a>, professional track cyclist and sprint specialist, struggle to power his toaster.
         </p>
+
+        <div class="graph">
+          <div class="chart" id="tpes_historical"></div>
+          <div class="source">
+            Source: <a href="https://ourworldindata.org/energy-production-and-changing-energy-sources/#global-total-energy-production-long-run-view-by-source">Our World In Data</a> (<a href="https://ourworldindata.org/grapher/global-primary-energy-consumption-1800-2015.csv">data</a>)
+          </div>
+        </div>
+
+        <script>
+          (function() {
+            var url = 'data/global-primary-energy-consumption-1800-2015.csv';
+
+            d3.csv(url, function(err, obj) {
+              if (err) throw err;
+
+              // Add an aggreate field that sums biofuels
+              obj.forEach(function(d) {
+                d['Biofuels'] = 
+                  +d['Modern biofuels'] + +d['Traditional biofuels']
+              })
+              var mapping = {
+                'Coal': 'coal',
+                'Crude oil': 'oil',
+                'Natural gas': 'gas',
+                'Hydroelectricity': 'hydro',
+                'Nuclear electricity': 'nuclear',
+                'Wind and solar': 'wind & solar',
+                // 'Modern biofuels': 'biomass',
+                // 'Traditional biofuels': 'biomass'
+                'Biofuels': 'biomass'
+              }
+              var colors = {
+                'wind & solar': '#74cdb9',
+                // 'solar': '#f27406',
+                'hydro': '#2772b2',
+                'biomass': '#166a57',
+                'nuclear': '#AEB800',
+                'gas': '#bb2f51',
+                'coal': '#ac8c35',
+                'oil': '#867d66',
+              };
+              var byFuel = {};
+              var xData = [];
+              obj.forEach(function(d) {
+                xData.push(d.Year)
+                Object.keys(d).forEach(function(k) {
+                  if (!mapping[k]) { return; }
+                  var kk = mapping[k];
+                  if (!byFuel[kk]) { byFuel[kk] = []; }
+                  byFuel[kk].push(+d[k])
+                })
+              })
+
+              data = [
+                {name: 'biomass', values: byFuel['biomass']},
+                {name: 'coal', values: byFuel['coal']},
+                {name: 'oil', values: byFuel['oil']},
+                {name: 'gas', values: byFuel['gas']},
+                {name: 'hydro', values: byFuel['hydro']},
+                {name: 'nuclear', values: byFuel['nuclear']},
+                {name: 'wind & solar', values: byFuel['wind & solar']},
+              ]
+
+              var option = initialOption();
+
+              option.title.text = 'World primary energy consumption since 1800';
+              option.title.subtext = 'in EJ (exajoules)';
+
+              option.xAxis.data = xData;
+
+              // option.tooltip.formatter = function(e) {
+              //   var yValue = e[0].data[1];
+              //   var xValue = e[0].data[0];
+              //   var year = xValue < 0 ?
+              //     Math.round(xValue) + ' BC' :
+              //     Math.round(xValue) + ' AD';
+              //   return yValue + ' ppm in ' + year;
+              // }
+
+              option.legend = {
+                data: data.map(function(d) { return d.name; }),
+                orient: 'vertical',
+                x: 'right',
+                y: 'center'
+              }
+              option.grid.right = 120;
+
+              option.yAxis.max = 550;
+
+              option.color = data.map(function(d) { return colors[d.name] })
+              option.series = data.map(function(d) {
+                return {
+                  name: d.name,
+                  type: 'line',
+                  symbol: 'none',
+                  stack: 'common',
+                  data: d.values,
+                  areaStyle: { normal: { } },
+                  lineStyle: { normal: { } }
+                }
+              })
+
+              var chart = echarts.init(document.getElementById('tpes_historical'))
+              chart.setOption(option);
+              window.addEventListener('resize', chart.resize);
+
+            });
+          })();
+        </script>
+
         <p class="incomplete">
-          Graph (IEA) that shows primary energy % by fuel to show biomass -> coal -> oil -> gas and (!renewables). Don't forget to talk about agri?
+          Graph (IEA) that shows primary energy % by fuel to show biomass -> coal -> oil -> gas and (!renewables).
+          NOTE: NO SUBSTITUTION -> IT ENABLED FURTHER GROWTH!
 
           Fossil fuel are, as their name say, given once and for all.
 
           [that explains why CO2 has increased so much]
         </p>
 
-        <p class="incomplete">
+        <!--<p class ="incomplete">
+          [SKIP?]
           The effect of greenhouse gases has been identified since the beginning of the century.
           <a href="https://paperspast.natlib.govt.nz/newspapers/rodney-and-otamatea-times-waitemata-and-kaipara-gazette/1912/8/14/7" target="_blank">This article</a> from 1912 is one of the earliest accounts which identifies the risk of burning fossil fuel, releasing CO<sub>2</sub> into the atmosphere, thus causing an increase in temperature.
-        </p>
+        </p> -->
 
         <p>
           The proliferation of machines burning fossil fuels since the industrial revolution explains the drastic increase in measured CO<sub>2</sub> concentrations, but are not the only source of greenhouse gases:
@@ -786,7 +898,7 @@
         </script>
 
         <p>
-          The majority of our emissions comes from burning fossil fuels (coal, oil and gas). That it happening as soon as we drive a car, take a plane or use electricity. It also indirectly happens when we consume objects assembled from parts transported from afar, or requiring heavy energy usage to manufacture.
+          The majority of our emissions comes from burning fossil fuels (coal, oil and gas) for energy. That it happening as soon as we drive a car, take a plane or use electricity. It also indirectly happens when we consume objects assembled from parts transported from afar, or requiring heavy energy usage to manufacture.
         </p>
         <p class="incomplete">
           A substancial amount comes from [explain livestock, CH4, N2O, albedo change, forest fires]. Note that the use of fossil fuels for operating machines, or the use of electricity, is not counted here.
