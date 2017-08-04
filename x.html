@@ -240,15 +240,20 @@
           </div>
 
           <script>
+            // Will be reused later
+            function parseGiss(giss_obj) {
+              return giss_obj
+                  .split('\n')
+                  .map(function(row, i) { return row.split('     ') })
+                  .filter(function(row, i) { return +row[0]; })
+            }
+
             (function() {
               var url = 'data/647_Global_Temperature_Data_File.txt';
               d3.text(url, function(err, giss_obj) {
                 if (err) throw err;
 
-                var giss_data = giss_obj
-                  .split('\n')
-                  .map(function(row, i) { return row.split('     ') })
-                  .filter(function(row, i) { return +row[0]; })
+                var giss_data = parseGiss(giss_obj);
 
                 var option = initialOption();
                 var xData = giss_data.map(function(d) { return +d[0] });
@@ -263,10 +268,10 @@
                 }
 
                 option.xAxis.max = d3.max(xData);
-                option.yAxis.min = -0.5;
+                option.yAxis.min = -0.7;
                 option.yAxis.max = 1.2;
 
-                option.title.text = 'Temperature anomaly'
+                option.title.text = 'Temperature anomalies'
                 option.title.subtext = '°C compared to 1951-1980 average';
 
                 option.tooltip.formatter = function(e) {
@@ -321,42 +326,67 @@
           <div class="graph">
             <div class="chart" id="temperature_time_series_OLD"></div>
             <div class="source">
-              Source: <a href="http://science.sciencemag.org/content/339/6124/1198" target="_blank">A Reconstruction of Regional and Global Temperature for the Past 11,300 Years</a> (<a href="http://science.sciencemag.org/content/suppl/2013/03/07/339.6124.1198.DC1" target="_blank">data</a>)
+              Source: <a href="http://science.sciencemag.org/content/339/6124/1198" target="_blank">A Reconstruction of Regional and Global Temperature for the Past 11,300 Years</a> (<a href="http://science.sciencemag.org/content/suppl/2013/03/07/339.6124.1198.DC1" target="_blank">data</a>) before 1880, <a href="https://climate.nasa.gov/vital-signs/global-temperature/" target="_blank">NASA's Goddard Institute for Space Studies (GISS)</a> (<a href="http://climate.nasa.gov/system/internal_resources/details/original/647_Global_Temperature_Data_File.txt" target="_blank">data</a>) after 1880
             </div>
           </div>
 
           <script>
             (function() {
-              var marcott_url = 'data/marcott2013.csv'
+              var marcott_url = 'data/marcott2013.csv';
+              var giss_url = 'data/647_Global_Temperature_Data_File.txt';
 
-              d3.text(marcott_url, function(err, marcott_obj) {
+              d3.queue()
+                .defer(d3.text, marcott_url)
+                .defer(d3.text, giss_url)
+                .await(function(err, marcott_obj, giss_obj) {
+
                 if (err) throw err;
 
-                var marcott_data = d3.dsvFormat(';').parse(marcott_obj);
-                var data = marcott_data
+                var giss_data = parseGiss(giss_obj)
+                  .map(function(d) {
+                    return [+d[0], +d[1]]
+                  });
+
+                var marcott_data = d3.dsvFormat(';').parse(marcott_obj)
                   .map(function(r) {
                     return [1950 - +r['Age (yrs BP)'], parseFloat(r['Global (°C)'].replace(',', '.'))]
                   }).filter(function(d) {
-                    return isFinite(d[1]);
-                  })
+                    return isFinite(d[1]) && d[0] < giss_data[0][0];
+                  }).reverse()
+
+                // Make sure to convert the baseline to the giss one
+                var marcott_baseline = [1961, 1990];
+                var delta = d3.mean(giss_data.filter(function(d) {
+                  return d[0] >= marcott_baseline[0] &&
+                    d[1] <= marcott_baseline[1];
+                }), function(d) {
+                  return d[1];
+                })
+
+                data = marcott_data.map(function(d) {
+                  return [d[0], d[1] - delta]
+                });
+                giss_data.forEach(function(d) {
+                  data.push(d);
+                })
 
                 var option = initialOption();
 
-                option.title.text = 'Reconstruction of global temperatures in the last 11 300 years';
-                option.title.subtext = '°C compared to 1961-1990 average';
-
-                option.color = ['#61a0a8']
+                option.title.text = 'Temperature anomalies in the last 11 300 years';
+                option.title.subtext = '°C compared to 1951-1980 average';
 
                 option.xAxis.type = 'value';
                 option.xAxis.axisLabel = {
                   formatter: function(e) { return e.toString() }
                 }
+                option.xAxis.min = data[0][0];
+                option.xAxis.max = data[data.length - 1][0]
 
-                option.yAxis.min = -0.5;
+                option.yAxis.min = -0.7;
                 option.yAxis.max = 1.2;
 
                 option.tooltip.formatter = function(e) {
-                  var yValue = e[0].data[1];
+                  var yValue = Math.round(e[0].data[1] * 100) / 100;
                   var sign = yValue >= 0 ? '+' : '';
                   var xValue = e[0].data[0];
                   var year = xValue < 0 ? xValue + ' BC' : xValue + ' AD';
@@ -368,7 +398,24 @@
                     name: 'marcott',
                     type: 'line',
                     showSymbol: false,
-                    data: data
+                    data: data,
+                    areaStyle: {
+                      normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: -1 * option.yAxis.min / option.yAxis.max - 0.2,
+                            color: 'rgb(255, 64, 30)'
+                        }, {
+                            offset: 1,
+                            color: 'rgb(180, 200, 255)'
+                        }])
+                      }
+                    },
+                  },
+                  {
+                    name: 'last',
+                    type: 'effectScatter',
+                    data: [data[data.length - 1]],
+                    symbolSize: 10,
                   }
                 ];
 
@@ -379,8 +426,6 @@
               });
             })();
           </script>
-
-          <p class="incomplete">TODO: Add the last portion of this graph</p>
 
           <p>
             What is worrying is not so much the change itself, but rather <b>the speed at which this change is taking place</b>.
@@ -1094,7 +1139,7 @@
                   itemStyle: {
                     normal: {
                       color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                          offset: 0.5,
+                          offset: 0,
                           color: 'rgb(255, 64, 30)'
                       }, {
                           offset: 1,
