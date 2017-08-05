@@ -493,7 +493,8 @@
                   var r = d.split('\t')
                   return [1950 - +r[0], +r[1]];
                 })
-                .filter(function(d) { return d[0] < split_date; })
+                .filter(function(d) { return d[0] < split_date && isFinite(d[1]); })
+                .reverse()
                 .forEach(function(d) { data.push(d) })
               mlo_obj.split('\n')
                 .filter(function(d) { return d[0] != '#'; })
