@@ -277,7 +277,7 @@
                 option.tooltip.formatter = function(e) {
                   var value = e[0].data[1];
                   var sign = value >= 0 ? '+' : '';
-                  return sign + value + ' °C in ' + e[0].data[0];
+                  return e[0].marker + ' ' + sign + value + ' °C in ' + e[0].data[0];
                 }
 
                 option.series = [
@@ -395,7 +395,7 @@
                   var sign = yValue >= 0 ? '+' : '';
                   var xValue = e[0].data[0];
                   var year = xValue < 0 ? xValue + ' BC' : xValue + ' AD';
-                  return sign + yValue + ' °C in ' + year;
+                  return e[0].marker + ' ' + sign + yValue + ' °C in ' + year;
                 }
 
                 option.series = [
@@ -529,7 +529,7 @@
                 var year = xValue < 0 ?
                   Math.round(xValue) + ' BC' :
                   Math.round(xValue) + ' AD';
-                return yValue + ' ppm in ' + year;
+                return e[0].marker + ' ' + yValue + ' ppm in ' + year;
               }
 
               option.series = [
@@ -820,17 +820,22 @@
 
               option.xAxis.data = xData;
 
-              // option.tooltip.formatter = function(e) {
-              //   var yValue = e[0].data[1];
-              //   var xValue = e[0].data[0];
-              //   var year = xValue < 0 ?
-              //     Math.round(xValue) + ' BC' :
-              //     Math.round(xValue) + ' AD';
-              //   return yValue + ' ppm in ' + year;
-              // }
+              option.tooltip.formatter = function(e) {
+                e.reverse();
+                var sum = d3.sum(e, function(d) { return d.data; })
+                var html = e.map(function(d) {
+                  return d.marker + ' ' + d.seriesName + ': ' + d.data + ' (' + Math.round(d.data * 100 / sum) + ' %)';
+                }).join('<br />')
+                html += '<br />--<br />'
+                var ff = d3.sum(e.filter(function(d) {
+                  return ['gas', 'oil', 'coal'].indexOf(d.seriesName) != -1
+                }), function(d) { return d.data });
+                html += 'Fossil fuels: ' + (Math.round(ff * 100) / 100) + ' (' + Math.round(ff * 100 / sum) + ' %)';
+                return html;
+              }
 
               option.legend = {
-                data: data.map(function(d) { return d.name; }),
+                data: data.map(function(d) { return d.name; }).reverse(),
                 orient: 'vertical',
                 x: 'right',
                 y: 'center'
@@ -1351,6 +1356,8 @@
       We must redouble our R&D effort, but not rely on them. Given the time constraints we are under, it is unlikely a new clean energy source will surface.
 
       A note on emissions -> concentrations -> temperature
+
+      Aujourd’hui encore, les kWh domptent les degrés. Si la pluie fait défaut, nous pouvons faire venir de l’eau ou de la nourriture d’ailleurs ; si des logements, des usines ou des ponts sont détruits, nous pouvons les reconstruire rapidement ; si des espèces disparaissent, les produits de notre industrie nous fournissent les mêmes services… et tout cela grâce à l’énergie, qui met en face de toute adversité des machines bien plus puissantes que nos muscles.
         </p>
 
       </div>
