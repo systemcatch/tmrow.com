@@ -49,9 +49,16 @@ img.svg {
 /* Fonts */
 html, body {
 	font-family: 'Open Sans', sans-serif;
+	line-height: 1.5em;
 }
 h1, h2, h3 {
 	font-family: 'Lato', sans-serif;
+}
+h1 {
+	font-size: 1.5em;
+}
+h2 {
+	font-size: 1.2em;
 }
 
 /* Blocks */
@@ -90,6 +97,9 @@ section h1:first-child {
 }
 section p:last-child {
 	margin-bottom: 0;
+}
+section.alternate, footer.alternate {
+	background-color: #f3f3f3;
 }
 
 /* cols */
