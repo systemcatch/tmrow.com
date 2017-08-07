@@ -477,7 +477,7 @@
         </p>
 
         <div class="graph">
-          <div class="title">Atmospheric CO2 concentration in the last 10 000 to 800 000 years</div>
+          <div class="title">Atmospheric CO2 concentration in the last 40 000 to 800 000 years</div>
           <div class="description">in ppm (particles per million)</div>
           <div class="chart" id="ghg_time_series"></div>
           <div class="source">
@@ -522,12 +522,12 @@
               option.xAxis.axisLabel = {
                 formatter: function(e) { return e.toString() }
               }
-              option.xAxis.min = -90000;
+              option.xAxis.min = -900000;
               option.yAxis.min = 150;
               option.yAxis.max = 420;
 
               option.dataZoom = initialDataZoom();
-              option.dataZoom[0].startValue = -8000;
+              option.dataZoom[0].startValue = -40000;
 
               option.grid.bottom = 60;
 
@@ -960,7 +960,7 @@
         </script>
 
         <p class="incomplete">
-          A substancial amount comes from [explain livestock, CH4, N2O, albedo change, forest fires]. Note that the use of fossil fuels for operating machines, or the use of electricity, is not counted here.
+          A substancial amount comes from [explain livestock, CH4, N2O, albedo change, forest fires, lack of carbon sink]. Note that the use of fossil fuels for operating machines, or the use of electricity, is not counted here.
         </p>
         <p class="incomplete">
           Finally, the chemical reaction required for the production cement [and steel?] results in a release of CO<sub>2</sub>.
@@ -1214,7 +1214,7 @@
               { name: 'solar + storage', intensity: '-' },
               { name: 'hydro', intensity: 24 },
               { name: 'biomass', intensity: 230 },
-              { name: 'geothermal', intensity: 24 },
+              { name: 'geothermal', intensity: 38 },
               { name: 'nuclear', intensity: 12 },
               { name: 'gas', intensity: 490 },
               { name: 'coal', intensity: 820 },
