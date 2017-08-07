@@ -122,10 +122,9 @@
     <script>
       function initialOption() {
         return {
-          title: { textStyle: { fontSize: 14 }, itemGap: 5 },
           xAxis: {},
           yAxis: {},
-          grid: { bottom: 45 },
+          grid: { top: 20, bottom: 45 },
           tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -196,6 +195,16 @@
       .source {
         font-size: small;
       }
+      .graph .title {
+        font-size: 14px;
+        line-height: 14px;
+        font-weight: bold;
+      }
+      .graph .description {
+        font-size: 12px;
+        color: #8a8a8a;
+        line-height: unset;
+      }
 
       /* Misc */
       .incomplete {
@@ -235,6 +244,8 @@
           </p>
 
           <div class="graph">
+            <div class="title">Temperature anomalies</div>
+            <div class="description">&deg;C compared to 1951-1980 average</div>
             <div class="chart" id="temperature_time_series_recent"></div>
             <div class="source">
               Source: <a href="https://climate.nasa.gov/vital-signs/global-temperature/" target="_blank">NASA's Goddard Institute for Space Studies (GISS)</a> (<a href="http://climate.nasa.gov/system/internal_resources/details/original/647_Global_Temperature_Data_File.txt" target="_blank">data</a>)
@@ -272,9 +283,6 @@
                 option.xAxis.max = d3.max(xData);
                 option.yAxis.min = -0.7;
                 option.yAxis.max = 1.2;
-
-                option.title.text = 'Temperature anomalies'
-                option.title.subtext = '°C compared to 1951-1980 average';
 
                 option.tooltip.formatter = function(e) {
                   var value = e[0].data[1];
@@ -326,6 +334,8 @@
           </p>
 
           <div class="graph">
+            <div class="title">Temperature anomalies in the last 11 300 years</div>
+            <div class="description">&deg;C compared to 1951-1980 average</div>
             <div class="chart" id="temperature_time_series_OLD"></div>
             <div class="source">
               Source: <a href="http://science.sciencemag.org/content/339/6124/1198" target="_blank">A Reconstruction of Regional and Global Temperature for the Past 11,300 Years</a> (<a href="http://science.sciencemag.org/content/suppl/2013/03/07/339.6124.1198.DC1" target="_blank">data</a>) before 1880, <a href="https://climate.nasa.gov/vital-signs/global-temperature/" target="_blank">NASA's Goddard Institute for Space Studies (GISS)</a> (<a href="http://climate.nasa.gov/system/internal_resources/details/original/647_Global_Temperature_Data_File.txt" target="_blank">data</a>) after 1880
@@ -373,9 +383,6 @@
                 })
 
                 var option = initialOption();
-
-                option.title.text = 'Temperature anomalies in the last 11 300 years';
-                option.title.subtext = '°C compared to 1951-1980 average';
 
                 option.xAxis.type = 'value';
                 option.xAxis.axisLabel = {
@@ -470,6 +477,8 @@
         </p>
 
         <div class="graph">
+          <div class="title">Atmospheric CO2 concentration in the last 10 000 to 800 000 years</div>
+          <div class="description">in ppm (particles per million)</div>
           <div class="chart" id="ghg_time_series"></div>
           <div class="source">
             Source: National Oceanic and Atmospheric Administration (NOAA) <a href="https://www.ncdc.noaa.gov/paleo-search/study/17975" target="_blank">Ice Core records</a> (<a href="https://www1.ncdc.noaa.gov/pub/data/paleo/icecore/antarctica/antarctica2015co2composite.txt" target="_blank">data</a>) before 1959 and <a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/data.html" target="_blank">Mauna Loa records</a> (<a href="ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_annmean_mlo.txt" target="_blank">data</a>) after 1959.
@@ -508,9 +517,6 @@
                 .forEach(function(d) { data.push(d) })
 
               var option = initialOption();
-
-              option.title.text = 'Atmospheric CO2 concentration in the last 10 000 to 800 000 years';
-              option.title.subtext = 'in ppm (particles per million)';
 
               option.xAxis.type = 'value';
               option.xAxis.axisLabel = {
@@ -579,6 +585,8 @@
         </p>
 
         <div class="graph">
+          <div class="title">Relative changes in radiative forcing in 2011 compared to 1750</div>
+          <div class="description">in W/m<sup>2</sup></div>
           <div class="chart" id="global_warming_components"></div>
           <div class="source">
             Source: Intergovernmental Panel on Climate Change (IPCC) <a href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg1/WG1AR5_Chapter08_FINAL.pdf" target="_blank">WG1 AR5, Fig. 8.15 p697</a> (<a href="http://www.ipcc.ch/report/ar5/wg1/docs/WG1AR5_AIISM_Datafiles.xlsx" target="_blank">data</a>)
@@ -642,9 +650,6 @@
 
               option.xAxis.type = 'value'
               option.yAxis.data = data.map(function(d) { return d.name })
-
-              option.title.text = 'Relative changes in radiative forcing in 2011 compared to 1750';
-              option.title.subtext = 'in W/m²';
 
               option.tooltip.formatter = function(e) {
                 var e0 = e
@@ -754,6 +759,8 @@
         </p>
 
         <div class="graph">
+          <div class="title">World primary energy consumption since 1800</div>
+          <div class="description">in EJ (exajoules)</div>
           <div class="chart" id="tpes_historical"></div>
           <div class="source">
             Source: <a href="https://ourworldindata.org/energy-production-and-changing-energy-sources/#global-total-energy-production-long-run-view-by-source">Our World In Data</a> (<a href="https://ourworldindata.org/grapher/global-primary-energy-consumption-1800-2015.csv">data</a>)
@@ -816,9 +823,6 @@
               ]
 
               var option = initialOption();
-
-              option.title.text = 'World primary energy consumption since 1800';
-              option.title.subtext = 'in EJ (exajoules)';
 
               option.xAxis.data = xData;
 
@@ -888,6 +892,8 @@
         </p>
 
         <div class="graph">
+          <div class="title">Man-made greehouse gas emissions in 2010</div>
+          <div class="description">% of total</div>
           <div class="chart" id="ghg_origin"></div>
           <div class="source">
             Source: <a href="https://www.accenture.com/t00010101T000000__w__/br-pt/_acnmedia/PDF-11/Accenture-Strategy-Energy-Perspectives-Consequences-COP21.pdf">Accenture Energy Perspectives - Consequences of COP21 for the Oil and Gas Industry</a>, Fig. 12 p14.
@@ -918,9 +924,6 @@
             option.grid.bottom = 50;
 
             option.yAxis.data = data.map(function(d) { return d.name })
-
-            option.title.text = 'Man-made greehouse gas emissions in 2010';
-            option.title.subtext = '% of total';
 
             option.tooltip.trigger = 'none';
 
@@ -990,6 +993,8 @@
         </p>
 
         <div class="graph">
+          <div class="title">World emissions by country in 2013</div>
+          <div class="description">in tCO<sub>2</sub>eq per person per year</div>
           <div class="chart" id="carbon_intensity_world"></div>
           <div class="source">
             Source: <a href="http://www.wri.org/resources/data-sets/cait-historical-emissions-data-countries-us-states-unfccc" target="_blank">World Resource Institute</a> (<a href="http://cait.wri.org/historical/export/Country%20GHG%20Emissions/WorldResourcesInstituteCAIT.csv?&keyField=Country&unit=MtCO2e&unit=MtCO%E2%82%82e%E2%80%8D&unit=People&indicator[]=Total%20GHG%20Emissions%20Excluding%20Land-Use%20Change%20and%20Forestry&indicator[]=Total%20GHG%20Emissions%20Including%20Land-Use%20Change%20and%20Forestry&indicator[]=Population&year[]=2013&sortIdx=1&sortDir=desc&chartType=geo" target="_blank">data</a>)
@@ -1089,9 +1094,6 @@
 
               var option = initialOption();
 
-              option.title.text = 'World emissions by country in ' + year;
-              option.title.subtext = 'in tCO₂eq per person per year';
-
               option.xAxis.name = 'of world population';
               option.xAxis.nameLocation = 'middle';
               option.xAxis.position = 'bottom';
@@ -1182,6 +1184,8 @@
         </p>
 
         <div class="graph">
+          <div class="title">Greenhouse gas intensity of electricity production modes</div>
+          <div class="description">in gCO<sub>2</sub>eq/kWh</div>
           <div class="chart" id="ghg_intensity_electricity"></div>
           <div class="source">
             Source: Live cycle emissions from <a href="https://github.com/tmrowco/electricitymap#carbon-intensity-calcuation-and-data-source" target="_blank">Electricity Map</a> (<a href="https://github.com/tmrowco/electricitymap/blob/master/config/co2eq_parameters.js" target="_blank">data</a>)
@@ -1227,9 +1231,6 @@
             option.xAxis.type = 'value'
             option.yAxis.data = data.map(function(d) { return d.name })
 
-            option.title.text = 'Greenhouse gas intensity of electricity production modes';
-            option.title.subtext = 'in gCO₂eq/kWh';
-
             option.grid.left = 90;
 
             option.tooltip.trigger = 'none';
@@ -1264,6 +1265,8 @@
         </script>
 
         <div class="graph incomplete">
+          <div class="title">Greenhouse gas intensity of transportation modes</div>
+          <div class="description">in gCO<sub>2</sub>eq / person / km</div>
           <div class="chart" id="ghg_intensity_transportation"></div>
           <div class="source">
             Source: 
@@ -1308,9 +1311,6 @@
 
             option.xAxis.type = 'value'
             option.yAxis.data = data.map(function(d) { return d.name })
-
-            option.title.text = 'Greenhouse gas intensity of transportation modes';
-            option.title.subtext = 'in gCO₂eq / person / km';
 
             option.tooltip.trigger = 'none';
 
