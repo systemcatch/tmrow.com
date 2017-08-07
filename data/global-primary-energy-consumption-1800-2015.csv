@@ -1,0 +1,24 @@
+Entity,Year,Country code,Coal,Crude oil,Natural gas,Hydroelectricity,Nuclear electricity,Wind and solar,Modern biofuels,Traditional biofuels
+World,1800,OWID_WRL,0.35,,,,,,,20
+World,1810,OWID_WRL,0.46,,,,,,,21
+World,1820,OWID_WRL,0.55,,,,,,,22
+World,1830,OWID_WRL,0.95,,,,,,,23
+World,1840,OWID_WRL,1.28,,,,,,,25
+World,1850,OWID_WRL,2.05,,,,,,,26
+World,1860,OWID_WRL,3.82,,,,,,,25
+World,1870,OWID_WRL,5.91,0.02,,,,,,25
+World,1880,OWID_WRL,9.15,0.12,,,,,,25
+World,1890,OWID_WRL,13.88,0.32,0.12,0.05,,,,24
+World,1900,OWID_WRL,20.62,0.65,0.23,0.06,,,,22
+World,1910,OWID_WRL,31.16,1.43,0.51,0.12,,,,23
+World,1920,OWID_WRL,35.4,3.2,0.84,0.23,,,,25
+World,1930,OWID_WRL,36.45,6.32,2.17,0.47,,,,26
+World,1940,OWID_WRL,41.71,9.55,3.15,0.69,,,,26
+World,1950,OWID_WRL,45.37,19.6,7.53,1.2,,,,27
+World,1960,OWID_WRL,55.59,39.95,16.1,2.48,0.03,,,32
+World,1970,OWID_WRL,62.39,85.31,35.89,4.93,0.83,,,34
+World,1980,OWID_WRL,79.8,110.24,51.76,6.11,7.68,,,36
+World,1990,OWID_WRL,94.1,113.36,70.78,7.78,19.1,0.01,0.59,40
+World,2000,OWID_WRL,96,129.16,86.11,9.55,24.55,0.1,0.89,45
+World,2010,OWID_WRL,150,141.92,114,12.47,26.22,1.35,4.37,42
+World,2015,OWID_WRL,159.7,154.62,123.78,14.21,24.5,3.93,4.75,40
