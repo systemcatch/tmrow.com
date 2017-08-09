@@ -94,6 +94,12 @@
 
         return t;
         }(document, "script", "twitter-wjs"));
+        twttr.ready(function(e) {
+            twttr.events.bind('click', function(event) {
+                // event.region is {tweet,follow}
+                trackAnalyticsEvent(event.region);
+            })
+        })
     </script>
     <!-- end Twitter -->
     <!-- Load Facebook SDK for JavaScript -->
@@ -107,6 +113,18 @@
           });
           if(window.location.href.indexOf('localhost') == -1)
             FB.AppEvents.logPageView('pageview');
+          FB.Event.subscribe('edge.create', function(e) {
+            // This will happen when they like the page
+            if (e == 'https://www.facebook.com/tmrowco') {
+              trackAnalyticsEvent('like');
+            }
+          })
+          FB.Event.subscribe('edge.remove', function(e) {
+            // This will happen when they unlike the page
+            if (e == 'https://www.facebook.com/tmrowco') {
+              trackAnalyticsEvent('unlike');
+            }
+          })
       };
       (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -115,6 +133,24 @@
         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <script>
+      function trackAnalyticsEvent(eventName, paramObj) {
+        if (window.location.href.indexOf('localhost') == -1) {
+          try {
+            if(typeof FB !== 'undefined')
+              FB.AppEvents.logEvent(eventName, undefined, paramObj);
+          } catch(err) { console.error('FB AppEvents error: ' + err); }
+          try {
+            if(typeof mixpanel !== 'undefined')
+              mixpanel.track(eventName, paramObj);
+          } catch(err) { console.error('Mixpanel error: ' + err); }
+          try {
+            if(typeof ga !== 'undefined')
+              ga('send', eventName);
+          } catch(err) { console.error('Google Analytics error: ' + err); }
+        }
+      }
     </script>
 
     <header>
