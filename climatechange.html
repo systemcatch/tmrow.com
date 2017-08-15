@@ -949,7 +949,17 @@ url: https://www.tmrow.com/climatechange.html
           IPCC graph -->
           The Paris agreement [ref needed] has set the world the 2&deg;C objective at horizon 2100.
           This gives us a carbon budget [ref], which is x% of proven reserves.
-          [dangerous to let the free market...]
+          [dangerous to let the free market...].
+          This also means we don't have time to wait for fusion to be around, or another new cheap abundant energy source.
+        </p>
+
+        <p>
+          So how do we personally do to reach that objective? Do we recycle more? Eat organic? Vote for more wind turbines? In this jungle of complex decisions, some pragmatism has to be introduced, in the form of a sober quantification of the impact of the different choices we make.
+        </p>
+
+        <p>
+          It all starts with <b>figuring out how much you are emitting compared to the 2t objective</b>.
+          Here's an estimate of personal emissions depending on where you live:
         </p>
 
         <div class="graph">
@@ -958,6 +968,9 @@ url: https://www.tmrow.com/climatechange.html
           <div class="chart" id="carbon_intensity_world"></div>
           <div class="source">
             Source: <a href="http://www.wri.org/resources/data-sets/cait-historical-emissions-data-countries-us-states-unfccc" target="_blank">World Resource Institute</a> (<a href="http://cait.wri.org/historical/export/Country%20GHG%20Emissions/WorldResourcesInstituteCAIT.csv?&keyField=Country&unit=MtCO2e&unit=MtCO%E2%82%82e%E2%80%8D&unit=People&indicator[]=Total%20GHG%20Emissions%20Excluding%20Land-Use%20Change%20and%20Forestry&indicator[]=Total%20GHG%20Emissions%20Including%20Land-Use%20Change%20and%20Forestry&indicator[]=Population&year[]=2013&sortIdx=1&sortDir=desc&chartType=geo" target="_blank">data</a>)
+            <p class="incomplete">
+            TODO: Would be nice to be able to find one's country. Maybe using a map? Datazoom should be controlled though. Maybe showing a map
+            </p>
           </div>
         </div>
 
@@ -1061,6 +1074,12 @@ url: https://www.tmrow.com/climatechange.html
               option.xAxis.axisLabel = {formatter: '{value}%', margin: 30};
               option.grid.bottom = 80;
 
+              option.yAxis.name = 'personal footprint';
+              option.yAxis.nameLocation = 'middle';
+              option.yAxis.nameRotate = 90;
+              option.yAxis.nameGap = 35;
+              option.yAxis.axisLabel = {formatter: '{value}t'};
+
               option.dataZoom = initialDataZoom();
               option.dataZoom[0].bottom = option.grid.bottom - 20;
               option.dataZoom[0].endValue = 6;
@@ -1119,7 +1138,7 @@ url: https://www.tmrow.com/climatechange.html
                     data: [{ yAxis: 2 }],
                     label: {
                       normal: {
-                        formatter: 'Paris objective',
+                        formatter: 'Paris 2t objective',
                         position: 'end'
                       },
                     },
@@ -1139,33 +1158,26 @@ url: https://www.tmrow.com/climatechange.html
           })()
         </script>
 
+        <p>
+          The height represents the average personal footprint (to be compared against the 2t objective), and the width represents the number of people in that country.
+          The area hence represents the total amount of emissions from a given country.
+        </p>
+
         <p class="incomplete">
-          TODO: Would be nice to be able to find one's country. Maybe using a map? Datazoom should be controlled though. Maybe showing a map
+          Even though country averages put in perspective the amount of efforts needed, real change can only come if we all, as individuals, set personalised goals for living a sustainable life.
         </p>
 
-        <p>
-          The mirage of technology?
-
-          fusion: significant scale for decades to come
-        </p>
-
-        <p>
-          What can we, as individuals, do? Do we recycle? Eat organic? Vote for more wind turbines? In this jungle of complex decisions, some pragmatism has to be introduced, in the form of a sober quantification of the impact of the different choices we make.
-        </p>
-
-
-        <h1>X</h1>
-        <p>
+        <p class="incomplete">
           We need a framework on which we can assess the impact of the decisions we take, with the objective of getting our individual footprint to 2tCO<sub>2</sub>eq.
         </p>
-        <p>
+        <p class="incomplete">
           First, Nothing is truly renewable or totally circular (or no-waste) -> LCA.
           The world has limits.
         </p>
-        <p>
+        <p class="incomplete">
           Second, we have a limited amount of money. We must judge technologies by their cost / CO2 reduced. While CCS is interesting, it costs....
         </p>
-        <p>
+        <p class="incomplete">
           Finally, we have to keep track of the intensity, but also of the volume.
           Plane by km is actually not more emitting than a car. But a long travel makes a lot of emissions in absolute terms (50% or an individuals yearly footprint).
           Similarly, growth, planes are only 2% of global emissions. But 50% of individual. Great inequalities. Which means that there's not way to have the whole world flying around.
