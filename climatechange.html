@@ -963,13 +963,17 @@ url: https://www.tmrow.com/climatechange.html
         </p>
 
         <div class="graph">
-          <div class="title">World emissions by country in 2013</div>
+          <div class="title">World greenhouse gas emissions by country in 2013</div>
           <div class="description">in tCO<sub>2</sub>eq per person per year</div>
           <div class="chart" id="carbon_intensity_world"></div>
           <div class="source">
             Source: <a href="http://www.wri.org/resources/data-sets/cait-historical-emissions-data-countries-us-states-unfccc" target="_blank">World Resource Institute</a> (<a href="http://cait.wri.org/historical/export/Country%20GHG%20Emissions/WorldResourcesInstituteCAIT.csv?&keyField=Country&unit=MtCO2e&unit=MtCO%E2%82%82e%E2%80%8D&unit=People&indicator[]=Total%20GHG%20Emissions%20Excluding%20Land-Use%20Change%20and%20Forestry&indicator[]=Total%20GHG%20Emissions%20Including%20Land-Use%20Change%20and%20Forestry&indicator[]=Population&year[]=2013&sortIdx=1&sortDir=desc&chartType=geo" target="_blank">data</a>)
             <p class="incomplete">
             TODO: Would be nice to be able to find one's country. Maybe using a map? Datazoom should be controlled though. Maybe showing a map
+            </p>
+            <p>
+              The height represents the average personal footprint (to be compared against the 2t&nbsp;objective), and the width represents the number of people in that country.
+              The area therefore represents the total amount of emissions from a given country.
             </p>
           </div>
         </div>
@@ -1158,96 +1162,115 @@ url: https://www.tmrow.com/climatechange.html
           })()
         </script>
 
+        <p class="incomplete">
+          Our personal footprint can vary quite a lot from country averages.
+          Therefore, it is important to be able to measure it precisely enough to trigger behavioural change.
+          Some calculators are available here, here and here [ADD LINKS].
+        </p>
         <p>
-          The height represents the average personal footprint (to be compared against the 2t objective), and the width represents the number of people in that country.
-          The area hence represents the total amount of emissions from a given country.
+          In the next sections, we're going to give an overview of the impact of some daily decisions we make related to transportation, food and electricity.
+          We will present comparable quantities in order to show which behaviour changes can have the most impact.
+          It is important to note that although doing differently might help, reducing your absolute level of consumption might be the only way to get to the 2t objective.
+          Even a low-carbon activity can cumulate to great amounts when repeatedly carried out.
         </p>
-
-        <p class="incomplete">
-          Even though country averages put in perspective the amount of efforts needed, real change can only come if we all, as individuals, set personalised goals for living a sustainable life.
-        </p>
-
-        <p class="incomplete">
-          We need a framework on which we can assess the impact of the decisions we take, with the objective of getting our individual footprint to 2tCO<sub>2</sub>eq.
-        </p>
-        <p class="incomplete">
-          First, Nothing is truly renewable or totally circular (or no-waste) -> LCA.
-          The world has limits.
-        </p>
-        <p class="incomplete">
-          Second, we have a limited amount of money. We must judge technologies by their cost / CO2 reduced. While CCS is interesting, it costs....
-        </p>
-        <p class="incomplete">
-          Finally, we have to keep track of the intensity, but also of the volume.
-          Plane by km is actually not more emitting than a car. But a long travel makes a lot of emissions in absolute terms (50% or an individuals yearly footprint).
-          Similarly, growth, planes are only 2% of global emissions. But 50% of individual. Great inequalities. Which means that there's not way to have the whole world flying around.
-        </p>
-
-
-        <h1>X</h1>
         <p>
-          Sobering up: your own footprint, take your own choices, limit to 2deg. Here's a list of intensities to help you calculate it and make beter vchoices.
+          Finally it is important to understand that <b>no activity is carbon-free</b>.
+          Even the production of renewable energy requires the construction of wind turbines and solar panels, which will emit greenhouse gases during transportation, assembly, and the mining of necessary <a href="https://en.wikipedia.org/wiki/Precious_metal" target="_blank">precious metals</a>.
+        </p>
+
+        <h1>Transportation: Reduce long-distance travels</h1>
+
+        <div class="graph incomplete">
+          <div class="title">Greenhouse gas intensity of transportation modes</div>
+          <div class="description">in gCO<sub>2</sub>eq / person / km</div>
+          <div class="chart" id="ghg_intensity_transportation"></div>
+          <div class="source">
+            Source: 
+          </div>
+        </div>
+
+        <script>
+          (function() {
+
+            var modeColor = {
+              // 'wind': '#74cdb9',
+              // 'solar': '#f27406',
+              // 'hydro': '#2772b2',
+              // 'biomass': '#166a57',
+              // 'geothermal': 'yellow',
+              // 'nuclear': '#AEB800',
+              // 'gas': '#bb2f51',
+              // 'coal': '#ac8c35',
+              // 'oil': '#867d66',
+            };
+
+            var data = [
+              { name: 'car', intensity: Math.random() },
+              { name: 'electric car (low carbon elec.)', intensity: Math.random() },
+              { name: 'electric car (high carbon elec.)', intensity: Math.random() },
+              { name: 'airplane', intensity: Math.random() },
+              { name: 'electric train (low carbon elec.)', intensity: Math.random() },
+              { name: 'electric train (high carbon elec.)', intensity: Math.random() },
+              { name: 'diesel train', intensity: Math.random() },
+              { name: 'cycling', intensity: Math.random() },
+              { name: 'walking', intensity: Math.random() },
+            ].reverse();
+
+            var option = initialOption();
+
+            option.grid.left = 170;
+
+            option.xAxis.name = 'Greenhouse gas intensity in gCO₂eq / person / km';
+            option.xAxis.nameLocation = 'middle';
+            option.xAxis.nameGap = 30;
+            option.grid.bottom = 50;
+
+            option.xAxis.type = 'value'
+            option.yAxis.data = data.map(function(d) { return d.name })
+
+            option.tooltip.trigger = 'none';
+
+            option.series = [
+              {
+                type: 'bar',
+                data: echarts.util.map(data, function (d) {
+                  return {
+                    value: d.intensity,
+                    itemStyle: {
+                      normal: {
+                        color: modeColor[d.name]
+                      }
+                    }
+                  }
+                }),
+                label: {
+                  normal: {
+                    show: true,
+                    position: 'right'
+                  }
+                }
+              },
+            ];
+
+            var chart = echarts.init(
+              document.getElementById('ghg_intensity_transportation'));
+            chart.setOption(option);
+            window.addEventListener('resize', chart.resize);
+          })();
+        </script>
+
+        <p class="incomplete">
+          Surprising to see aircraft at the same level as car? Per km, so long distance.
+          The problem is actually time. Doing x km by car and plane is the same, the thing is that we do it in a little time, so ....
+        </p>
+
+        <p>
+          We must electrify transportation to reduce FF.
+          Hence, it matters how we generate our electricity.
         </p>
 
 
-EROI/ESOI (pumped hydro: 210, LiOn 10 http://ourrenewablefuture.org/chapter-3/)
-
-
-        - Looking for the turning point: total emissions are still growing, fossil fuel share of energy is constant and high (>80%).
-        - growing population
-        - mitigating climate change will require us to use even more energy (energy investments)
-        -------
-        - two ways: 1/ either we find a clean and abundant energy source (an energy miracle, as Bill Gates says) 2/ we don't, and we deal with what we have today
-        - We have 30y, so we won't be able to scale a tech to a global level that's...
-        - So what do we do?
-        - Degrowth? communication.
-        - Show dilema and importance of using EROI etc..
-        - Remember its energy and not GHG.
-        - Systemic questioning
-
-        a framework for evaluating.
-        - understanding LCA
-        - understanding intensity vs volume
-        - understanding mitigation cost ($/CO2eq avoided)
-
-
-        growth vs degrowth (gdp vs *net* energy -- i.e. after energy investment)
-        law of diminishing returns: low hanging fruits, e.g. build wind turbines in less adequate places etc..
-        Since almost all raw materials and energy that are until today used to produce the required equipments are nonrenewable, the old mines and wells of the same gradually get exhausted. Miners must then go to ever remoter and ever more difficult places to extract them out of new mines/wells.
-        Creates an S curve: fight between tech advances, and then no more low hanging fruits..
-
-        within a growth-orientated economy, efficiency gains tend to be reinvested in more consumption and more growth, rather than in reducing impact. -> rebound
-
-        limits: energy crisis (peak oil), climate crisis.
-        tech? % fossil fuel has barely changed. Laws of physics are different from those in informatics.
-        tech? solarfactory scale + Imagine now the huge amount of shit this gigantic effort would simultaneously produce: the environmental pollution, resource depletion, and waste that has to be dumped somewhere. May do more harm than good. -> LCA
-
-        Given peak fossil fuels, the prospects for increasing, or even just maintaining, gross energy depends heavily on how fast renewable energy and nuclear power can be scaled up.
-
-        Because oil is economically crucial and hard to replace, and because oil is leading the EROEI decline of fossil fuels, more and more energy investment capital will have to go toward maintaining essential existing oil-based energy usage systems, just as massive new investment is needed for renewable energy capacity, energy storage, and grid upgrades.
-
-        https://medium.com/insurge-intelligence/whats-really-driving-the-global-economic-crisis-is-net-energy-decline-82efb9ca45fe
-        In the last six years, new investment (including government, private sector etc) in all forms of renewable energy has leveled off at around the $300 billion a year. Heinberg and Finlay (p.123) estimate that this rate of investment would have to multiplied by more than a factor of ten and continued each year for several decades, if renewable energy was to meet current global energy demand, let alone the projected doubling of demand in most mainstream energy scenarios.
-
-        Globally, the ratio of capital expenditure to production rate increase expanded by an order of magnitude between the periods 1993–2005 and 2005–2013
-        http://ourrenewablefuture.org/introduction/
-
-        EROI is the total value of energy a resource can generate, calculated by comparing the quantity of energy extracted, to the quantity of energy put in to enable the extraction.
-
-        Practical fusion power continues to be at best a theoretical possibility many decades in the future
-
-        it seems highly likely that any future 100% renewable energy system (as opposed to individual technology) will provide far less net-energy than humanity — or at least, the minority of us in the energy rich affluent regions — has enjoyed during the fossil fuel epoch, mostly because of difficulty to transport, infra needed and intermittency.
-
-        EROI on the decline: https://medium.com/insurge-intelligence/whats-really-driving-the-global-economic-crisis-is-net-energy-decline-82efb9ca45fe
-
-        In 25 of the last 26 years, <a href="http://www.nationalobserver.com/2017/07/13/analysis/these-missing-charts-may-change-way-you-think-about-fossil-fuel-addiction" target="_blank">we burned more fossil fuels than the year before</a>.
-        most people are taking it far too lightly than the reality of the threat
-        so far the response is not adequate to the challenge
-
-
-        Intro to intensities/greenbit:
-        We can make small adjustments: recycling, buying reusable bottles for our water and ice coffee, foregoing the occasional plastic bag. But these small things, even multiplied by a large population, are still small in the end.
-
+        <h1>Electricity: remove coal, gas and oil power plants</h1>
         <div class="graph">
           <div class="title">Greenhouse gas intensity of electricity production modes</div>
           <div class="description">in gCO<sub>2</sub>eq/kWh</div>
@@ -1329,85 +1352,104 @@ EROI/ESOI (pumped hydro: 210, LiOn 10 http://ourrenewablefuture.org/chapter-3/)
           })();
         </script>
 
-        <div class="graph incomplete">
-          <div class="title">Greenhouse gas intensity of transportation modes</div>
-          <div class="description">in gCO<sub>2</sub>eq / person / km</div>
-          <div class="chart" id="ghg_intensity_transportation"></div>
-          <div class="source">
-            Source: 
-          </div>
-        </div>
+        <p>
+          It is crucial that we <b>get rid of fossil fuels for electricity generation</b>.
+          To keep track of how we stand, check out the <a href="https://www.electricitymap.org" target="_blank">Electricity&nbsp;Map</a>.
+          Low-carbon strategies fall into two categories in regions where the terrain does not allow the installation of large-scale hydropower: nuclear and wind/solar.
+          Nuclear has a waste problem and wind/solar suffer from intermittency, and must therefore incorporate a storage solution in order to deliver electricity continuously. 
+        </p>
+        <p>
+          If you're living in a country with high renewable penetration, you can reduce the need for storage by <b>consuming electricity when the wind blows, or when the sun shines</b>.
+          Even better: have your heating systems and electric car <a href="https://www.co2signal.com" target="_blank">do it automatically</a>.
+        </p>
 
-        <script>
-          (function() {
+        <h1>Food: avoid red meat</h1>
 
-            var modeColor = {
-              // 'wind': '#74cdb9',
-              // 'solar': '#f27406',
-              // 'hydro': '#2772b2',
-              // 'biomass': '#166a57',
-              // 'geothermal': 'yellow',
-              // 'nuclear': '#AEB800',
-              // 'gas': '#bb2f51',
-              // 'coal': '#ac8c35',
-              // 'oil': '#867d66',
-            };
 
-            var data = [
-              { name: 'car', intensity: Math.random() },
-              { name: 'electric car (low carbon elec.)', intensity: Math.random() },
-              { name: 'electric car (high carbon elec.)', intensity: Math.random() },
-              { name: 'airplane', intensity: Math.random() },
-              { name: 'electric train (low carbon elec.)', intensity: Math.random() },
-              { name: 'electric train (high carbon elec.)', intensity: Math.random() },
-              { name: 'diesel train', intensity: Math.random() },
-              { name: 'cycling', intensity: Math.random() },
-              { name: 'walking', intensity: Math.random() },
-            ].reverse();
+        <!-- <p>
+          We do however need to keep in mind that nothing is truly renewable, in the sense that it can be completely re-used without creating any waste.
+          Any resource consumption (even wind and solar energy) requires depleting a certain amount of energy (building wind turbines, digging oil..)
+          This is due to the <a href="https://en.wikipedia.org/wiki/Second_law_of_thermodynamics" target="_blank">second law of thermodynamics</a> which in a nutshell says that in practice, you can't reverse a process without using energy. In other words, 
+        </p> -->
 
-            var option = initialOption();
+        <!-- <h1>[the importance of LCA]</h1>
+        <p class="incomplete">
+          We need a framework on which we can assess the impact of the decisions we take, with the objective of getting our individual footprint to 2tCO<sub>2</sub>eq. First, Nothing is truly renewable or totally circular (or no-waste) -> LCA.
+          The world has limits.
+        </p>
+        <p class="incomplete">
+          Second, we have a limited amount of money. We must judge technologies by their cost / CO2 reduced. While CCS is interesting, it costs.... Important to keep in mind although we will not consider the cost of things here.
+        </p>
+        <p class="incomplete">
+          Finally, we have to keep track of the intensity, but also of the volume.
+          Plane by km is actually not more emitting than a car. But a long travel makes a lot of emissions in absolute terms (50% or an individuals yearly footprint).
+          Similarly, growth, planes are only 2% of global emissions. But 50% of individual. Great inequalities. Which means that there's not way to have the whole world flying around.
+        </p> -->
 
-            option.grid.left = 170;
 
-            option.xAxis.name = 'Greenhouse gas intensity in gCO₂eq / person / km';
-            option.xAxis.nameLocation = 'middle';
-            option.xAxis.nameGap = 30;
-            option.grid.bottom = 50;
+        <h1>X</h1>
+        <p>
+          Sobering up: your own footprint, take your own choices, limit to 2deg. Here's a list of intensities to help you calculate it and make beter vchoices.
+        </p>
 
-            option.xAxis.type = 'value'
-            option.yAxis.data = data.map(function(d) { return d.name })
 
-            option.tooltip.trigger = 'none';
+EROI/ESOI (pumped hydro: 210, LiOn 10 http://ourrenewablefuture.org/chapter-3/)
 
-            option.series = [
-              {
-                type: 'bar',
-                data: echarts.util.map(data, function (d) {
-                  return {
-                    value: d.intensity,
-                    itemStyle: {
-                      normal: {
-                        color: modeColor[d.name]
-                      }
-                    }
-                  }
-                }),
-                label: {
-                  normal: {
-                    show: true,
-                    position: 'right'
-                  }
-                }
-              },
-            ];
 
-            var chart = echarts.init(
-              document.getElementById('ghg_intensity_transportation'));
-            chart.setOption(option);
-            window.addEventListener('resize', chart.resize);
-          })();
-        </script>
+        - Looking for the turning point: total emissions are still growing, fossil fuel share of energy is constant and high (>80%).
+        - growing population
+        - mitigating climate change will require us to use even more energy (energy investments)
+        -------
+        - two ways: 1/ either we find a clean and abundant energy source (an energy miracle, as Bill Gates says) 2/ we don't, and we deal with what we have today
+        - We have 30y, so we won't be able to scale a tech to a global level that's...
+        - So what do we do?
+        - Degrowth? communication.
+        - Show dilema and importance of using EROI etc..
+        - Remember its energy and not GHG.
+        - Systemic questioning
 
+        a framework for evaluating.
+        - understanding LCA
+        - understanding intensity vs volume
+        - understanding mitigation cost ($/CO2eq avoided)
+
+
+        growth vs degrowth (gdp vs *net* energy -- i.e. after energy investment)
+        law of diminishing returns: low hanging fruits, e.g. build wind turbines in less adequate places etc..
+        Since almost all raw materials and energy that are until today used to produce the required equipments are nonrenewable, the old mines and wells of the same gradually get exhausted. Miners must then go to ever remoter and ever more difficult places to extract them out of new mines/wells.
+        Creates an S curve: fight between tech advances, and then no more low hanging fruits..
+
+        within a growth-orientated economy, efficiency gains tend to be reinvested in more consumption and more growth, rather than in reducing impact. -> rebound
+
+        limits: energy crisis (peak oil), climate crisis.
+        tech? % fossil fuel has barely changed. Laws of physics are different from those in informatics.
+        tech? solarfactory scale + Imagine now the huge amount of shit this gigantic effort would simultaneously produce: the environmental pollution, resource depletion, and waste that has to be dumped somewhere. May do more harm than good. -> LCA
+
+        Given peak fossil fuels, the prospects for increasing, or even just maintaining, gross energy depends heavily on how fast renewable energy and nuclear power can be scaled up.
+
+        Because oil is economically crucial and hard to replace, and because oil is leading the EROEI decline of fossil fuels, more and more energy investment capital will have to go toward maintaining essential existing oil-based energy usage systems, just as massive new investment is needed for renewable energy capacity, energy storage, and grid upgrades.
+
+        https://medium.com/insurge-intelligence/whats-really-driving-the-global-economic-crisis-is-net-energy-decline-82efb9ca45fe
+        In the last six years, new investment (including government, private sector etc) in all forms of renewable energy has leveled off at around the $300 billion a year. Heinberg and Finlay (p.123) estimate that this rate of investment would have to multiplied by more than a factor of ten and continued each year for several decades, if renewable energy was to meet current global energy demand, let alone the projected doubling of demand in most mainstream energy scenarios.
+
+        Globally, the ratio of capital expenditure to production rate increase expanded by an order of magnitude between the periods 1993–2005 and 2005–2013
+        http://ourrenewablefuture.org/introduction/
+
+        EROI is the total value of energy a resource can generate, calculated by comparing the quantity of energy extracted, to the quantity of energy put in to enable the extraction.
+
+        Practical fusion power continues to be at best a theoretical possibility many decades in the future
+
+        it seems highly likely that any future 100% renewable energy system (as opposed to individual technology) will provide far less net-energy than humanity — or at least, the minority of us in the energy rich affluent regions — has enjoyed during the fossil fuel epoch, mostly because of difficulty to transport, infra needed and intermittency.
+
+        EROI on the decline: https://medium.com/insurge-intelligence/whats-really-driving-the-global-economic-crisis-is-net-energy-decline-82efb9ca45fe
+
+        In 25 of the last 26 years, <a href="http://www.nationalobserver.com/2017/07/13/analysis/these-missing-charts-may-change-way-you-think-about-fossil-fuel-addiction" target="_blank">we burned more fossil fuels than the year before</a>.
+        most people are taking it far too lightly than the reality of the threat
+        so far the response is not adequate to the challenge
+
+
+        Intro to intensities/greenbit:
+        We can make small adjustments: recycling, buying reusable bottles for our water and ice coffee, foregoing the occasional plastic bag. But these small things, even multiplied by a large population, are still small in the end.
 
         <!--<p class ="incomplete">
           [SKIP?]
@@ -1471,7 +1513,8 @@ EROI/ESOI (pumped hydro: 210, LiOn 10 http://ourrenewablefuture.org/chapter-3/)
         var el = h1s[i];
         var a = document.createElement('a');
         var id = el.innerHTML
-          .replace(/[ ']/g, '-')
+          .replace(/(<sub>)|(<\/sub>)/g, '')
+          .replace(/[ ':,]/g, '-')
           .toLowerCase();
         el.setAttribute('id', id);
         a.setAttribute('class', 'anchor');
