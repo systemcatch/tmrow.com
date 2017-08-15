@@ -102,7 +102,8 @@ url: https://www.tmrow.com/climatechange.html
         margin-bottom: unset !important;
       }
       h1, h2 {
-        margin-top: 2rem;
+        margin-top: -3rem; /* padding-top + margin-top will be effective margin */
+        padding-top: 5rem;
       }
 
       /* Prevent subscript from affecting line-height */
@@ -1463,7 +1464,7 @@ EROI/ESOI (pumped hydro: 210, LiOn 10 http://ourrenewablefuture.org/chapter-3/)
         el.setAttribute('id', id);
         a.setAttribute('class', 'anchor');
         a.setAttribute('href', '#' + id);
-        a.innerHTML = '<i class="fa fa-link" aria-hidden="true"></i>';
+        a.innerHTML = '<small><i class="fa fa-link" aria-hidden="true"></i></small>';
         el.insertBefore(a, el.firstChild);
       }
     </script>
@@ -1471,7 +1472,7 @@ EROI/ESOI (pumped hydro: 210, LiOn 10 http://ourrenewablefuture.org/chapter-3/)
       h1 a {
         visibility: hidden;
         float: left;
-        margin-left: -1.2em;
+        margin-left: -1.0em;
         padding-right: 0.3em;
       }
       h1:hover a, h1, a:hover {
