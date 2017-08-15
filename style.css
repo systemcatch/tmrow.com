@@ -16,7 +16,7 @@ html, body {
 
 a {
 	color: #3064b9;
-	transition: all 0.2s ease;
+	transition: color 0.2s ease;
 	text-decoration: none;
 }
 a:hover {
