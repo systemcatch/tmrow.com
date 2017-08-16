@@ -1287,6 +1287,7 @@ url: https://www.tmrow.com/climatechange.html
               'wind': '#74cdb9',
               'solar': '#f27406',
               'hydro': '#2772b2',
+              'wind + storage': '#2772b2',
               'biomass': '#166a57',
               'geothermal': 'yellow',
               'nuclear': '#AEB800',
@@ -1364,6 +1365,83 @@ url: https://www.tmrow.com/climatechange.html
         </p>
 
         <h1>Food: avoid red meat</h1>
+
+        <div class="graph">
+          <div class="title">Greenhouse gas intensity of food</div>
+          <div class="description">in gCO<sub>2</sub>eq / kg</div>
+          <div class="chart" id="ghg_intensity_food"></div>
+          <div class="source">
+            Source: <a href="http://orgprints.org/15610/1/15610.pdf" target="_blank">Life cycle assessment accros the Food Supply Chain</a> and <a href="http://gefionau.dk/lcafood/" target="_blank">LCA Food Database</a>.
+          </div>
+        </div>
+
+        <script>
+          (function() {
+
+            var modeColor = {
+              'fish': '#74cdb9',
+              'yellow cheese': '#f27406',
+              'lobster': '#2772b2',
+              'vegetables': '#166a57',
+              'cattle': 'darkred',
+              'chicken': '#ac8c35',
+              'bread': '#867d66',
+            };
+
+            var data = [
+              { name: 'vegetables', intensity: 1.05 },
+              { name: 'bread', intensity: 0.99 },
+              { name: 'milk', intensity: 1.2 },
+              { name: 'yellow cheese', intensity: 11.3 },
+              { name: 'fish', intensity: 2.73 },
+              { name: 'lobster', intensity: 20.2 },
+              { name: 'pork', intensity: 3.23 },
+              { name: 'chicken', intensity: 3.35 },
+              { name: 'cattle', intensity: 23.7 },
+            ].reverse();
+
+            var option = initialOption();
+
+            option.grid.left = 170;
+
+            option.xAxis.name = 'Greenhouse gas intensity in gCO₂eq / kg';
+            option.xAxis.nameLocation = 'middle';
+            option.xAxis.nameGap = 30;
+            option.grid.bottom = 50;
+
+            option.xAxis.type = 'value'
+            option.yAxis.data = data.map(function(d) { return d.name })
+
+            option.tooltip.trigger = 'none';
+
+            option.series = [
+              {
+                type: 'bar',
+                data: echarts.util.map(data, function (d) {
+                  return {
+                    value: d.intensity,
+                    itemStyle: {
+                      normal: {
+                        color: modeColor[d.name]
+                      }
+                    }
+                  }
+                }),
+                label: {
+                  normal: {
+                    show: true,
+                    position: 'right'
+                  }
+                }
+              },
+            ];
+
+            var chart = echarts.init(
+              document.getElementById('ghg_intensity_food'));
+            chart.setOption(option);
+            window.addEventListener('resize', chart.resize);
+          })();
+        </script>
 
 
         <!-- <p>
