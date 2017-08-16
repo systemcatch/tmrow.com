@@ -1170,12 +1170,10 @@ url: https://www.tmrow.com/climatechange.html
         <p>
           In the next sections, we're going to give an overview of the impact of some daily decisions we make related to transportation, food and electricity.
           We will present comparable quantities in order to show which behaviour changes can have the most impact.
-          It is important to note that although doing differently might help, reducing your absolute level of consumption might be the only way to get to the 2t objective.
-          Even a low-carbon activity can cumulate to great amounts when repeatedly carried out.
         </p>
         <p>
           Finally it is important to understand that <b>no activity is carbon-free</b>.
-          Even the production of renewable energy requires the construction of wind turbines and solar panels, which will emit greenhouse gases during transportation, assembly, and the mining of necessary <a href="https://en.wikipedia.org/wiki/Precious_metal" target="_blank">precious metals</a>.
+          Even the production of renewable energy requires the construction of wind turbines and solar panels, which will emit greenhouse gases during transportation, assembly, and mining of the necessary <a href="https://en.wikipedia.org/wiki/Precious_metal" target="_blank">rare metals</a>.
         </p>
 
         <h1>Transportation: Reduce long-distance travels</h1>
@@ -1265,15 +1263,15 @@ url: https://www.tmrow.com/climatechange.html
         </p>
 
         <p>
-          We must electrify transportation to reduce FF.
-          Hence, it matters how we generate our electricity.
+          In order to get rid of fossil fuels, we must electrify transportation directly by using electric motors, or indirectly, by using hydrogen produced by electricity.
+          <b>In the end, what matters is how we generate our electricity</b>. Generating it with fossil fuels would reduce all of our efforts to nothing.
         </p>
 
 
         <h1>Electricity: remove coal, gas and oil power plants</h1>
         <div class="graph">
           <div class="title">Greenhouse gas intensity of electricity production modes</div>
-          <div class="description">in gCO<sub>2</sub>eq/kWh</div>
+          <div class="description">in gCO<sub>2</sub>eq / kWh consumed</div>
           <div class="chart" id="ghg_intensity_electricity"></div>
           <div class="source">
             Source: Live cycle emissions from <a href="https://github.com/tmrowco/electricitymap#carbon-intensity-calcuation-and-data-source" target="_blank">Electricity Map</a> (<a href="https://github.com/tmrowco/electricitymap/blob/master/config/co2eq_parameters.js" target="_blank">data</a>) and <a href="http://www.lowtechmagazine.com/2015/05/sustainability-off-grid-solar-power.html" target="_blank">How Sustainable is Stored Sunlight?</a> for solar + storage intensity estimations.
@@ -1312,7 +1310,7 @@ url: https://www.tmrow.com/climatechange.html
 
             var option = initialOption();
 
-            option.xAxis.name = 'Greenhouse gas intensity in gCO₂eq/kWh';
+            option.xAxis.name = 'Greenhouse gas intensity in gCO₂eq per kWh consumed';
             option.xAxis.nameLocation = 'middle';
             option.xAxis.nameGap = 30;
             option.grid.bottom = 50;
@@ -1368,7 +1366,7 @@ url: https://www.tmrow.com/climatechange.html
 
         <div class="graph">
           <div class="title">Greenhouse gas intensity of food</div>
-          <div class="description">in gCO<sub>2</sub>eq / kg</div>
+          <div class="description">in gCO<sub>2</sub>eq / g consumed</div>
           <div class="chart" id="ghg_intensity_food"></div>
           <div class="source">
             Source: <a href="http://orgprints.org/15610/1/15610.pdf" target="_blank">Life cycle assessment accros the Food Supply Chain</a> and <a href="http://gefionau.dk/lcafood/" target="_blank">LCA Food Database</a>.
@@ -1402,9 +1400,9 @@ url: https://www.tmrow.com/climatechange.html
 
             var option = initialOption();
 
-            option.grid.left = 170;
+            option.grid.left = 100;
 
-            option.xAxis.name = 'Greenhouse gas intensity in gCO₂eq / kg';
+            option.xAxis.name = 'Greenhouse gas intensity in gCO₂eq per g consumed';
             option.xAxis.nameLocation = 'middle';
             option.xAxis.nameGap = 30;
             option.grid.bottom = 50;
@@ -1443,6 +1441,35 @@ url: https://www.tmrow.com/climatechange.html
           })();
         </script>
 
+        <p class="incomplete">
+          Some conclusion about the food part here.
+        </p>
+
+        <p>
+          It is important to note that although doing differently might help, reducing your absolute level of consumption might be the only way to get to the 2t objective.
+          Even a low-carbon activity can cumulate to great amounts when repeatedly carried out.
+        </p>
+
+        <h1>Information must be accessible and widely spread</h1>
+        <p>
+          How to we get a whole civilisation to shift consumption patterns?
+          We need to put in place incentives that reward low-carbon consumption decisions motivating people to stay under the 2t yearly budget.
+          Money is the strongest incentive we have, and thus, a carbon tax must be set into place.
+          It could very well replace the VAT (<a href="https://en.wikipedia.org/wiki/Value-added_tax" target="_blank">Value-Added Tax</a>), such that the total amount of tax is kept equal but simply skewed such that low-carbon products are less taxed.
+        </p>
+        <p>
+          So far, the carbon tax has only been applied to large companies and manufacturers (with an insufficient price).
+          A carbon tax on goods consumed (like a VAT) would be complicated to set in place, because it would require all companies of the value chain to implement precise carbon accounting.
+        </p>
+        <p>
+          We believe that the consumer should be made aware, and rewarded for positive action. We believe that by giving consumers an idea of the impact of their consumption habits, we empower them to make better choices and have an impact.
+        </p>
+        <p>
+          What is needed is to centralise our global knowledge about greehouse gas intensities of various goods or services consumed, and build interfaces that enable any actor to access it and present it to consumers.
+        </p>
+        <p>
+          It is our belief that when consumers become both aware of the objective and empowered enough to achieve it, we will see a shift in consciousness.
+        </p>
 
         <!-- <p>
           We do however need to keep in mind that nothing is truly renewable, in the sense that it can be completely re-used without creating any waste.
@@ -1465,7 +1492,7 @@ url: https://www.tmrow.com/climatechange.html
         </p> -->
 
 
-        <h1>X</h1>
+        <!-- <h1>X</h1>
         <p>
           Sobering up: your own footprint, take your own choices, limit to 2deg. Here's a list of intensities to help you calculate it and make beter vchoices.
         </p>
@@ -1527,7 +1554,7 @@ EROI/ESOI (pumped hydro: 210, LiOn 10 http://ourrenewablefuture.org/chapter-3/)
 
 
         Intro to intensities/greenbit:
-        We can make small adjustments: recycling, buying reusable bottles for our water and ice coffee, foregoing the occasional plastic bag. But these small things, even multiplied by a large population, are still small in the end.
+        We can make small adjustments: recycling, buying reusable bottles for our water and ice coffee, foregoing the occasional plastic bag. But these small things, even multiplied by a large population, are still small in the end. -->
 
         <!--<p class ="incomplete">
           [SKIP?]
@@ -1536,17 +1563,11 @@ EROI/ESOI (pumped hydro: 210, LiOn 10 http://ourrenewablefuture.org/chapter-3/)
         </p> -->
 
         <p class="incomplete">
-
-          We must redouble our R&D effort, but not rely on them. Given the time constraints we are under, it is unlikely a new clean energy source will surface.
-
-          intensity vs volume problem
-
-          Aujourd’hui encore, les kWh domptent les degrés. Si la pluie fait défaut, nous pouvons faire venir de l’eau ou de la nourriture d’ailleurs ; si des logements, des usines ou des ponts sont détruits, nous pouvons les reconstruire rapidement ; si des espèces disparaissent, les produits de notre industrie nous fournissent les mêmes services… et tout cela grâce à l’énergie, qui met en face de toute adversité des machines bien plus puissantes que nos muscles.
-
-
-      
+        Greenbit + hiring
           <a href="https://electricitymap.us15.list-manage.com/subscribe/post?u=8689fc68cd6c50ec671a95afb&id=96da98142a" target="_blank">sign up for the beta</a>
+        </p>
 
+        <p>
           <!-- Facebook share -->
           <div class="fb-share-button"
                data-href="https://www.tmrow.com/climatechange.html"
