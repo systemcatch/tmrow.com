@@ -1153,7 +1153,7 @@ url: https://www.tmrow.com/climatechange.html
                     left: 'left',
                     top: 'bottom',
                     calculable: true,
-                    formatter: function(d) { return Math.round(d) + ' tons'}
+                    formatter: function(d) { return Math.round(d) + 't'}
                 },
               }
 
@@ -1392,12 +1392,12 @@ url: https://www.tmrow.com/climatechange.html
 
         <h2>Transportation: Reduce long-distance travels</h2>
 
-        <div class="graph incomplete">
+        <div class="graph">
           <div class="title">Greenhouse gas intensity of transportation modes</div>
           <div class="description">in gCO<sub>2</sub>eq / person / km</div>
           <div class="chart" id="ghg_intensity_transportation"></div>
           <div class="source">
-            Source: 
+            Source: <a href="http://www.ecoinvent.org/" target="_blank">Ecoinvent 3</a> through <a href="https://static.ducky.no/calculator_documentation.pdf" target="_blank">ducky.no</a>
           </div>
         </div>
 
@@ -1417,15 +1417,14 @@ url: https://www.tmrow.com/climatechange.html
             };
 
             var data = [
-              { name: 'car', intensity: Math.random() },
-              { name: 'electric car (low carbon elec.)', intensity: Math.random() },
-              { name: 'electric car (high carbon elec.)', intensity: Math.random() },
-              { name: 'airplane', intensity: Math.random() },
-              { name: 'electric train (low carbon elec.)', intensity: Math.random() },
-              { name: 'electric train (high carbon elec.)', intensity: Math.random() },
-              { name: 'diesel train', intensity: Math.random() },
-              { name: 'cycling', intensity: Math.random() },
-              { name: 'walking', intensity: Math.random() },
+              { name: 'car', intensity: 257 },
+              { name: 'scooter', intensity: 108 },
+              { name: 'bus', intensity: 103 },
+              { name: 'electric car', intensity: 81 },
+              { name: 'train', intensity: 42 },
+              { name: 'airplane (short distance)', intensity: 340 },
+              { name: 'airplane (long distance)', intensity: 239 },
+              { name: 'boat', intensity: 803 },
             ].reverse();
 
             var option = initialOption();
@@ -1478,7 +1477,7 @@ url: https://www.tmrow.com/climatechange.html
 
         <p>
           In order to get rid of fossil fuels, we must electrify transportation directly by using electric motors, or indirectly, by using hydrogen produced by electricity.
-          <b>In the end, what matters is how we generate our electricity</b>. Generating it with fossil fuels would reduce all of our efforts to nothing.
+          Therefore, it matters how we generate our electricity: Generating it with fossil fuels would reduce all of our efforts to nothing.
         </p>
 
 
@@ -1666,119 +1665,20 @@ url: https://www.tmrow.com/climatechange.html
 
         <h2>Information must be accessible and widely spread</h2>
         <p>
-          How to we get a whole civilisation to shift consumption patterns?
-          We need to put in place incentives that reward low-carbon consumption decisions motivating people to stay under the 2t yearly budget.
-          Money is the strongest incentive we have, and thus, a carbon tax must be set into place.,
-          It could very well replace the VAT (<a href="https://en.wikipedia.org/wiki/Value-added_tax" target="_blank">Value-Added Tax</a>), such that the total amount of tax is kept equal but simply skewed such that low-carbon products are less taxed.
+          How do we get a whole civilisation to shift consumption patterns?
         </p>
         <p>
-          So far, the carbon tax has only been applied to large companies and manufacturers (with an insufficient price).
-          A carbon tax on goods consumed (like a VAT) would be complicated to set in place, because it would require all companies of the value chain to implement precise carbon accounting.
+          We need to <b>reward low-carbon consumption decisions</b>, incentivizing people to stay under the 2t yearly budget.
+          Money is the strongest incentive we have, and thus, a <b>consumer-centric carbon tax</b> must be set into place.,
+          It could very well replace the VAT (<a href="https://en.wikipedia.org/wiki/Value-added_tax" target="_blank">Value-Added Tax</a>), such that the total amount of tax is kept equal but simply distributed differently across goods, making low-carbon products cheaper.
         </p>
         <p>
-          We believe that the consumer should be made aware, and rewarded for positive action. We believe that by giving consumers an idea of the impact of their consumption habits, we empower them to make better choices and have an impact.
+          We believe that we, consumers, should be made aware and rewarded for positive action. We believe that by giving us an idea of the impact of our consumption habits, we become empowered to make better choices.
         </p>
+
         <p>
-          What is needed is to centralise our global knowledge about greehouse gas intensities of various goods or services consumed, and build interfaces that enable any actor to access it and present it to consumers.
-        </p>
-        <p>
-          It is our belief that when consumers become both aware of the objective and empowered enough to achieve it, we will see a shift in consciousness.
-        </p>
-
-        <!-- <p>
-          We do however need to keep in mind that nothing is truly renewable, in the sense that it can be completely re-used without creating any waste.
-          Any resource consumption (even wind and solar energy) requires depleting a certain amount of energy (building wind turbines, digging oil..)
-          This is due to the <a href="https://en.wikipedia.org/wiki/Second_law_of_thermodynamics" target="_blank">second law of thermodynamics</a> which in a nutshell says that in practice, you can't reverse a process without using energy. In other words, 
-        </p> -->
-
-        <!-- <h1>[the importance of LCA]</h1>
-        <p class="incomplete">
-          We need a framework on which we can assess the impact of the decisions we take, with the objective of getting our individual footprint to 2tCO<sub>2</sub>eq. First, Nothing is truly renewable or totally circular (or no-waste) -> LCA.
-          The world has limits.
-        </p>
-        <p class="incomplete">
-          Second, we have a limited amount of money. We must judge technologies by their cost / CO2 reduced. While CCS is interesting, it costs.... Important to keep in mind although we will not consider the cost of things here.
-        </p>
-        <p class="incomplete">
-          Finally, we have to keep track of the intensity, but also of the volume.
-          Plane by km is actually not more emitting than a car. But a long travel makes a lot of emissions in absolute terms (50% or an individuals yearly footprint).
-          Similarly, growth, planes are only 2% of global emissions. But 50% of individual. Great inequalities. Which means that there's not way to have the whole world flying around.
-        </p> -->
-
-
-        <!-- <h1>X</h1>
-        <p>
-          Sobering up: your own footprint, take your own choices, limit to 2deg. Here's a list of intensities to help you calculate it and make beter vchoices.
-        </p>
-
-
-EROI/ESOI (pumped hydro: 210, LiOn 10 http://ourrenewablefuture.org/chapter-3/)
-
-
-        - Looking for the turning point: total emissions are still growing, fossil fuel share of energy is constant and high (>80%).
-        - growing population
-        - mitigating climate change will require us to use even more energy (energy investments)
-        -------
-        - two ways: 1/ either we find a clean and abundant energy source (an energy miracle, as Bill Gates says) 2/ we don't, and we deal with what we have today
-        - We have 30y, so we won't be able to scale a tech to a global level that's...
-        - So what do we do?
-        - Degrowth? communication.
-        - Show dilema and importance of using EROI etc..
-        - Remember its energy and not GHG.
-        - Systemic questioning
-
-        a framework for evaluating.
-        - understanding LCA
-        - understanding intensity vs volume
-        - understanding mitigation cost ($/CO2eq avoided)
-
-
-        growth vs degrowth (gdp vs *net* energy -- i.e. after energy investment)
-        law of diminishing returns: low hanging fruits, e.g. build wind turbines in less adequate places etc..
-        Since almost all raw materials and energy that are until today used to produce the required equipments are nonrenewable, the old mines and wells of the same gradually get exhausted. Miners must then go to ever remoter and ever more difficult places to extract them out of new mines/wells.
-        Creates an S curve: fight between tech advances, and then no more low hanging fruits..
-
-        within a growth-orientated economy, efficiency gains tend to be reinvested in more consumption and more growth, rather than in reducing impact. -> rebound
-
-        limits: energy crisis (peak oil), climate crisis.
-        tech? % fossil fuel has barely changed. Laws of physics are different from those in informatics.
-        tech? solarfactory scale + Imagine now the huge amount of shit this gigantic effort would simultaneously produce: the environmental pollution, resource depletion, and waste that has to be dumped somewhere. May do more harm than good. -> LCA
-
-        Given peak fossil fuels, the prospects for increasing, or even just maintaining, gross energy depends heavily on how fast renewable energy and nuclear power can be scaled up.
-
-        Because oil is economically crucial and hard to replace, and because oil is leading the EROEI decline of fossil fuels, more and more energy investment capital will have to go toward maintaining essential existing oil-based energy usage systems, just as massive new investment is needed for renewable energy capacity, energy storage, and grid upgrades.
-
-        https://medium.com/insurge-intelligence/whats-really-driving-the-global-economic-crisis-is-net-energy-decline-82efb9ca45fe
-        In the last six years, new investment (including government, private sector etc) in all forms of renewable energy has leveled off at around the $300 billion a year. Heinberg and Finlay (p.123) estimate that this rate of investment would have to multiplied by more than a factor of ten and continued each year for several decades, if renewable energy was to meet current global energy demand, let alone the projected doubling of demand in most mainstream energy scenarios.
-
-        Globally, the ratio of capital expenditure to production rate increase expanded by an order of magnitude between the periods 1993–2005 and 2005–2013
-        http://ourrenewablefuture.org/introduction/
-
-        EROI is the total value of energy a resource can generate, calculated by comparing the quantity of energy extracted, to the quantity of energy put in to enable the extraction.
-
-        Practical fusion power continues to be at best a theoretical possibility many decades in the future
-
-        it seems highly likely that any future 100% renewable energy system (as opposed to individual technology) will provide far less net-energy than humanity — or at least, the minority of us in the energy rich affluent regions — has enjoyed during the fossil fuel epoch, mostly because of difficulty to transport, infra needed and intermittency.
-
-        EROI on the decline: https://medium.com/insurge-intelligence/whats-really-driving-the-global-economic-crisis-is-net-energy-decline-82efb9ca45fe
-
-        In 25 of the last 26 years, <a href="http://www.nationalobserver.com/2017/07/13/analysis/these-missing-charts-may-change-way-you-think-about-fossil-fuel-addiction" target="_blank">we burned more fossil fuels than the year before</a>.
-        most people are taking it far too lightly than the reality of the threat
-        so far the response is not adequate to the challenge
-
-
-        Intro to intensities/greenbit:
-        We can make small adjustments: recycling, buying reusable bottles for our water and ice coffee, foregoing the occasional plastic bag. But these small things, even multiplied by a large population, are still small in the end. -->
-
-        <!--<p class ="incomplete">
-          [SKIP?]
-          The effect of greenhouse gases has been identified since the beginning of the century.
-          <a href="https://paperspast.natlib.govt.nz/newspapers/rodney-and-otamatea-times-waitemata-and-kaipara-gazette/1912/8/14/7" target="_blank">This article</a> from 1912 is one of the earliest accounts which identifies the risk of burning fossil fuel, releasing CO<sub>2</sub> into the atmosphere, thus causing an increase in temperature.
-        </p> -->
-
-        <p class="incomplete">
-        Greenbit + hiring
-          <a href="https://electricitymap.us15.list-manage.com/subscribe/post?u=8689fc68cd6c50ec671a95afb&id=96da98142a" target="_blank">sign up for the beta</a>
+          We're on a mission to <b>build the information technology</b> that will enable sustainable means of consumption.
+          <a href="https://electricitymap.us15.list-manage.com/subscribe/post?u=8689fc68cd6c50ec671a95afb&id=96da98142a" target="_blank">Sign up</a> for our upcoming beta, or <a href="index.html#jobs">join us</a> to make it happen.
         </p>
 
         <p>
