@@ -105,6 +105,9 @@ url: https://www.tmrow.com/climatechange.html
         margin-top: -3rem; /* padding-top + margin-top will be effective margin */
         padding-top: 5rem;
       }
+      hr {
+        margin-bottom: 0px;
+      }
 
       /* Prevent subscript from affecting line-height */
       sub {
@@ -153,11 +156,12 @@ url: https://www.tmrow.com/climatechange.html
       }
 
       /* TOC */
-      #toc {
-        margin-top: 2.5rem;
+      #toc li {
+        margin-left: 4rem;
       }
-      #toc > li {
-        margin-left: 5rem;
+      #toc > h4 {
+        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
       }
     </style>
 
@@ -186,10 +190,31 @@ url: https://www.tmrow.com/climatechange.html
         <p>
           This guide is a pragmatic guide to what Climate Change is, what the drivers behind it are, and what we, as individuals, can do about it.
         </p>
-        <ol id="toc">
-        </ol>
+        <div id="toc">
+          <h4>1. The Earth</h4>
+          <ul>
+            <li>The state of Climate Change</li>
+            <li>Consequences</li>
+            <li>What causes it</li>
+          </ul>
+          <h4>2. Humans</h4>
+          <ul>
+            <li>Fossil fuels are used everywhere, and for good reasons</li>
+          </ul>
+          <h4>3. What can we do?</h4>
+          <ul>
+            <li>Objective: 2 tons CO2eq per human per year by 2050</li>
+            <li>Electricity: remove coal, gas and oil power plants</li>
+            <li>Food: avoid red meat</li>
+            <li>Transportation: Reduce long-distance travels</li>
+            <li>Information must be accessible and widely spread</li>
+          </li>
+        </div>
 
-        <h1>Global temperatures are rapidly increasing</h1>
+        <hr/>
+
+        <h1>1. The Earth</h1>
+        <h2>The state of Climate Change</h2>
         <div>
           <p>
             "Warming of the climate system is unequivocal, and since the 1950s, many of the observed changes are unprecedented over decades to millennia", writes the Intergovernmental Panel on Climate Change (IPCC) in its <a href="http://www.ipcc.ch/pdf/assessment-report/ar5/syr/AR5_SYR_FINAL_SPM.pdf" target="_blank">fifth assessment</a>.
@@ -259,6 +284,15 @@ url: https://www.tmrow.com/climatechange.html
                         }])
                       }
                     },
+                    markLine: {
+                      data: [{ type: 'max', x: '70%' }],
+                      label: {
+                        normal: {
+                          formatter: '2016',
+                          position: 'start'
+                        },
+                      },
+                    }
                   },
                   {
                     name: 'last',
@@ -282,7 +316,7 @@ url: https://www.tmrow.com/climatechange.html
           </p>
 
           <p>
-            We have now achieved a temperature increase of 1&deg;C since the end of the 70s. A change of 1&deg;C in 50 years is unprecedented, as it can be seen from the following reconstruction of temperatures in the last 11&nbsp;000 years:
+            We have now achieved a temperature increase of 1&deg;C since the end of the 70s. <b>A change of 1&deg;C in 50 years is unprecedented</b>, as it can be seen from the following reconstruction of temperatures in the last 11&nbsp;000 years:
           </p>
 
           <div class="graph">
@@ -376,6 +410,15 @@ url: https://www.tmrow.com/climatechange.html
                         }])
                       }
                     },
+                    markLine: {
+                      data: [{ type: 'max', x: '70%' }],
+                      label: {
+                        normal: {
+                          formatter: '2016',
+                          position: 'start'
+                        },
+                      },
+                    }
                   },
                   {
                     name: 'last',
@@ -402,7 +445,7 @@ url: https://www.tmrow.com/climatechange.html
         </div>
 
 
-        <h1>A couple of degrees change has widespread consequences</h1>
+        <h2>Consequences</h2>
 
         <p class="incomplete">
           x% of earth is water. Temp over the whole surface. Dilatation of the water. Most of heat is absorbed by the sea. More extreme weather. Temperature changes on land will cause pop and animal migrations. Some species can't adapt fast enough.
@@ -421,7 +464,7 @@ url: https://www.tmrow.com/climatechange.html
         <p>Climate change is a serious issue. Let's dive into what causes it.</p>
 
 
-        <h1>Climate change is caused by greenhouse gases</h1>
+        <h2>What causes it?</h2>
         <p>
           Some gases are transparent to the sun's <b>incoming rays</b> heating the Earth, but are opaque (acting as mirrors) with respect to <b>outgoing rays</b> emitted back from the Earth.
           Those gases act as a blanket, trapping heat that is unable to escape.
@@ -516,6 +559,15 @@ url: https://www.tmrow.com/climatechange.html
                       }])
                     }
                   },
+                  markLine: {
+                    data: [{ type: 'max', x: '70%' }],
+                    label: {
+                      normal: {
+                        formatter: '2016',
+                        position: 'start'
+                      },
+                    },
+                  }
                 },
                 {
                   name: 'last',
@@ -703,7 +755,8 @@ url: https://www.tmrow.com/climatechange.html
         </p>
 
 
-        <h1>Fossil fuels are used everywhere, and for good reasons</h1>
+        <h1>2. Humans</h1>
+        <h2>Fossil fuels are used everywhere, and for good reasons</h2>
 
         <p>
           Historically, the world's energy has come from burning trees (biomass) for heat and tool manufacturing.
@@ -946,7 +999,8 @@ url: https://www.tmrow.com/climatechange.html
         </p>
 
 
-        <h1>Objective: 2 tons CO<sub>2</sub>eq per human per year by 2050</h1>
+        <h1>What can we do?</h1>
+        <h2>Objective: 2 tons CO<sub>2</sub>eq per human per year by 2050</h2>
 
         <p>
           All <a href="https://en.wikipedia.org/wiki/Greenhouse_gas" target="_blank">greenhouse gases</a> differ by how much radiation they trap and by how long they stay in the atmosphere.
@@ -1189,7 +1243,7 @@ url: https://www.tmrow.com/climatechange.html
           Even the production of renewable energy requires the construction of wind turbines and solar panels, which will emit greenhouse gases during transportation, assembly, and mining of the necessary <a href="https://en.wikipedia.org/wiki/Precious_metal" target="_blank">rare metals</a>.
         </p>
 
-        <h1>Transportation: Reduce long-distance travels</h1>
+        <h2>Transportation: Reduce long-distance travels</h2>
 
         <div class="graph incomplete">
           <div class="title">Greenhouse gas intensity of transportation modes</div>
@@ -1281,7 +1335,7 @@ url: https://www.tmrow.com/climatechange.html
         </p>
 
 
-        <h1>Electricity: remove coal, gas and oil power plants</h1>
+        <h2>Electricity: remove coal, gas and oil power plants</h2>
         <div class="graph">
           <div class="title">Greenhouse gas intensity of electricity production modes</div>
           <div class="description">in gCO<sub>2</sub>eq / kWh consumed</div>
@@ -1375,7 +1429,7 @@ url: https://www.tmrow.com/climatechange.html
           Even better: have your heating systems and electric car <a href="https://www.co2signal.com" target="_blank">do it automatically</a>.
         </p>
 
-        <h1>Food: avoid red meat</h1>
+        <h2>Food: avoid red meat</h2>
 
         <div class="graph">
           <div class="title">Greenhouse gas intensity of food</div>
@@ -1463,11 +1517,11 @@ url: https://www.tmrow.com/climatechange.html
           Even a low-carbon activity can cumulate to great amounts when repeatedly carried out.
         </p>
 
-        <h1>Information must be accessible and widely spread</h1>
+        <h2>Information must be accessible and widely spread</h2>
         <p>
           How to we get a whole civilisation to shift consumption patterns?
           We need to put in place incentives that reward low-carbon consumption decisions motivating people to stay under the 2t yearly budget.
-          Money is the strongest incentive we have, and thus, a carbon tax must be set into place.
+          Money is the strongest incentive we have, and thus, a carbon tax must be set into place.,
           It could very well replace the VAT (<a href="https://en.wikipedia.org/wiki/Value-added_tax" target="_blank">Value-Added Tax</a>), such that the total amount of tax is kept equal but simply skewed such that low-carbon products are less taxed.
         </p>
         <p>
@@ -1628,15 +1682,6 @@ EROI/ESOI (pumped hydro: 210, LiOn 10 http://ourrenewablefuture.org/chapter-3/)
           .replace(/(<sub>)|(<\/sub>)/g, '')
           .replace(/[ ':,]/g, '-')
           .toLowerCase();
-
-        if (i > 0) {
-          var l = document.createElement('li');
-          var d = document.createElement('a');
-          l.appendChild(d)
-          d.innerHTML = el.innerHTML;
-          d.setAttribute('href', '#' + id);
-          toc.appendChild(l);
-        }
 
         var a = document.createElement('a');
         el.setAttribute('id', id);
