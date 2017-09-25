@@ -199,7 +199,10 @@ url: https://www.tmrow.com/climatechange.html
           </ul>
           <h4>2. Humans</h4>
           <ul>
+            <li>Where do greenhouse gases come from?</li>
             <li>Fossil fuels are used everywhere, and for good reasons</li>
+            <li class="incomplete">[agriculture / deforestation]</li>
+            <li class="incomplete">[industrial processes]</li>
           </ul>
           <h4>3. What can we do?</h4>
           <ul>
@@ -756,18 +759,95 @@ url: https://www.tmrow.com/climatechange.html
 
 
         <h1>2. Humans</h1>
+        <h2>Where do greenhouse gases come from?</h2>
+
+        Most greenhouse gases come from burning <a href="https://en.wikipedia.org/wiki/Fossil_fuel" target="_blank">fossil fuels</a> (oil, gas or coal). That happens as soon as we drive a car, take a plane or use electricity.
+        It also indirectly happens when we consume objects assembled from parts transported from afar, or when we use plastics, chemicals, lubricants, and pharmaceuticals (all derived from oil).
+
+        <div class="graph">
+          <div class="title">Man-made greehouse gas emissions in 2010</div>
+          <div class="description">% of total</div>
+          <div class="chart" id="ghg_origin"></div>
+          <div class="source">
+            Source: <a href="https://www.accenture.com/t00010101T000000__w__/br-pt/_acnmedia/PDF-11/Accenture-Strategy-Energy-Perspectives-Consequences-COP21.pdf">Accenture Energy Perspectives - Consequences of COP21 for the Oil and Gas Industry</a>, Fig. 12 p14.
+          </div>
+        </div>
+
+        <script>
+          (function() {
+
+            var data = [
+              { name: 'Fossil fuels', value: 48.9 - 12.2 - 4.4 , color: '#c23531'},
+              { name: 'Agriculture and\ndeforestation', value: 12.2, color: '#749f83' },
+              { name: 'Industrial processes', value: 4.4, color: '#546570' },
+            ].reverse();
+
+            // Percentage
+            var total = d3.sum(data, function(d) { return d.value; })
+            data.forEach(function(d) {
+              d.value /= total / 100;
+            })
+
+            var option = initialOption();
+
+            option.grid.left = 150;
+
+            option.xAxis.type = 'value'
+            option.xAxis.axisLabel = {formatter: '{value}%'};
+            option.grid.bottom = 50;
+
+            option.yAxis.data = data.map(function(d) { return d.name })
+
+            option.tooltip.trigger = 'none';
+
+            option.series = [
+              {
+                type: 'bar',
+                data: echarts.util.map(data, function (d) {
+                  return {
+                    value: d.value,
+                    itemStyle: {
+                      normal: {
+                        color: d.color
+                      }
+                    }
+                  }
+                }),
+                label: {
+                  normal: {
+                    show: true,
+                    position: 'right',
+                    formatter: function(e) {
+                      return Math.round(e.data.value) + '%';
+                    }
+                  }
+                }
+              },
+            ];
+
+            var chart = echarts.init(
+              document.getElementById('ghg_origin'));
+            chart.setOption(option);
+            window.addEventListener('resize', chart.resize);
+          })();
+        </script>
+
+        <p class="incomplete">
+          A substancial amount comes from [explain livestock, CH4, N2O, albedo change, forest fires, lack of carbon sink]. Note that the use of fossil fuels for operating machines, or the use of electricity, is not counted here.
+        </p>
+        <p class="incomplete">
+          Finally, the chemical reaction required for the production cement [and steel?] results in a release of CO<sub>2</sub>.
+          + Landfills.
+          Again, note that the use of fossil fuels for operating machines, or the use of electricity, is not counted here.
+        </p>
+
         <h2>Fossil fuels are used everywhere, and for good reasons</h2>
 
         <p>
           Historically, the world's energy has come from burning trees (biomass) for heat and tool manufacturing.
-          However, the invention of an efficient steam engine by James Watt in 1784 meant humans were now able to convert much more effectively <a href="https://en.wikipedia.org/wiki/Fossil_fuel" target="_blank">fossil fuels</a> (coal, and later oil and gas) into mechanical work (lifting heavy objects or turning the wheels of a very heavy train for example).
-        </p>
-
-        <p>
-          In particular, the discovery of oil, being both light and dense, gave access to a powerful and portable source of energy.
-          The energy released when burning 1&nbsp;liter of oil (roughly 10&nbsp;kWh) is equivalent to <b>25 professional athletes</b> cycling for one hour (at 400&nbsp;W each).
-          1&nbsp;liter of oil weighs <b>under 1&nbsp;kg</b> and costs <b>100 to 1000 times less</b> than the equivalent human labor.
-          Thus it is no mystery that intensive human labour got replaced by machines, propelling humanity into an industrialised age where the use of fossil fuels <a href="https://ourworldindata.org/employment-in-agriculture" target="_blank">displaced jobs from agriculture to the service sector</a>.
+          However, the invention of an efficient steam engine by James Watt in 1784 meant humans were now able to convert existing <a href="https://en.wikipedia.org/wiki/Fossil_fuel" target="_blank">fossil fuels</a> (coal, and later oil and gas) into intensive mechanical work (lifting heavy objects or turning the wheels of a very heavy train for example).
+          Furthermore, it enabled humans to build machines to dig up even more fossil fuels, enabling an exponential growth of our energy usage.
+          The discovery of new types of fuels such as oil and gas did not replace the usage of existing fuels: it fueled additional growth instead.
         </p>
 
         <div class="graph">
@@ -860,6 +940,11 @@ url: https://www.tmrow.com/climatechange.html
                 x: 'right',
                 y: 'center'
               }
+              option.legend.selected = {};
+              data.forEach(function(d) {
+                option.legend.selected[d.name] = false;
+              })
+
               option.grid.right = 120;
 
               option.yAxis.max = 550;
@@ -881,20 +966,39 @@ url: https://www.tmrow.com/climatechange.html
               chart.setOption(option);
               window.addEventListener('resize', chart.resize);
 
+              var i = 0;
+              function scheduleNext() {
+                option.legend.selected[data[i].name] = true;
+                chart.setOption(option);
+                if (i < data.length - 1) {
+                  i++;
+                  setTimeout(scheduleNext, 1000);
+                }
+              }
+
+              window.tpesHistoricalPlay = scheduleNext;
+
             });
           })();
         </script>
 
         <p>
-          Note that there has been very little substitution between the different energy fuels. The discovery of a new fuel (be it coal, oil or gas) didn't replace the fuel used previously, but has instead fueled additional growth.
-          Also note that even though renewable energy is a decent part of newly installed energy production facilities nowadays (we hear about it very often in the news), it is still only a tiny 1% percent of global energy supply.
-          In fact, we see that in 2015, <b>83% of our energy still comes from fossil fuels</b>, which surprinsingly is <b>exactly the same as in 1980</b>: the growth of renewables has been matched by (or even <a href="http://www.nationalobserver.com/2017/07/13/analysis/these-missing-charts-may-change-way-you-think-about-fossil-fuel-addiction" target="_blank">outpaced by</a>) a similar growth of fossil fuels.
+          Although wind and solar power are a decent part of newly installed energy production facilities nowadays (we hear about it very often in the news), it is still only 1% percent of global energy supply.
+          In fact, we see that we currently still get <b>83% of our energy from fossil fuels</b>, which surprinsingly is <b>exactly the same as in 1980</b>: the growth of renewables has been matched by (or even <a href="http://www.nationalobserver.com/2017/07/13/analysis/these-missing-charts-may-change-way-you-think-about-fossil-fuel-addiction" target="_blank">outpaced by</a>) a similar growth of fossil fuels. How come?
+        </p>
+
+        <p>
+          The answer is that fossil fuels pack an intense amount of energy in a small volume and small weight.
+          Oil in particular, being light and dense, enabled the investion of modern transportation.
+          The energy released when burning 1&nbsp;liter of oil (roughly 10&nbsp;kWh) is equivalent to <b>25 professional athletes</b> cycling for one hour (at 400&nbsp;W each).
+          1&nbsp;liter of oil weighs <b>under 1&nbsp;kg</b> and costs <b>100 to 1000 times less</b> than the equivalent human labor.
+          Thus it is no mystery that intensive human labour got replaced by machines, propelling humanity into an industrialised age where the use of fossil fuels <a href="https://ourworldindata.org/employment-in-agriculture" target="_blank">displaced jobs from agriculture to the service sector</a>.
         </p>
 
         <p>
           Every day, an average person on Earth uses roughly <a href="http://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE" target="_blank">60 kWh</a> of energy per day.
           That's the equivalent of <b>dedicating, to each person, 15 professional cyclists for 10 hours a day</b>.
-          The current quality of life that we are enjoying has been enabled by the efficient use of fossil fuels freeing us intensive labour.
+          The current quality of life that we are enjoying has been enabled by the efficient use of fossil fuels freeing us from intensive labour.
         </p>
         <p>
           To get an even more concrete idea, take a look at this video to see <a href="https://en.wikipedia.org/wiki/Robert_F%C3%B6rstemann">Robert Förstemann</a>, professional track cyclist and sprint specialist, struggle to power his toaster:
@@ -908,96 +1012,16 @@ url: https://www.tmrow.com/climatechange.html
         </div>
 
         <p>
-          Nowadays we don't spend an enormous amount of our time and energy to power our toaster: we use electricity instead, mostly generated by <a href="https://en.wikipedia.org/wiki/World_energy_consumption#Energy_supply.2C_consumption_and_electricity" target="_blank">burning fossil fuels (60 % in 2014)</a>.
+          Nowadays we don't spend an enormous amount of our time and energy to power our toaster: we use electricity instead, unfortunately still mostly generated by <a href="https://en.wikipedia.org/wiki/World_energy_consumption#Energy_supply.2C_consumption_and_electricity" target="_blank">burning fossil fuels (60 % in 2014)</a>.
         </p>
         <p>
           Unfortunately, burning fossil fuels (for electricity, or for anything else) is a process that releases carbon dioxide (CO<sub>2</sub>) into the atmosphere, hence explaining the sudden increase in measured CO<sub>2</sub> concentrations.
-          Burning fossil fuels happens as soon as we drive a car, take a plane or use electricity.
-          It also indirectly happens when we consume objects assembled from parts transported from afar, or when we use plastics, chemicals, lubricants, and pharmaceuticals (all derived from oil).
-          However, they are not the only source of greenhouse gases:
         </p>
 
-        <div class="graph">
-          <div class="title">Man-made greehouse gas emissions in 2010</div>
-          <div class="description">% of total</div>
-          <div class="chart" id="ghg_origin"></div>
-          <div class="source">
-            Source: <a href="https://www.accenture.com/t00010101T000000__w__/br-pt/_acnmedia/PDF-11/Accenture-Strategy-Energy-Perspectives-Consequences-COP21.pdf">Accenture Energy Perspectives - Consequences of COP21 for the Oil and Gas Industry</a>, Fig. 12 p14.
-          </div>
-        </div>
-
-        <script>
-          (function() {
-
-            var data = [
-              { name: 'Fossil fuels', value: 48.9 - 12.2 - 4.4 , color: '#c23531'},
-              { name: 'Agriculture and\ndeforestation', value: 12.2, color: '#749f83' },
-              { name: 'Industrial processes', value: 4.4, color: '#546570' },
-            ].reverse();
-
-            // Percentage
-            var total = d3.sum(data, function(d) { return d.value; })
-            data.forEach(function(d) {
-              d.value /= total / 100;
-            })
-
-            var option = initialOption();
-
-            option.grid.left = 150;
-
-            option.xAxis.type = 'value'
-            option.xAxis.axisLabel = {formatter: '{value}%'};
-            option.grid.bottom = 50;
-
-            option.yAxis.data = data.map(function(d) { return d.name })
-
-            option.tooltip.trigger = 'none';
-
-            option.series = [
-              {
-                type: 'bar',
-                data: echarts.util.map(data, function (d) {
-                  return {
-                    value: d.value,
-                    itemStyle: {
-                      normal: {
-                        color: d.color
-                      }
-                    }
-                  }
-                }),
-                label: {
-                  normal: {
-                    show: true,
-                    position: 'right',
-                    formatter: function(e) {
-                      return Math.round(e.data.value) + '%';
-                    }
-                  }
-                }
-              },
-            ];
-
-            var chart = echarts.init(
-              document.getElementById('ghg_origin'));
-            chart.setOption(option);
-            window.addEventListener('resize', chart.resize);
-          })();
-        </script>
-
-        <p class="incomplete">
-          A substancial amount comes from [explain livestock, CH4, N2O, albedo change, forest fires, lack of carbon sink]. Note that the use of fossil fuels for operating machines, or the use of electricity, is not counted here.
-        </p>
-        <p class="incomplete">
-          Finally, the chemical reaction required for the production cement [and steel?] results in a release of CO<sub>2</sub>.
-          + Landfills.
-          Again, note that the use of fossil fuels for operating machines, or the use of electricity, is not counted here.
-        </p>
-
-        <p class="incomplete">
-          Our increadible technological advances and increased living standards have been enabled by the discovery of fossil fuels [can we generalise to !FF?], so how do we get rid of them?
-        </p>
-
+        <h2>Food / agriculture deep-dive</h2>
+        <p class="incomplete">TBD</p>
+        <h2>Industrial processes</h2>
+        <p class="incomplete">TBD</p>
 
         <h1>What can we do?</h1>
         <h2>Objective: 2 tons CO<sub>2</sub>eq per human per year by 2050</h2>
@@ -1672,12 +1696,16 @@ EROI/ESOI (pumped hydro: 210, LiOn 10 http://ourrenewablefuture.org/chapter-3/)
       </div>
     </footer>
 
+    <script src="vendor/jquery.min.js"></script>
+    <script src="vendor/jquery-scrollspy.min.js"></script>
+
+    <!-- link anchors -->
     <script>
       // Find all h1 and set anchors + add to toc
-      var h1s = document.getElementsByTagName('h1');
+      var titles = document.getElementsByTagName('h2');
       var toc = document.getElementById('toc');
-      for (i = 0; i < h1s.length; i++) {
-        var el = h1s[i];
+      for (i = 0; i < titles.length; i++) {
+        var el = titles[i];
         var id = el.innerHTML
           .replace(/(<sub>)|(<\/sub>)/g, '')
           .replace(/[ ':,]/g, '-')
@@ -1692,16 +1720,32 @@ EROI/ESOI (pumped hydro: 210, LiOn 10 http://ourrenewablefuture.org/chapter-3/)
       }
     </script>
     <style>
-      h1 a {
+      h2 a {
         visibility: hidden;
         float: left;
         margin-left: -1.0em;
         padding-right: 0.2em;
       }
-      h1:hover a, h1, a:hover {
+      h2:hover a, h2, a:hover {
         visibility: unset;
       }
     </style>
+
+    <!-- Scroll -->
+    <script>
+      $(function domReady($) {
+        var $this = $('#tpes_historical');
+        var position = $this.position();
+        var offset = $('header').outerHeight() + 400;
+        $this.scrollspy({
+          min: position.top - offset,
+          max: position.top - offset + $this.outerHeight(),
+          onEnter: function onEnter(element) {
+            tpesHistoricalPlay()
+          }
+        })
+      });
+    </script>
 
   </body>
 </html>
