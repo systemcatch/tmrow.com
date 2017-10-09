@@ -484,7 +484,7 @@ url: https://www.tmrow.com/climatechange.html
           One of those greenhouse gases is carbon dioxide (CO<sub>2</sub>).
           By drilling <a href="https://earthobservatory.nasa.gov/Features/Paleoclimatology_IceCores/" target="_blank">ice cores</a> (columns of ice containing small bubbles of old trapped air), scientists have been able to infer historical CO<sub>2</sub> concentration up to 800&nbsp;000 years BC.
           This concentration has been relatively stable up to the industrial revolution, where it skyrocketed.
-          Again, what is worrying is the speed at which the change of concentration is happening. Both the concentration level and the speed of change are unprecendented in the history of measurements:
+          Again, what is worrying is the speed at which the change of concentration is happening. Both the concentration level and the speed of change are unprecendented in the history of measurements (use the handles at the bottom of the graph to zoom in and out):
         </p>
 
         <div class="graph">
@@ -600,7 +600,7 @@ url: https://www.tmrow.com/climatechange.html
         </p>
 
         <p>
-          By comparing the heating and cooling components between the pre-industrial period (where the greenhouse gas atmospheric levels had not yet increased) and now, we observe that the drastic increase in greenhouse gases <a href="https://www.bloomberg.com/graphics/2015-whats-warming-the-world/" target="_blank">is the main driver behind the observed warming</a> (although some other effects do cause a certain amount of cooling):
+          By comparing the factors causing heating and cooling of the atmosphere between the pre-industrial period (where the greenhouse gas atmospheric levels had not yet increased) and now, we observe that the drastic increase in greenhouse gases <a href="https://www.bloomberg.com/graphics/2015-whats-warming-the-world/" target="_blank">is the main driver behind the observed warming</a> (although some other effects do cause a certain amount of cooling):
         </p>
 
         <div class="graph">
@@ -666,6 +666,11 @@ url: https://www.tmrow.com/climatechange.html
               var option = initialOption();
 
               option.grid.left = 150;
+
+              option.xAxis.name = 'Warming increase (W/m²)'
+              option.xAxis.nameLocation = 'middle'
+              option.xAxis.nameGap = 30
+              option.grid.bottom += 30
 
               option.xAxis.type = 'value'
               option.yAxis.data = data.map(function(d) { return d.name })
@@ -774,7 +779,8 @@ url: https://www.tmrow.com/climatechange.html
           <div class="description">% of total</div>
           <div class="chart" id="ghg_origin"></div>
           <div class="source">
-            Source: <a href="https://www.accenture.com/t00010101T000000__w__/br-pt/_acnmedia/PDF-11/Accenture-Strategy-Energy-Perspectives-Consequences-COP21.pdf">Accenture Energy Perspectives - Consequences of COP21 for the Oil and Gas Industry</a>, Fig. 12 p14.
+            Source: <a href="https://www.accenture.com/t00010101T000000__w__/br-pt/_acnmedia/PDF-11/Accenture-Strategy-Energy-Perspectives-Consequences-COP21.pdf">Accenture Energy Perspectives - Consequences of COP21 for the Oil and Gas Industry</a>, Fig. 12 p14.<br />
+            A fascinating Sankey diagram shows this in much more details <a href="https://www.ecofys.com/files/files/world-ghg-emission-flow-chart-2012_v9-c-asn-ecofys-2016_02.pdf" target="_blank">here</a>.
           </div>
         </div>
 
@@ -837,13 +843,14 @@ url: https://www.tmrow.com/climatechange.html
           })();
         </script>
 
-        <p class="incomplete">
-          A substancial amount comes from [explain livestock, CH4, N2O, albedo change, forest fires, lack of carbon sink]. Note that the use of fossil fuels for operating machines, or the use of electricity, is not counted here.
+        <p>
+          A substancial amount of agriculatural emissions comes from <b>cows and other livestock emitting methane</b> (CH<sub>4</sub>) as part of their <a href="https://en.wikipedia.org/wiki/Enteric_fermentation" target="_blank">digestive process</a>.
+          Furthermore, <b>deforestation leads to less trees absorbing CO<sub>2</sub></b> through <a href="https://en.wikipedia.org/wiki/Photosynthesis" target="_blank">photosynthesis</a>, and the use of <b>nitrogen-based fertilizers</b> in agriculture emits Nitrous Oxyde (N<sub>2</sub>O), which is a greehouse gas. 
+          Note that the use of fossil fuels (or electricity) for operating agriculatural machines is not counted here.
         </p>
-        <p class="incomplete">
-          Finally, the chemical reaction required for the production cement [and steel?] results in a release of CO<sub>2</sub>.
-          + Landfills.
-          Again, note that the use of fossil fuels for operating machines, or the use of electricity, is not counted here.
+        <p>
+          Finally, a substancial amount of emissions of industrial processes is the <b>chemical reaction responsible for the production of cement</b> <a href="https://en.wikipedia.org/wiki/Environmental_impact_of_concrete#Carbon_dioxide_emissions_and_climate_change" target="_blank">releases CO<sub>2</sub></a>.
+          Again, note that the use of fossil fuels (or electricity) in order to operating production machines is not counted here.
         </p>
 
         <h2>Fossil fuels are used everywhere, and for good reasons</h2>
