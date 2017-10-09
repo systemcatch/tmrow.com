@@ -307,7 +307,7 @@ image: https://user-images.githubusercontent.com/1655848/29027789-6f2358b0-7b82-
           </p>
 
           <div class="graph">
-            <div class="title">Temperature anomalies in the last 11 300 years</div>
+            <div class="title">Temperature anomalies in the last 11 000 years</div>
             <div class="description">&deg;C compared to 1951-1980 average</div>
             <div class="chart" id="temperature_time_series_OLD"></div>
             <div class="source">
@@ -745,7 +745,7 @@ image: https://user-images.githubusercontent.com/1655848/29027789-6f2358b0-7b82-
           Up to 40% of the CO<sub>2</sub> emitted today <b>will still be present 1 000 years from now</b>, thus still causing warming (see FAQ 12.3 <a href="http://www.ipcc.ch/pdf/assessment-report/ar5/wg1/WG1AR5_Chapter12_FINAL.pdf" target="_blank">here</a>). <a href="http://jancovici.com/en/climate-change/predicting-the-future/will-climate-change-get-rapidely-to-a-halt-if-we-quickly-decrease-the-emissions/" target="_blank">If we were to stop emissions today</a>, CO<sub>2</sub> levels would essentially never come back to its pre-industrial level on time scales relevant for our society.
         </p>
         <p>
-          This is in stark contrast with the immediate and ephemeral cooling effect of volcanos eruptions or aerosols that stay in the atmosphere for a very short time.
+          This is in stark contrast with the immediate and ephemeral cooling effect of volcanos eruptions or <a href="https://earthobservatory.nasa.gov/Features/Aerosols/page3.php" target="_blank">man-made aerosols</a> such as sultates, nitrate or soot that stay in the atmosphere for a very short time.
 
           It is therefore very important to reduce greenhouse gas emissions very quickly, as <b>they will affect the climate in the centuries (even millennials) to come</b>. So how do we do it?
         </p>
@@ -755,14 +755,14 @@ image: https://user-images.githubusercontent.com/1655848/29027789-6f2358b0-7b82-
         <h2>Where do greenhouse gases come from?</h2>
 
         Most greenhouse gases come from burning <a href="https://en.wikipedia.org/wiki/Fossil_fuel" target="_blank">fossil fuels</a> (oil, gas or coal). That happens as soon as we drive a car, take a plane or use electricity.
-        It also indirectly happens when we consume objects assembled from parts transported from afar, where oil probably was used as transportation fuel.
+        It also indirectly happens when we consume objects or food, that required a lot of energy to be produced, or assembled from parts transported from afar.
 
         <div class="graph">
           <div class="title">Man-made greehouse gas emissions in 2010</div>
           <div class="description">% of total</div>
           <div class="chart" id="ghg_origin"></div>
           <div class="source">
-            Source: <a href="https://www.accenture.com/t00010101T000000__w__/br-pt/_acnmedia/PDF-11/Accenture-Strategy-Energy-Perspectives-Consequences-COP21.pdf">Accenture Energy Perspectives - Consequences of COP21 for the Oil and Gas Industry</a>, Fig. 12 p14.<br />
+            Source: <a href="https://www.accenture.com/t00010101T000000__w__/br-pt/_acnmedia/PDF-11/Accenture-Strategy-Energy-Perspectives-Consequences-COP21.pdf" target="_blank">Accenture Energy Perspectives - Consequences of COP21 for the Oil and Gas Industry</a>, Fig. 12 p14.<br />
             A fascinating Sankey diagram shows this in much more details <a href="https://www.ecofys.com/files/files/world-ghg-emission-flow-chart-2012_v9-c-asn-ecofys-2016_02.pdf" target="_blank">here</a>.
           </div>
         </div>
@@ -771,9 +771,9 @@ image: https://user-images.githubusercontent.com/1655848/29027789-6f2358b0-7b82-
           (function() {
 
             var data = [
-              { name: 'Fossil fuels', value: 48.9 - 12.2 - 4.4 , color: '#c23531'},
+              { name: 'Fossil fuels consumption', value: 48.9 - 12.2 - 4.4 , color: '#c23531'},
               { name: 'Agriculture and\ndeforestation', value: 12.2, color: '#749f83' },
-              { name: 'Industrial processes', value: 4.4, color: '#546570' },
+              { name: 'Non-energy related industrial processes', value: 4.4, color: '#546570' },
             ].reverse();
 
             // Percentage
@@ -829,11 +829,10 @@ image: https://user-images.githubusercontent.com/1655848/29027789-6f2358b0-7b82-
         <p>
           A substancial amount of agriculatural emissions comes from <b>cows and other livestock emitting methane</b> (CH<sub>4</sub>) as part of their <a href="https://en.wikipedia.org/wiki/Enteric_fermentation" target="_blank">digestive process</a>.
           Furthermore, <b>deforestation leads to less trees absorbing CO<sub>2</sub></b> through <a href="https://en.wikipedia.org/wiki/Photosynthesis" target="_blank">photosynthesis</a>, and the use of <b>nitrogen-based fertilizers</b> in agriculture emits Nitrous Oxyde (N<sub>2</sub>O), which is a greehouse gas. 
-          Note that the use of fossil fuels (or electricity) for operating agriculatural machines is not counted here.
+          Note that the use of fossil fuels (or electricity) for operating agriculatural machines is not even included in these 25%. By comparison, all road-travel globally only accounts for 11%.
         </p>
         <p>
-          Finally, a substancial amount of emissions of industrial processes is the <b>chemical reaction responsible for the production of cement</b> <a href="https://en.wikipedia.org/wiki/Environmental_impact_of_concrete#Carbon_dioxide_emissions_and_climate_change" target="_blank">releases CO<sub>2</sub></a>.
-          Again, note that the use of fossil fuels (or electricity) in order to operating production machines is not counted here.
+          Finally, some 9 % of global emissions relates to certain types of heavy industrial processes, such as kiln production for cemeteries, whose emissions are not related to the burning of fossil-fuels, and which must be accounted for separately.
         </p>
 
         <h2>Fossil fuels are used everywhere, and for good reasons</h2>
@@ -980,7 +979,7 @@ image: https://user-images.githubusercontent.com/1655848/29027789-6f2358b0-7b82-
         </script>
 
         <p>
-          Although wind and solar power are a decent part of newly installed energy production facilities nowadays (we hear about it very often in the news), it is still only 1% percent of global energy supply.
+          Although wind and solar power are a decent part of newly installed energy production facilities nowadays (we hear about it very often in the news), it is still only 1% percent of global primary energy supply.
           In fact, we see that we currently still get <b>83% of our energy from fossil fuels</b>, which surprinsingly is <b>exactly the same as in 1980</b>: the growth of renewables has been matched by (or even <a href="http://www.nationalobserver.com/2017/07/13/analysis/these-missing-charts-may-change-way-you-think-about-fossil-fuel-addiction" target="_blank">outpaced by</a>) a similar growth of fossil fuels. How come?
         </p>
 
@@ -994,7 +993,7 @@ image: https://user-images.githubusercontent.com/1655848/29027789-6f2358b0-7b82-
 
         <p>
           Every day, an average person on Earth uses roughly <a href="http://data.worldbank.org/indicator/EG.USE.PCAP.KG.OE" target="_blank">60 kWh</a> of energy per day.
-          That means that <b>every day, we each have an equivalent of 15 professional cyclists dedicated to us to support our living standards</b>.
+          That means that <b>every day, we each have an equivalent of 15 professional cyclists dedicated 24/7 to us to support our living standards</b>.
           The current quality of life that we are enjoying has been enabled by the efficient use of fossil fuels freeing us from intensive human labour.
         </p>
         <p>
@@ -1495,7 +1494,7 @@ image: https://user-images.githubusercontent.com/1655848/29027789-6f2358b0-7b82-
         </p>
 
         <p>
-          In order to get rid of fossil fuels, <b>we must switch to electric transportation with electricity being produced without fossil fuels</b> (else, it would reduce all of our efforts to nothing).
+          In order to get rid of fossil fuels, <b>we must ultimately switch to electric transportation with electricity being produced without fossil fuels</b> (else, it would reduce all of our efforts to nothing).
         </p>
 
 
