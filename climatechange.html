@@ -166,21 +166,7 @@ url: https://www.tmrow.com/climatechange.html
       }
     </style>
 
-    <header>
-      <div id="header-content">
-        <a href="/" title="Tomorrow" class="logo">
-          Tomorrow
-        </a>
-        <ul class="menu">
-          <li class="email"><a href="mailto:hello@tmrow.com"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Contact</a></li>
-          <li class="blog"><a href="https://medium.com/tmrow" target="_blank"><i class="fa fa-medium" aria-hidden="true"></i>&nbsp;Blog</a></li>
-          <li class="products"><a href="/#products"><i class="fa fa-flask" aria-hidden="true"></i>&nbsp;Products</a></li>
-          <li class="team"><a href="/#team"><i class="fa fa-users" aria-hidden="true"></i>&nbsp;Team</a></li>
-          <li class="jobs"><a href="/#jobs"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;Jobs</a></li>
-          <li class="climate active"><a href="#"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Climate Change</a></li>
-        </ul>
-      </div>
-    </header>
+    {% include header.html %}
 
     <section style="margin-top: 3em;">
       <div class="section-content">
@@ -202,8 +188,6 @@ url: https://www.tmrow.com/climatechange.html
           <ul>
             <li>Where do greenhouse gases come from?</li>
             <li>Fossil fuels are used everywhere, and for good reasons</li>
-            <li class="incomplete">[agriculture / deforestation]</li>
-            <li class="incomplete">[industrial processes]</li>
           </ul>
           <h4>3. What can we do?</h4>
           <ul>
@@ -1453,14 +1437,14 @@ url: https://www.tmrow.com/climatechange.html
             };
 
             var data = [
-              { name: 'car', intensity: 257 },
-              { name: 'scooter', intensity: 108 },
-              { name: 'bus', intensity: 103 },
-              { name: 'electric car', intensity: 81 },
-              { name: 'train', intensity: 42 },
-              { name: 'airplane (short distance)', intensity: 340 },
-              { name: 'airplane (long distance)', intensity: 239 },
-              { name: 'boat', intensity: 803 },
+              { name: 'car', intensity: 257, label: '🚗 car' },
+              { name: 'scooter', intensity: 108, label: '🏍 scooter' },
+              { name: 'bus', intensity: 103, label: '🚌 bus' },
+              { name: 'electric car', intensity: 81, label: '🚙 electric car' },
+              { name: 'train', intensity: 42, label: '🚆 train' },
+              { name: 'airplane (short distance)', intensity: 340, label: '✈️ airplane (short distance)' },
+              { name: 'airplane (long distance)', intensity: 239, label: '✈️ airplane (long distance' },
+              { name: 'boat', intensity: 803, label: '🚢 boat' },
             ].reverse();
 
             var option = initialOption();
@@ -1473,7 +1457,7 @@ url: https://www.tmrow.com/climatechange.html
             option.grid.bottom = 50;
 
             option.xAxis.type = 'value'
-            option.yAxis.data = data.map(function(d) { return d.name })
+            option.yAxis.data = data.map(function(d) { return d.label || d.name })
 
             option.tooltip.trigger = 'none';
 
@@ -1636,15 +1620,15 @@ url: https://www.tmrow.com/climatechange.html
             };
 
             var data = [
-              { name: 'vegetables', intensity: 1.05 },
-              { name: 'bread', intensity: 0.99 },
-              { name: 'milk', intensity: 1.2 },
-              { name: 'yellow cheese', intensity: 11.3 },
-              { name: 'fish', intensity: 2.73 },
-              { name: 'lobster', intensity: 20.2 },
-              { name: 'pork', intensity: 3.23 },
-              { name: 'chicken', intensity: 3.35 },
-              { name: 'cattle', intensity: 23.7 },
+              { name: 'vegetables', intensity: 1.05, label: '🥕 vegetables' },
+              { name: 'bread', intensity: 0.99, label: '🍞 bread'},
+              { name: 'milk', intensity: 1.2, label: '🥛 milk' },
+              { name: 'yellow cheese', intensity: 11.3, label: '🧀 cheese' },
+              { name: 'fish', intensity: 2.73, label: '🐟 fish' },
+              { name: 'lobster', intensity: 20.2, label: '🦀 lobster' },
+              { name: 'pork', intensity: 3.23, label: '🐷 pork' },
+              { name: 'chicken', intensity: 3.35, label: '🐔 chicken' },
+              { name: 'cattle', intensity: 23.7, label: '🐄 cattle' },
             ].reverse();
 
             var option = initialOption();
@@ -1657,7 +1641,7 @@ url: https://www.tmrow.com/climatechange.html
             option.grid.bottom = 50;
 
             option.xAxis.type = 'value'
-            option.yAxis.data = data.map(function(d) { return d.name })
+            option.yAxis.data = data.map(function(d) { return d.label || d.name })
 
             option.tooltip.trigger = 'none';
 
@@ -1704,9 +1688,17 @@ url: https://www.tmrow.com/climatechange.html
           How do we get a whole civilisation to shift consumption patterns?
         </p>
         <p>
-          We need to <b>reward low-carbon consumption decisions</b>, incentivizing people to stay under the 2t yearly budget.
-          Money is the strongest incentive we have, and thus, a <b>consumer-centric carbon tax</b> must be set into place.,
+          At <a href="https://www.tmrow.com">Tomorrow</a> we have a vision of a world where the price we pay for goods and services takes into account long-term climate consequences (also called <a href="https://en.wikipedia.org/wiki/Externality" target="_blank">externalities</a>).
+        </p>
+        <p>
+          This would naturally <b>reward low-carbon consumption decisions</b>, incentivizing people to stay under the 2t yearly budget.
+        </p>
+        <p>
+          In order to get there, we must put in place a <b>consumer-centric carbon tax</b>.
           It could very well replace the VAT (<a href="https://en.wikipedia.org/wiki/Value-added_tax" target="_blank">Value-Added Tax</a>), such that the total amount of tax is kept equal but simply distributed differently across goods, making low-carbon products cheaper.
+        </p>
+        <p>
+          This requires centralizing <b>knowledge about the carbon intensities of each and every one of our activities</b>, enabling us to take better decisions.
         </p>
         <p>
           We believe that we, consumers, should be made aware and rewarded for positive action. We believe that by giving us an idea of the impact of our consumption habits, we become empowered to make better choices.
@@ -1714,7 +1706,7 @@ url: https://www.tmrow.com/climatechange.html
 
         <p>
           We're on a mission to <b>build the information technology</b> that will enable sustainable means of consumption.
-          <a href="https://electricitymap.us15.list-manage.com/subscribe/post?u=8689fc68cd6c50ec671a95afb&id=96da98142a" target="_blank">Sign up</a> for our upcoming beta, or <a href="index.html#jobs">join us</a> to make it happen.
+          <a href="https://electricitymap.us15.list-manage.com/subscribe/post?u=8689fc68cd6c50ec671a95afb&id=96da98142a" target="_blank">Sign up</a> for our upcoming beta, or <a href="index.html#jobs">join us</a> to help us make it happen.
         </p>
 
         <p>
