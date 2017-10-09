@@ -1041,26 +1041,48 @@ url: https://www.tmrow.com/climatechange.html
           All <a href="https://en.wikipedia.org/wiki/Greenhouse_gas" target="_blank">greenhouse gases</a> differ by how much radiation they trap and by how long they stay in the atmosphere.
           To be able to compare them, we convert the mass of any greenhouse gases into the mass of CO<sub>2</sub> that would yield an equivalent warming over 100 years.
           That unit is called <b>CO<sub>2</sub> equivalent</b>, abbreviated CO<sub>2</sub>eq.
-          For example, 1g of N<sub>2</sub>O (nitrous oxide, used in fertilisers) corresponds to 300gCO<sub>2</sub>eq.
+          For example, 1g of N<sub>2</sub>O (nitrous oxide, used in fertilizers) corresponds to 300gCO<sub>2</sub>eq.
         </p>
 
-        <p class="incomplete">
+        <p>
           <!-- Start with projection, aim 2050, and look at CO2. Divide by pop. -> 2t / pers.
           http://tntcat.iiasa.ac.at:8787/RcpDb/dsd?Action=htmlpage&page=compare
           http://uneplive.unep.org/media/docs/theme/13/EGR_2015_Technical_Report_final_version.pdf
-          IPCC graph -->
-          The Paris agreement [ref needed] has set the world the 2&deg;C objective at horizon 2100.
-          This gives us a carbon budget [ref], which is x% of proven reserves.
-          [dangerous to let the free market...].
-          This also means we don't have time to wait for fusion to be around, or another new cheap abundant energy source.
+          IPCC graph 
+
+          http://uneplive.unep.org/media/docs/theme/13/EGR_2015_Technical_Report_final_version.pdf ->
+          carbon budget: 1 000 GtCO2 (not eq!)
+          yearly emissions in 2030 for 2deg 42Gtco2eq
+          2050: ~23tco2eq
+
+          pop: 2030, 8.5B -> 4.9t / pers / year
+          2050: 9.8 -> 2.3t / pers / year
+
+
+        -->
+          The <a href="https://en.wikipedia.org/wiki/Paris_Agreement" target="_blank">Paris climate accord</a> has set the world an objective of limiting global warming to 2&deg;C objective at horizon 2100.
+          In order to get there, models <a href="http://uneplive.unep.org/media/docs/theme/13/EGR_2015_Technical_Report_final_version.pdf" target="_blank">projecting global emission</a> compatible with the 2&deg;C objective have been made.
+          Using <a href="https://en.wikipedia.org/wiki/Projections_of_population_growth" target="_blank">population growth projections</a>, we can deduce the amount CO<sub>2</sub>eq we should be allowed to emit per person and per year:
+        </p>
+        <p>
+          <center>
+            5 tons CO<sub>2</sub>eq per person per year by 2030<br />
+            <b>2 tons CO<sub>2</sub>eq per person per year by 2050</b><br />
+            0 tons CO<sub>2</sub>eq per person per year by 2070
+          </center>
         </p>
 
         <p>
-          So how do we personally do to reach that objective? Do we recycle more? Eat organic? Vote for more wind turbines? In this jungle of complex decisions, some pragmatism has to be introduced, in the form of a sober quantification of the impact of the different choices we make.
+          This also means using only 34% of the <a href="https://www.accenture.com/_acnmedia/PDF-11/Accenture-Strategy-Energy-Perspectives-Rougher-Seas-Ahead.pdf" target="_blank">proven fossil fuel reserves</a>, leaving the rest of it in the ground.
+          It is highly unlikely that the free market, without any regulation, achieves this result.
         </p>
 
         <p>
-          It all starts with <b>figuring out how much you are emitting compared to the 2t objective</b>.
+          So how do we all reach that objective? Do we recycle more? Eat organic? Vote for more wind turbines? In this jungle of complex decisions, some pragmatism has to be introduced, in the form of a sober quantification of the impact of the different choices we make.
+        </p>
+
+        <p>
+          It all starts with <b>figuring out how much we're emitting compared to the 2t objective</b>.
           Here's an estimate of personal emissions depending on where you live:
         </p>
 
@@ -1176,8 +1198,8 @@ url: https://www.tmrow.com/climatechange.html
 
         <p>
           Most countries in the world are far from the 2t objective.
-          Note that the more a country is populated, the more it's average footprint will affect global emissions.
-          For example, the United States has an average footprint almost identical to Canada, but due to its population contributes to 14% of global emissions (compared to 2% for Canada).
+          Note that the more a country is populated, the more its average footprint will affect global emissions.
+          For example, the United States has an average footprint almost identical to Canada, but due to its large population it contributes to 14% of global emissions (compared to only 2% for Canada).
           We therefore need to look at both population and footprint per person:
         </p>
 
@@ -1360,13 +1382,13 @@ url: https://www.tmrow.com/climatechange.html
                     data: [{ yAxis: 2 }],
                     label: {
                       normal: {
-                        formatter: 'Paris 2t objective',
+                        formatter: 'Paris 2t objective 2050',
                         position: 'end'
                       },
                     },
                     lineStyle: {
                       normal: {
-                        color: 'darkblue',
+                        color: 'darkgreen',
                         width: 3
                       }
                     }
@@ -1382,14 +1404,18 @@ url: https://www.tmrow.com/climatechange.html
         </script>
 
         <p>
-          A staggering <b>80% of the world lives above the 2t objective</b>.
-          Furthermore, <b>40% will require reducing by 4</b> their personal emissions in order to reach the objective.
+          <b>80% of the world lives above the 2t objective</b>.
+          Furthermore, half of the world is above the 5t objective for 2030.
+          This is no small challenge, and the matter must be taken seriously.
         </p>
 
-        <p class="incomplete">
-          Even within a country, our personal footprint can vary quite a lot depending on wealth and consumption habits.
-          Therefore, it is important to be able to measure it precisely enough to trigger behavioural change.
-          Some calculators are available here, here and here [ADD LINKS].
+        <p>
+          Note that even within a country, our personal footprint can vary quite a lot depending on our wealth and consumption habits.
+          Therefore, it is important to be able to measure our footprint precisely enough to trigger personal behavioural change.
+          If you're curious about your own footprint, there's <a href="https://www.google.com/search?q=personal+carbon+calculator" target="_blank">a lot of calculators available on the web</a>.
+        </p>
+        </p>
+          We're also working on a real-time automatic calculator of our own: you could <a href="https://electricitymap.us15.list-manage.com/subscribe/post?u=8689fc68cd6c50ec671a95afb&id=96da98142a" target="_blank">subscribe to the beta</a>.
         </p>
         <p>
           In the next sections, we're going to give an overview of the impact of some daily decisions we make related to transportation, food and electricity.
