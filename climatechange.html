@@ -1595,10 +1595,10 @@ image: https://user-images.githubusercontent.com/1655848/29027789-6f2358b0-7b82-
 
         <div class="graph">
           <div class="title">Greenhouse gas intensity of food</div>
-          <div class="description">in gCO<sub>2</sub>eq / g consumed</div>
+          <div class="description">in gCO<sub>2</sub>eq / kcal</div>
           <div class="chart" id="ghg_intensity_food"></div>
           <div class="source">
-            Source: <a href="http://orgprints.org/15610/1/15610.pdf" target="_blank">Life cycle assessment accros the Food Supply Chain</a> and <a href="http://gefionau.dk/lcafood/" target="_blank">LCA Food Database</a>.
+            Source: Carbon Intensity of Eating, from <a href="http://shrinkthatfootprint.com/food-carbon-footprint-diet" target="_blank">Shrink that footprint</a>.
           </div>
         </div>
 
@@ -1606,32 +1606,28 @@ image: https://user-images.githubusercontent.com/1655848/29027789-6f2358b0-7b82-
           (function() {
 
             var modeColor = {
-              'fish': '#74cdb9',
-              'yellow cheese': '#f27406',
-              'lobster': '#2772b2',
               'vegetables': '#166a57',
-              'cattle': 'darkred',
+              'fruits': 'green',
+              'bread': '#f27406',
+              'milk': 'darkgray',
               'chicken': '#ac8c35',
-              'bread': '#867d66',
+              'cattle': 'darkred',
             };
 
             var data = [
-              { name: 'vegetables', intensity: 1.05, label: '🥕 vegetables' },
-              { name: 'bread', intensity: 0.99, label: '🍞 bread'},
-              { name: 'milk', intensity: 1.2, label: '🥛 milk' },
-              { name: 'yellow cheese', intensity: 11.3, label: '🧀 cheese' },
-              { name: 'fish', intensity: 2.73, label: '🐟 fish' },
-              { name: 'lobster', intensity: 20.2, label: '🦀 lobster' },
-              { name: 'pork', intensity: 3.23, label: '🐷 pork' },
-              { name: 'chicken', intensity: 3.35, label: '🐔 chicken' },
-              { name: 'cattle', intensity: 23.7, label: '🐄 cattle' },
+              { name: 'vegetables', intensity: 2.8, label: '🥕 vegetables' },
+              { name: 'fruits', intensity: 4.6, label: '🍏 fruits' },
+              { name: 'bread', intensity: 1.3, label: '🍞 bread & cereals'},
+              { name: 'milk', intensity: 4.5, label: '🥛 milk' },
+              { name: 'chicken', intensity: 3.8, label: '🐔 chicken, 🐟 fish & 🐷 pork' },
+              { name: 'cattle', intensity: 14.1, label: '🐮 beef & lamb' },
             ].reverse();
 
             var option = initialOption();
 
-            option.grid.left = 100;
+            option.grid.left = 160;
 
-            option.xAxis.name = 'Greenhouse gas intensity in gCO₂eq per g consumed';
+            option.xAxis.name = 'Greenhouse gas intensity in gCO₂eq per kcal';
             option.xAxis.nameLocation = 'middle';
             option.xAxis.nameGap = 30;
             option.grid.bottom = 50;
