@@ -180,22 +180,22 @@ url: https://www.tmrow.com/climatechange.html
         <div id="toc">
           <h4>1. The Earth</h4>
           <ul>
-            <li>The state of Climate Change</li>
-            <li>Consequences</li>
-            <li>What causes it</li>
+            <li><a href="#the-state-of-climate-change">The state of Climate Change</a></li>
+            <li><a href="#consequences">Consequences</a></li>
+            <li><a href="#what-causes-it?">What causes it</a></li>
           </ul>
           <h4>2. Humans</h4>
           <ul>
-            <li>Where do greenhouse gases come from?</li>
-            <li>Fossil fuels are used everywhere, and for good reasons</li>
+            <li><a href="#where-do-greenhouse-gases-come-from?">Where do greenhouse gases come from?</a></li>
+            <li><a href="#fossil-fuels-are-used-everywhere--and-for-good-reasons">Fossil fuels are used everywhere, and for good reasons</a></li>
           </ul>
           <h4>3. What can we do?</h4>
           <ul>
-            <li>Objective: 2 tons CO2eq per human per year by 2050</li>
-            <li>Electricity: remove coal, gas and oil power plants</li>
-            <li>Food: avoid red meat</li>
-            <li>Transportation: Reduce long-distance travels</li>
-            <li>Information must be accessible and widely spread</li>
+            <li><a href="#objective--2-tons-co2eq-per-human-per-year-by-2050">Objective: 2 tons CO2eq per human per year by 2050</a></li>
+            <li><a href="#transportation--reduce-long-distance-travels">Transportation: Reduce long-distance travels</a></li>
+            <li><a href="#electricity--remove-coal--gas-and-oil-power-plants">Electricity: remove coal, gas and oil power plants</a></li>
+            <li><a href="#food--avoid-red-meat">Food: avoid red meat</a></li>
+            <li><a href="#information-must-be-accessible-and-widely-spread">Information must be accessible and widely spread</a></li>
           </li>
         </div>
 
@@ -1443,7 +1443,7 @@ url: https://www.tmrow.com/climatechange.html
               { name: 'electric car', intensity: 81, label: '🚙 electric car' },
               { name: 'train', intensity: 42, label: '🚆 train' },
               { name: 'airplane (short distance)', intensity: 340, label: '✈️ airplane (short distance)' },
-              { name: 'airplane (long distance)', intensity: 239, label: '✈️ airplane (long distance' },
+              { name: 'airplane (long distance)', intensity: 239, label: '✈️ airplane (long distance)' },
               { name: 'boat', intensity: 803, label: '🚢 boat' },
             ].reverse();
 
@@ -1490,14 +1490,13 @@ url: https://www.tmrow.com/climatechange.html
           })();
         </script>
 
-        <p class="incomplete">
-          Surprising to see aircraft at the same level as car? Per km, so long distance.
-          The problem is actually time. Doing x km by car and plane is the same, the thing is that we do it in a little time, so ....
+        <p>
+          Note that even though long-distance plane trips are as efficient per km as cars, they enable to travel a much longer distance and therefore end up being a very substancial part of our footprint.
+          If you can, travel by train instead, or simply reduce distances travelled.
         </p>
 
         <p>
-          In order to get rid of fossil fuels, we must electrify transportation directly by using electric motors, or indirectly, by using hydrogen produced by electricity.
-          Therefore, it matters how we generate our electricity: Generating it with fossil fuels would reduce all of our efforts to nothing.
+          In order to get rid of fossil fuels, <b>we must switch to electric transportation with electricity being produced without fossil fuels</b> (else, it would reduce all of our efforts to nothing).
         </p>
 
 
@@ -1588,7 +1587,7 @@ url: https://www.tmrow.com/climatechange.html
           It is crucial that we <b>get rid of fossil fuels for electricity generation</b>.
           To keep track of how we stand, check out the <a href="https://www.electricitymap.org" target="_blank">Electricity&nbsp;Map</a>.
           Low-carbon strategies fall into two categories in regions where the terrain does not allow the installation of large-scale hydropower: nuclear and wind/solar.
-          Nuclear has a waste problem and wind/solar suffer from intermittency, and must therefore incorporate a storage solution in order to deliver electricity continuously. 
+          Nuclear has a waste problem and wind/solar suffers from intermittency, and must therefore incorporate a storage solution in order to deliver electricity continuously. 
         </p>
         <p>
           If you're living in a country with high renewable penetration, you can reduce the need for storage by <b>consuming electricity when the wind blows, or when the sun shines</b>.
@@ -1674,8 +1673,8 @@ url: https://www.tmrow.com/climatechange.html
           })();
         </script>
 
-        <p class="incomplete">
-          Some conclusion about the food part here.
+        <p>
+          The simplest thing you can do is to avoid red meat, as cattles require a lot of resources and emit a lot of greenhouse gases as part of their digestive process.
         </p>
 
         <p>
@@ -1767,15 +1766,13 @@ url: https://www.tmrow.com/climatechange.html
         a.setAttribute('class', 'anchor');
         a.setAttribute('href', '#' + id);
         a.innerHTML = '<small><i class="fa fa-link" aria-hidden="true"></i></small>';
-        el.insertBefore(a, el.firstChild);
+        el.appendChild(a);
       }
     </script>
     <style>
       h2 a {
         visibility: hidden;
-        float: left;
-        margin-left: -1.0em;
-        padding-right: 0.2em;
+        margin-left: 0.3em;
       }
       h2:hover a, h2, a:hover {
         visibility: unset;
