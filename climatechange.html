@@ -172,7 +172,7 @@ url: https://www.tmrow.com/climatechange.html
       <div class="section-content">
         <h1>A pragmatic guide to Climate Change</h1>
         <p style="color: darkgray; font-size: small;">
-          If you see anything inconsistent, or would like to propose a change, feel free to edit the page on <a href="https://github.com/tmrowco/tmrow.com/blob/master/climatechange.html" target="_blank"><i class="fa fa-github"></i> github</a> or submit an <a href="https://github.com/tmrowco/tmrow.com/issues" target="_blank"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> issue</a>.
+          If you see anything inconsistent, or would like to propose a change, feel free to edit the page on <a href="https://github.com/tmrowco/tmrow.com/blob/master/climatechange.html" target="_blank"><i class="fa fa-github"></i>&nbsp;github</a> or submit an <a href="https://github.com/tmrowco/tmrow.com/issues" target="_blank"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;issue</a>.
         </p>
         <p>
           This guide is a pragmatic guide to what Climate Change is, what the drivers behind it are, and what we, as individuals, can do about it.
@@ -553,7 +553,7 @@ url: https://www.tmrow.com/climatechange.html
                     }
                   },
                   markLine: {
-                    data: [{ type: 'max', x: '70%' }],
+                    data: [{ x: '70%', yAxis: data[data.length-1][1] }],
                     label: {
                       normal: {
                         formatter: '2016',
@@ -785,7 +785,7 @@ url: https://www.tmrow.com/climatechange.html
 
             var option = initialOption();
 
-            option.grid.left = 150;
+            option.grid.left = 130;
 
             option.xAxis.type = 'value'
             option.xAxis.axisLabel = {formatter: '{value}%'};
